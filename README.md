@@ -1,2 +1,2 @@
 # BoxIt
-hi
+This is a game.
