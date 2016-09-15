@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Buttons()
+comment0.text=\r\n\ This\ will\ be\ the\ buttons.\r\n\ pre\ none\r\n\ pram\ none\r\n\ return\ none\r\n\ post\ all\r\n
+comment1.params=
+comment1.target=void\ activate()
+comment1.text=\r\n\ This\ will\ be\ the\ buttons.\r\n\ pre\ none\r\n\ pram\ none\r\n\ return\ none\r\n\ post\ all\r\n
+comment2.params=e
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=3

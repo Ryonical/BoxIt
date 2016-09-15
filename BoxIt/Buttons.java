@@ -51,8 +51,6 @@ public class Buttons
         jpButtons.setLayout(new FlowLayout());
         jpButtons.add(jbtSell);
         
-        //reads in for easteregg
-        firstEgg.read();
         
         //attacks
         jbtSell.addActionListener(new ActionListener()
