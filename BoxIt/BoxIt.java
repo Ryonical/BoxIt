@@ -1,4 +1,6 @@
 import java.util.*;
+import java.text.DecimalFormat;
+import java.math.*;
 /**
  * This is the bulk of BoxIt.
  * 
@@ -44,6 +46,8 @@ public class BoxIt
     //final answers
     public final String YES = "y";
     public final String BOX_BUILD = "build a box";
+    public final String SAVE = "save";
+    public final String EXIT = "exit";
     
     //what you have in stock
     public ArrayList <Box> myStock;
@@ -79,7 +83,7 @@ public class BoxIt
     }//ends constructer
     
     /**
-    * This construct.
+    * This is the main game.
     * @pre none
     * @pram none
     * @return none
@@ -101,85 +105,132 @@ public class BoxIt
         }//ends while
         
         
-//         System.out.println("sucsess, " + myName);
-//         System.out.println("You have 1\" of paper what do you want do do with it?");
-//         System.out.println("build a box, make a paper airplane, start a paper football company");
-//         myAnswer = in.nextLine();
-//         while(!myAnswer.equals(BOX_BUILD))
-//         {
-//             System.out.println("YOU WILL FAIL NOOB DO SOMETHING ELSE!");
-//             myAnswer = in.nextLine();
-//         }//ends while
-//         System.out.println("Good Choice");
-//         System.out.println("You go to sell it and you find a person who needs it so badly.\n" + 
-//         "They offer to pay you 10 moola and you accept.\nYou probaly will never be so lucky again.\n" +
-//         "You now have started your company what would you like to call it?");
+                    //         System.out.println("sucsess, " + myName);
+                    //         System.out.println("You have 1\" of paper what do you want do do with it?");
+                    //         System.out.println("build a box, make a paper airplane, start a paper football company");
+                    //         myAnswer = in.nextLine();
+                    //         while(!myAnswer.equals(BOX_BUILD))
+                    //         {
+                    //             System.out.println("YOU WILL FAIL NOOB DO SOMETHING ELSE!");
+                    //             myAnswer = in.nextLine();
+                    //         }//ends while
+                    //         System.out.println("Good Choice");
+                    //         System.out.println("You go to sell it and you find a person who needs it so badly.\n" + 
+                    //         "They offer to pay you 10 moola and you accept.\nYou probaly will never be so lucky again.\n" +
+                    //         "You now have started your company what would you like to call it?");
+                            
+                    //         myCompName = in.nextLine();
+                    //         System.out.println("Are you sure that " + myCompName + " will be your company name y/n");
+                    //         myAnswer = in.nextLine();
+                    //         while(!myAnswer.equals(YES))
+                    //         {
+                    //             System.out.println("Ok name your company again");
+                    //             myCompName = in.nextLine();
+                    //             System.out.println("Are you sure that " + myCompName + " will be your company name y/n");
+                    //             myAnswer = in.nextLine();
+                    //       }//ends while
         
-//         myCompName = in.nextLine();
-//         System.out.println("Are you sure that " + myCompName + " will be your company name y/n");
-//         myAnswer = in.nextLine();
-//         while(!myAnswer.equals(YES))
-//         {
-//             System.out.println("Ok name your company again");
-//             myCompName = in.nextLine();
-//             System.out.println("Are you sure that " + myCompName + " will be your company name y/n");
-//             myAnswer = in.nextLine();
-//         }//ends while
-        
-        while(myMola > 0)
+        while(true)
         {
             System.out.println("What would you like to buy?");
-            myAnswer = in.nextLine();
+            myAnswer = in.next();
             word(myAnswer);
             System.out.println("How many?");
-            myIntAnswer = in.nextInt();
+            try
+            {
+                myIntAnswer = in.nextInt();
+            }//try
+            catch(Exception e)
+            {
+                myIntAnswer = 0;
+            }//catch
             for(int i = 0; i < myIntAnswer; i++)
             {
                 if(myType != BOX_NUM + 1)
                 {
-                    buy(myAnswer);
+                    buy();
                 }//ends if
-            }
-            for(int i = 0; i < BOX_NUM; i++)
-            {
-                System.out.println("You have " + myStock.get(i).getAmount() + " " + myStock.get(i).getName());
             }//ends for
-            System.out.println("You have " + myMola + " mola");
+            output();
+            System.out.println("Would you like to sell?");
+            myAnswer = in.next();
+            word(myAnswer);
+            System.out.println("How Many");
+            try
+            {
+                myIntAnswer = in.nextInt();
+            }//try
+            catch(Exception e)
+            {
+                myIntAnswer = 0;
+            }//catch
+            sell(myIntAnswer);
+            output();
         }//ends while
         
     }//ends game
     
     
     /**
-    * This construct.
+    * This buys.
     * @pre none
     * @pram none
     * @return none
     * @post none
     */
-    public void buy(String word)
+    public void buy(int i)
     {
-        if(myType != BOX_NUM + 1)
+        if()
         {
-            if(word.equals(myStock.get(0).getName()) && myMola >= PAPER_COST)
-            {
-                myMola -= PAPER_COST;
-                myStock.get(0).setAmount(myStock.get(0).getAmount() + 1);
-            }//ends if
             
-            if(word.equals(myStock.get(1).getName()) && myMola >= CARDBOARD_COST)
-            {
-                myMola -= CARDBOARD_COST;
-                myStock.get(1).setAmount(myStock.get(1).getAmount() + 1);
-            }//ends if
+        }//ends if 
+        if(myType != BOX_NUM + 1 && myMola >= myStock.get(myType).getCost())
+        {
+            myMola -= myStock.get(myType).getCost();
+            myStock.get(myType).setAmount(myStock.get(myType).getAmount() + 1);
         }//ends if
+        round();
     }//ends buy
     
-    
     /**
-    * This construct.
+    * This will sell the boxes.
     * @pre none
     * @pram none
+    * @return none
+    * @post none
+    */
+    public void sell(int i)
+    {
+        if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
+        {
+            myStock.get(myType).setAmount(0);
+            myMola = myStock.get(myType).getSell() * i;
+        }//ends if
+        else if (myType != BOX_NUM + 1)
+        {
+            i = myStock.get(myType).getAmount();
+            myStock.get(myType).setAmount(0);
+            myMola = myStock.get(myType).getSell() * 1;
+        }//ends else if
+        
+    }//ends sell
+    
+    /**
+    * This will round myMola.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myMola
+    */
+    public void round()
+    {
+        myMola = (double)Math.round(myMola * 10000) / 10000;
+    }//ends round
+    
+    /**
+    * This checks to see if this is a recognized word.
+    * @pre none
+    * @pram word
     * @return none
     * @post none
     */
@@ -199,9 +250,25 @@ public class BoxIt
             }//ends else if
         }//ends for
     }//ends word
+   
+    /**
+    * This outputs.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post none
+    */
+    public void output()
+    {
+        for(int i = 0; i < BOX_NUM; i++)
+        {
+            System.out.println("You have " + myStock.get(i).getAmount() + " " + myStock.get(i).getName());
+        }//ends for
+        System.out.println("You have " + myMola + " mola");
+    }
     
     /**
-    * This construct.
+    * This creates the boxes at the begginging of the game.
     * @pre none
     * @pram none
     * @return none
@@ -216,5 +283,5 @@ public class BoxIt
         myStock.add(new Box(4, "saneza", SANEZA_COST, SANEZA_SELL, SANEZA_CHANGE));
         myStock.add(new Box(5, "thorby", THORBY_COST, THORBY_SELL, THORBY_CHANGE));
         myStock.add(new Box(6, "plarbin", PLARBIN_COST, PLARBIN_SELL, PLARBIN_CHANGE));
-    }
+    }//ends createBoxes
 }//ends BoxIt
