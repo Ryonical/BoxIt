@@ -17,6 +17,11 @@ public class BoxItDriver
     public static void main(String[] args)
     {
         BoxIt box = new BoxIt();
+        GameScreen game = new GameScreen();
+        Buttons button = new Buttons(box, game);
+        button.activate();
+        game.showScreen();
+        game.addButtons(button.getButtons());
         box.game();
     }//ends main
 }//ends BoxItDriver

@@ -33,9 +33,9 @@ public class BoxIt
     public final double SANEZA_COST = 4.5;//This is the base cost of saneza
     public final double SANEZA_CHANGE = 1.75;//This is how much the saneza value can change
         //thorby
-    public final double THORBY_SELL = 3;//This is the base price of thorby
+    public final double THORBY_SELL = 20;//This is the base price of thorby
     public final double THORBY_COST = 30;//This is the base cost of thorby
-    public final double THORBY_CHANGE = 0.0;//This is how much the thorby value can change
+    public final double THORBY_CHANGE = 15;//This is how much the thorby value can change
         //plarbin
     public final double PLARBIN_SELL = 50;//This is the base price of plarbin
     public final double PLARBIN_COST = 15;//This is the base cost of plarbin
@@ -49,6 +49,8 @@ public class BoxIt
     public final String SAVE = "save";
     public final String EXIT = "exit";
     
+    //gives random chance
+    public final double FIFTY_FIFTY = .5;
     //what you have in stock
     public ArrayList <Box> myStock;
     //money
@@ -63,6 +65,10 @@ public class BoxIt
     private String myAnswer;
     //int input
     private int myIntAnswer;
+    //this is how many things you can buy a day
+    private int myMaxBuy;
+    //random prices
+    private ArrayList<Double> myRandom;
     /**
     * This constructs.
     * @pre none
@@ -73,13 +79,14 @@ public class BoxIt
     public BoxIt()
     {
         myStock = new ArrayList<Box>();
-        createBoxes();
-        myMola = 10;
+        myMola = 0.50;
         myName = " ";
         myCompName = " ";
         myType = 0;
         myAnswer = " ";
         myIntAnswer = 0;
+        myMaxBuy = 10;
+        myRandom = new ArrayList<Double>();
     }//ends constructer
     
     /**
@@ -92,19 +99,19 @@ public class BoxIt
     public void game()
     {
         createBoxes();
-        System.out.println("What is your name");
-        myName = in.nextLine();
-        System.out.println("Are you sure that " + myName + " will be your name y/n");
-        myAnswer = in.nextLine();
-        while(!myAnswer.equals(YES))
-        {
-            System.out.println("Ok name yourself again");
-            myName = in.nextLine();
-            System.out.println("Are you sure that " + myName + " will be your name y/n");
-            myAnswer = in.nextLine();
-        }//ends while
-        
-        
+                    //         System.out.println("What is your name");
+                    //         myName = in.nextLine();
+                    //         System.out.println("Are you sure that " + myName + " will be your name y/n");
+                    //         myAnswer = in.nextLine();
+                    //         while(!myAnswer.equals(YES))
+                    //         {
+                    //             System.out.println("Ok name yourself again");
+                    //             myName = in.nextLine();
+                    //             System.out.println("Are you sure that " + myName + " will be your name y/n");
+                    //             myAnswer = in.nextLine();
+                    //         }//ends while
+                    //         
+                    //         
                     //         System.out.println("sucsess, " + myName);
                     //         System.out.println("You have 1\" of paper what do you want do do with it?");
                     //         System.out.println("build a box, make a paper airplane, start a paper football company");
@@ -132,10 +139,10 @@ public class BoxIt
         
         while(true)
         {
-            System.out.println("What would you like to buy?");
-            myAnswer = in.next();
-            word(myAnswer);
-            System.out.println("How many?");
+//             System.out.println("What would you like to buy?");
+//             myAnswer = in.next();
+//             word(myAnswer);
+//             System.out.println("How many?");
             try
             {
                 myIntAnswer = in.nextInt();
@@ -144,18 +151,15 @@ public class BoxIt
             {
                 myIntAnswer = 0;
             }//catch
-            for(int i = 0; i < myIntAnswer; i++)
+            if(myType != BOX_NUM + 1)
             {
-                if(myType != BOX_NUM + 1)
-                {
-                    buy();
-                }//ends if
-            }//ends for
-            output();
-            System.out.println("Would you like to sell?");
-            myAnswer = in.next();
-            word(myAnswer);
-            System.out.println("How Many");
+                buy(myIntAnswer);
+            }//ends if
+            
+//             System.out.println("Would you like to sell?");
+//             myAnswer = in.next();
+//             word(myAnswer);
+//             System.out.println("How Many");
             try
             {
                 myIntAnswer = in.nextInt();
@@ -165,7 +169,6 @@ public class BoxIt
                 myIntAnswer = 0;
             }//catch
             sell(myIntAnswer);
-            output();
         }//ends while
         
     }//ends game
@@ -180,15 +183,21 @@ public class BoxIt
     */
     public void buy(int i)
     {
-        if()
+        if(i > myMaxBuy)
         {
-            
-        }//ends if 
-        if(myType != BOX_NUM + 1 && myMola >= myStock.get(myType).getCost())
-        {
-            myMola -= myStock.get(myType).getCost();
-            myStock.get(myType).setAmount(myStock.get(myType).getAmount() + 1);
+            i = myMaxBuy;
         }//ends if
+        if(myMola >= myStock.get(myType).getCost() * i && myType != BOX_NUM + 1)
+        {
+            myStock.get(myType).setAmount(myStock.get(myType).getAmount() + i);
+            myMola -= myStock.get(myType).getCost() * i;
+        }//ends if
+        else if (myType != BOX_NUM + 1)
+        {
+            i = (int)(myMola / myStock.get(myType).getCost());
+            myStock.get(myType).setAmount(myStock.get(myType).getAmount() + i);
+            myMola -= myStock.get(myType).getCost() * i;
+        }//ends else if
         round();
     }//ends buy
     
@@ -201,18 +210,19 @@ public class BoxIt
     */
     public void sell(int i)
     {
+        randomizePrices();
         if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
         {
-            myStock.get(myType).setAmount(0);
-            myMola = myStock.get(myType).getSell() * i;
+            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
+            myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
         }//ends if
         else if (myType != BOX_NUM + 1)
         {
             i = myStock.get(myType).getAmount();
-            myStock.get(myType).setAmount(0);
-            myMola = myStock.get(myType).getSell() * 1;
+            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
+            myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
         }//ends else if
-        
+        round();
     }//ends sell
     
     /**
@@ -268,6 +278,38 @@ public class BoxIt
     }
     
     /**
+    * This randomizes the prices.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post none
+    */
+    public void randomizePrices()
+    {
+        //this randomizes prices and rounds them
+        myRandom.set(0, Math.random() * PAPER_CHANGE);
+        myRandom.set(1, Math.random() * CARDBOARD_CHANGE);
+        myRandom.set(2, Math.random() * PLASTIC_CHANGE);
+        myRandom.set(3, Math.random() * STEEL_CHANGE);
+        myRandom.set(4, Math.random() * SANEZA_CHANGE);
+        myRandom.set(5, Math.random() * THORBY_CHANGE);
+        myRandom.set(6, Math.random() * PLARBIN_CHANGE);
+        for(int i = 0; i < BOX_NUM; i++)
+        {
+            
+            if(Math.random() < FIFTY_FIFTY)
+            {
+                myRandom.set(i, -myRandom.get(i));
+            }//ends if
+            myRandom.set(i, (double)Math.round(myRandom.get(i) * 100) / 100);
+        }//ends for
+        for(int i = 0; i < BOX_NUM; i++)
+        {
+//             System.out.println(myStock.get(i).getName() + " "  + myRandom.get(i));
+        }//ends for
+    }//ends randomizePrices
+    
+    /**
     * This creates the boxes at the begginging of the game.
     * @pre none
     * @pram none
@@ -276,6 +318,7 @@ public class BoxIt
     */
     public void createBoxes()
     {
+        //this constructs the boxes
         myStock.add(new Box(0, "paper", PAPER_COST, PAPER_SELL, PAPER_CHANGE));
         myStock.add(new Box(1, "cardboard", CARDBOARD_COST, CARDBOARD_SELL, CARDBOARD_CHANGE));
         myStock.add(new Box(2, "plastic", PLASTIC_COST, PLASTIC_SELL, PLASTIC_CHANGE));
@@ -283,5 +326,34 @@ public class BoxIt
         myStock.add(new Box(4, "saneza", SANEZA_COST, SANEZA_SELL, SANEZA_CHANGE));
         myStock.add(new Box(5, "thorby", THORBY_COST, THORBY_SELL, THORBY_CHANGE));
         myStock.add(new Box(6, "plarbin", PLARBIN_COST, PLARBIN_SELL, PLARBIN_CHANGE));
+        //this adds box_num null places to myRandom so it will have the spaces
+        for(int i = 0; i < BOX_NUM; i++)
+        {
+            myRandom.add(null);
+        }//ends fort
     }//ends createBoxes
+    
+    /**
+    * This gets myMola.
+    * @pre none
+    * @pram none
+    * @return myMola
+    * @post none
+    */
+    public double getMola()
+    {
+        return myMola;
+    }//ends getMola
+    
+    /**
+    * This sets myType.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myType
+    */
+    public void setType(int type)
+    {
+        myType = type;
+    }//ends setType
 }//ends BoxIt
