@@ -207,7 +207,7 @@ public class Buttons extends JFrame
     {
         
         String[] output = new String [1];
-        output [0] = Double.toString(box.getMola());
+        output [0] = "You have $" + Double.toString(box.getMola()) + " Mola";
         
        
        game.refresh(output);
