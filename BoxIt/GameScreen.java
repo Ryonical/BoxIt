@@ -62,7 +62,7 @@ public class GameScreen extends JFrame
     * return none
     * post none
     */
-    public void addButtons(JButton ... button)
+    public void addButtons(JButton[] button)
     {
         myButtonPanel = new JPanel();
         myButtonPanel.setLayout(new BoxLayout(myButtonPanel, BoxLayout.X_AXIS));

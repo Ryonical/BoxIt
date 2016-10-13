@@ -13,15 +13,15 @@ public class BoxIt
     Scanner in = new Scanner(System.in);
     //prices
         //paper
-    public final double PAPER_SELL = .2;//This is the base price of paper
+    public final double PAPER_SELL = .10;//This is the base price of paper
     public final double PAPER_COST = .05;//This is the base cost of paper
     public final double PAPER_CHANGE = .05;//This is how much the paper value can change
         //cardboard
-    public final double CARDBOARD_SELL = 3;//This is the base price of cardboard
+    public final double CARDBOARD_SELL = 2;//This is the base price of cardboard
     public final double CARDBOARD_COST = 1;//This is the base cost of cardboard
     public final double CARDBOARD_CHANGE = .2;//This is how much the cardboard value can change
         //plastic
-    public final double PLASTIC_SELL = 10;//This is the base price of plastic
+    public final double PLASTIC_SELL = 7;//This is the base price of plastic
     public final double PLASTIC_COST = 3;//This is the base cost of plastic
     public final double PLASTIC_CHANGE = 0.25;//This is how much the plastic value can change
         //steel
@@ -42,7 +42,8 @@ public class BoxIt
     public final double PLARBIN_CHANGE = 7.5;//This is how much the plarbin value can change
     //keeps track of how many boxes there are
     public final int BOX_NUM = 7;
-    
+    //reserch finals
+    public final double RESERCH_INCREASE = 1.5;
     //final answers
     public final String YES = "y";
     public final String BOX_BUILD = "build a box";
@@ -65,7 +66,8 @@ public class BoxIt
     private String myAnswer;
     //int input
     private int myIntAnswer;
-    //this is how many things you can buy a day
+    //this is reserch related
+    private double myReserchCost;
     private int myMaxBuy;
     //random prices
     private ArrayList<Double> myRandom;
@@ -85,6 +87,7 @@ public class BoxIt
         myType = 0;
         myAnswer = " ";
         myIntAnswer = 0;
+        myReserchCost = 5.0;
         myMaxBuy = 10;
         myRandom = new ArrayList<Double>();
     }//ends constructer
@@ -98,7 +101,6 @@ public class BoxIt
     */
     public void game()
     {
-        createBoxes();
                     //         System.out.println("What is your name");
                     //         myName = in.nextLine();
                     //         System.out.println("Are you sure that " + myName + " will be your name y/n");
@@ -199,6 +201,7 @@ public class BoxIt
             myMola -= myStock.get(myType).getCost() * i;
         }//ends else if
         round();
+        randomizePrices();
     }//ends buy
     
     /**
@@ -210,7 +213,6 @@ public class BoxIt
     */
     public void sell(int i)
     {
-        randomizePrices();
         if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
         {
             myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
@@ -223,6 +225,7 @@ public class BoxIt
             myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
         }//ends else if
         round();
+        randomizePrices();
     }//ends sell
     
     /**
@@ -310,6 +313,23 @@ public class BoxIt
     }//ends randomizePrices
     
     /**
+    * This allowes you to buy more boxes at a time.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post none
+    */
+    public void reserch()
+    {
+        if(myMola >= myReserchCost)
+        {
+            myMaxBuy++;
+            myMola -= myReserchCost;
+            myReserchCost *= RESERCH_INCREASE;
+        }//ends if
+    }//ends reserch
+    
+    /**
     * This creates the boxes at the begginging of the game.
     * @pre none
     * @pram none
@@ -356,4 +376,88 @@ public class BoxIt
     {
         myType = type;
     }//ends setType
+    
+    /**
+    * This gets myRandom0.
+    * @pre none
+    * @pram none
+    * @return myRandom0
+    * @post none
+    */
+    public String getRandom0()
+    {
+        return myStock.get(0).getName() + " "  + myRandom.get(0);
+    }//ends getRandom0
+    
+    /**
+    * This gets myRandom1.
+    * @pre none
+    * @pram none
+    * @return myRandom1
+    * @post none
+    */
+    public String getRandom1()
+    {
+        return myStock.get(1).getName() + " "  + myRandom.get(1);
+    }//ends getRandom1
+    
+    /**
+    * This gets myRandom2.
+    * @pre none
+    * @pram none
+    * @return myRandom2
+    * @post none
+    */
+    public String getRandom2()
+    {
+        return myStock.get(2).getName() + " "  + myRandom.get(2);
+    }//ends getRandom2
+    
+    /**
+    * This gets myRandom3.
+    * @pre none
+    * @pram none
+    * @return myRandom3
+    * @post none
+    */
+    public String getRandom3()
+    {
+        return myStock.get(3).getName() + " "  + myRandom.get(3);
+    }//ends getRandom3
+    
+    /**
+    * This gets myRandom4.
+    * @pre none
+    * @pram none
+    * @return myRandom4
+    * @post none
+    */
+    public String getRandom4()
+    {
+        return myStock.get(4).getName() + " "  + myRandom.get(4);
+    }//ends getRandom4
+    
+    /**
+    * This gets myRandom5.
+    * @pre none
+    * @pram none
+    * @return myRandom5
+    * @post none
+    */
+    public String getRandom5()
+    {
+        return myStock.get(5).getName() + " "  + myRandom.get(5);
+    }//ends getRandom5
+    
+    /**
+    * This gets myRandom6.
+    * @pre none
+    * @pram none
+    * @return myRandom6
+    * @post none
+    */
+    public String getRandom6()
+    {
+        return myStock.get(6).getName() + " "  + myRandom.get(6);
+    }//ends getRandom6
 }//ends BoxIt
