@@ -14,12 +14,15 @@ public class Load
     //to save
     private File fileInt = null;
     private File fileDouble = null;
+    private File fileAmount = null;
     private Scanner inFileInt = null;
     private Scanner inFileDouble = null;
+    private Scanner inFileAmount = null;
 
     //vars
     private ArrayList <Integer> mySaveInt;
     private ArrayList <Double> mySaveDouble;
+    private ArrayList <Integer> mySaveAmount;
 
     //classes
     BoxIt box;
@@ -38,6 +41,8 @@ public class Load
             inFileInt = new Scanner(fileInt);
             fileDouble = new File("saveDouble.txt");
             inFileDouble = new Scanner(fileDouble);
+            fileAmount = new File("saveAmount.txt");
+            inFileAmount = new Scanner(fileAmount);
         }catch(Exception e)
         {
             System.out.println(e);
@@ -46,6 +51,7 @@ public class Load
         box = box2;
         mySaveInt = new ArrayList<Integer>();
         mySaveDouble = new ArrayList<Double>();
+        mySaveAmount = new ArrayList<Integer>();
     }//ends constructer
 
     /**
@@ -75,6 +81,14 @@ public class Load
                     mySaveDouble.add(Double.valueOf(inFileDouble.nextDouble()).doubleValue());
                 }//ends while
             }//ends if
+            //boxes
+            if(fileAmount != null)
+            {
+                while(inFileAmount.hasNext())
+                {
+                    mySaveAmount.add(Integer.valueOf(inFileAmount.nextInt()).intValue());
+                }//ends while
+            }//ends if            
         }//ends try
         catch(Exception e)
         {
@@ -94,7 +108,7 @@ public class Load
         //so I can add vars later
         int countInt = 0;
         int countDouble = 0;
-        int countBool = 0;
+        int countAmount = 0;
         //the input for ints
         box.setMaxBuy(mySaveInt.get(countInt));
         countInt++;
@@ -102,5 +116,21 @@ public class Load
         //the input for doubles
         box.setMola(mySaveDouble.get(countDouble));
         countDouble++;
+        
+        //the input for boxes
+        box.setPaperAmount(mySaveAmount.get(countAmount));
+        countAmount++;
+        box.setCardboardAmount(mySaveAmount.get(countAmount));
+        countAmount++;
+        box.setPlasticAmount(mySaveAmount.get(countAmount));
+        countAmount++;
+        box.setSteelAmount(mySaveAmount.get(countAmount));
+        countAmount++;
+        box.setSanezaAmount(mySaveAmount.get(countAmount));
+        countAmount++;
+        box.setThorbyAmount(mySaveAmount.get(countAmount));
+        countAmount++;
+        box.setPlarbinAmount(mySaveAmount.get(countAmount));
+        countAmount++;
     }//ends load
 }//ends Save

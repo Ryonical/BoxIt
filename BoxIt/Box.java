@@ -113,7 +113,7 @@ public class Box
     @Override
     public String toString()
     {
-        return myName + "\n" + myAmount + "\n" + myValue + "\n" + myCost +
-        "\n" + mySell + "\n" +myChange;
+        return myName + System.lineSeparator() + myAmount + System.lineSeparator() + myValue + System.lineSeparator() + myCost +
+        System.lineSeparator() + mySell + System.lineSeparator() +myChange;
     }//ends toString
 }//ends box

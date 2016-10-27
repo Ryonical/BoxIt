@@ -338,25 +338,169 @@ public class BoxIt
     * This gets myStock 0 amount.
     * @pre none
     * @pram none
-    * @return a part of my stock
+    * @return a part of myAmount
     * @post none
     */
-    public Box getPaper()
+    public int getPaperAmount()
     {
-        return myStock.get(0);
-    }//ends getMola
+        return myStock.get(0).getAmount();
+    }//ends getPaperAmount
     
     /**
     * This sets myStock 0 amount.
     * @pre none
     * @pram none
     * @return none
-    * @post a part of my stock
+    * @post a part of myAmount
     */
-    public void setPaper(Box stock)
+    public void setPaperAmount(int stock)
     {
-        myStock.get(0);
-    }//ends getMola
+        myStock.get(0).setAmount(stock);
+    }//ends setPaperAmount
+    
+    /**
+    * This gets myStock 1 amount.
+    * @pre none
+    * @pram none
+    * @return a part of myAmount
+    * @post none
+    */
+    public int getCardboardAmount()
+    {
+        return myStock.get(1).getAmount();
+    }//ends getCardboardAmount
+    
+    /**
+    * This sets myStock 1 amount.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post a part of myAmount
+    */
+    public void setCardboardAmount(int stock)
+    {
+        myStock.get(1).setAmount(stock);
+    }//ends setCardboardAmount
+    
+    /**
+    * This gets myStock 2 amount.
+    * @pre none
+    * @pram none
+    * @return a part of myAmount
+    * @post none
+    */
+    public int getPlasticAmount()
+    {
+        return myStock.get(2).getAmount();
+    }//ends getPlasticAmount
+    
+    /**
+    * This sets myStock 2 amount.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post a part of myAmount
+    */
+    public void setPlasticAmount(int stock)
+    {
+        myStock.get(2).setAmount(stock);
+    }//ends setPlasticAmount
+    
+    /**
+    * This gets myStock 3 amount.
+    * @pre none
+    * @pram none
+    * @return a part of myAmount
+    * @post none
+    */
+    public int getSteelAmount()
+    {
+        return myStock.get(3).getAmount();
+    }//ends getSteelAmount
+    
+    /**
+    * This sets myStock 3 amount.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post a part of myAmount
+    */
+    public void setSteelAmount(int stock)
+    {
+        myStock.get(3).setAmount(stock);
+    }//ends setSteelAmount
+    
+    /**
+    * This gets myStock 4 amount.
+    * @pre none
+    * @pram none
+    * @return a part of myAmount
+    * @post none
+    */
+    public int getSanezaAmount()
+    {
+        return myStock.get(4).getAmount();
+    }//ends getSanezaAmount
+    
+    /**
+    * This sets myStock 4 amount.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post a part of myAmount
+    */
+    public void setSanezaAmount(int stock)
+    {
+        myStock.get(4).setAmount(stock);
+    }//ends setSanezaAmount
+    
+    /**
+    * This gets myStock 5 amount.
+    * @pre none
+    * @pram none
+    * @return a part of myAmount
+    * @post none
+    */
+    public int getThorbyAmount()
+    {
+        return myStock.get(5).getAmount();
+    }//ends getThorbyAmount
+    
+    /**
+    * This sets myStock 5 amount.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post a part of myAmount
+    */
+    public void setThorbyAmount(int stock)
+    {
+        myStock.get(5).setAmount(stock);
+    }//ends setThorbyAmount
+    
+    /**
+    * This gets myStock 6 amount.
+    * @pre none
+    * @pram none
+    * @return a part of myAmount
+    * @post none
+    */
+    public int getPlarbinAmount()
+    {
+        return myStock.get(6).getAmount();
+    }//ends getPlarbinAmount
+    
+    /**
+    * This sets myStock 6 amount.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post a part of myAmount
+    */
+    public void setPlarbinAmount(int stock)
+    {
+        myStock.get(6).setAmount(stock);
+    }//ends setPlarbinAmount
     
     /**
     * This sets myType.

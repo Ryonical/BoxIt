@@ -14,12 +14,12 @@ public class Save
     //to save
     FileWriter fileInt;
     FileWriter fileDouble;
-    FileWriter fileBox;
+    FileWriter fileAmount;
     
     //arraylist
     private ArrayList <String> mySaveInt;
     private ArrayList <String> mySaveDouble;
-    private ArrayList <String> mySaveBox;
+    private ArrayList <String> mySaveAmount;
     
     //classes
     BoxIt box;
@@ -36,7 +36,7 @@ public class Save
         {
             fileInt = new FileWriter("saveInt.txt");
             fileDouble = new FileWriter("saveDouble.txt");
-            fileBox = new FileWriter("saveBox.txt");
+            fileAmount = new FileWriter("saveAmount.txt");
         }catch(Exception e)
         {
             System.out.println(e);
@@ -45,7 +45,7 @@ public class Save
         box = box2;
         mySaveInt = new ArrayList<String>();
         mySaveDouble = new ArrayList<String>();
-        mySaveBox = new ArrayList<String>();
+        mySaveAmount = new ArrayList<String>();
     }
     
     /**
@@ -62,7 +62,13 @@ public class Save
         //doubles
         mySaveDouble.add(Double.toString(box.getMola()));
         //box
-        mySaveBox.add(box.getPaper().toString());
+        mySaveAmount.add(Integer.toString(box.getPaperAmount()));
+        mySaveAmount.add(Integer.toString(box.getCardboardAmount()));
+        mySaveAmount.add(Integer.toString(box.getPlasticAmount()));
+        mySaveAmount.add(Integer.toString(box.getSteelAmount()));
+        mySaveAmount.add(Integer.toString(box.getSanezaAmount()));
+        mySaveAmount.add(Integer.toString(box.getThorbyAmount()));
+        mySaveAmount.add(Integer.toString(box.getPlarbinAmount()));
     }//ends getStats
     
     /**
@@ -88,6 +94,12 @@ public class Save
                 fileDouble.write((mySaveDouble.get(i) + System.lineSeparator()));
             }//ends for
             fileDouble.close();
+            //to save boxes
+            for(int i = 0; i < mySaveAmount.size(); i++)
+            {
+                fileAmount.write((mySaveAmount.get(i) + System.lineSeparator()));
+            }//ends for
+            fileAmount.close();
         }catch(Exception e)
         {
             System.out.println(e);

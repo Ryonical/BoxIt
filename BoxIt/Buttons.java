@@ -430,6 +430,7 @@ public class Buttons extends JFrame
                 load.reader();
                 load.load();
                 outputx();
+                screenx();
             }//ends actionPerformed
         });//ends jbtLoad
     }
