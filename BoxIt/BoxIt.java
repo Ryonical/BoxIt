@@ -9,27 +9,25 @@ import java.math.*;
  */
 public class BoxIt
 {
-    //input
-    Scanner in = new Scanner(System.in);
     //prices
         //paper
-    public final double PAPER_SELL = .10;//This is the base price of paper
+    public final double PAPER_SELL = .1;//This is the base price of paper
     public final double PAPER_COST = .05;//This is the base cost of paper
-    public final double PAPER_CHANGE = .05;//This is how much the paper value can change
+    public final double PAPER_CHANGE = 0.05;//This is how much the paper value can change
         //cardboard
-    public final double CARDBOARD_SELL = 2;//This is the base price of cardboard
+    public final double CARDBOARD_SELL = 1.25;//This is the base price of cardboard
     public final double CARDBOARD_COST = 1;//This is the base cost of cardboard
     public final double CARDBOARD_CHANGE = .2;//This is how much the cardboard value can change
         //plastic
-    public final double PLASTIC_SELL = 7;//This is the base price of plastic
+    public final double PLASTIC_SELL = 5;//This is the base price of plastic
     public final double PLASTIC_COST = 3;//This is the base cost of plastic
     public final double PLASTIC_CHANGE = 0.25;//This is how much the plastic value can change
         //steel
-    public final double STEEL_SELL = 20;//This is the base price of steel
+    public final double STEEL_SELL = 10;//This is the base price of steel
     public final double STEEL_COST = 6;//This is the base cost of steel
     public final double STEEL_CHANGE = 2.5;//This is how much the steel value can change
         //sabeza
-    public final double SANEZA_SELL = 15;//This is the base price of saneza
+    public final double SANEZA_SELL = 7.5;//This is the base price of saneza
     public final double SANEZA_COST = 4.5;//This is the base cost of saneza
     public final double SANEZA_CHANGE = 1.75;//This is how much the saneza value can change
         //thorby
@@ -37,13 +35,13 @@ public class BoxIt
     public final double THORBY_COST = 30;//This is the base cost of thorby
     public final double THORBY_CHANGE = 15;//This is how much the thorby value can change
         //plarbin
-    public final double PLARBIN_SELL = 50;//This is the base price of plarbin
+    public final double PLARBIN_SELL = 30;//This is the base price of plarbin
     public final double PLARBIN_COST = 15;//This is the base cost of plarbin
-    public final double PLARBIN_CHANGE = 7.5;//This is how much the plarbin value can change
+    public final double PLARBIN_CHANGE = 5.0;//This is how much the plarbin value can change
     //keeps track of how many boxes there are
     public final int BOX_NUM = 7;
-    //reserch finals
-    public final double RESERCH_INCREASE = 1.5;
+    //research finals
+    public final double RESEARCH_INCREASE = 1.5;
     //final answers
     public final String YES = "y";
     public final String BOX_BUILD = "build a box";
@@ -56,19 +54,13 @@ public class BoxIt
     public ArrayList <Box> myStock;
     //money
     private double myMola;//This is how much mola you have
-    //player name
-    private String myName;
-    //company name
-    private String myCompName;
     //is the int value of the box type
     private int myType;
-    //input
-    private String myAnswer;
-    //int input
-    private int myIntAnswer;
-    //this is reserch related
-    private double myReserchCost;
+    //this is research related
+    private double myResearchCost;
     private int myMaxBuy;
+    private double myResearchTypeCost;
+    private int myTypeBuy;
     //random prices
     private ArrayList<Double> myRandom;
     /**
@@ -82,13 +74,11 @@ public class BoxIt
     {
         myStock = new ArrayList<Box>();
         myMola = 0.50;
-        myName = " ";
-        myCompName = " ";
         myType = 0;
-        myAnswer = " ";
-        myIntAnswer = 0;
-        myReserchCost = 5.0;
+        myResearchCost = 5.0;
         myMaxBuy = 10;
+        myResearchTypeCost = 15;
+        myTypeBuy = 0;
         myRandom = new ArrayList<Double>();
     }//ends constructer
     
@@ -138,41 +128,6 @@ public class BoxIt
                     //             System.out.println("Are you sure that " + myCompName + " will be your company name y/n");
                     //             myAnswer = in.nextLine();
                     //       }//ends while
-        
-        while(true)
-        {
-//             System.out.println("What would you like to buy?");
-//             myAnswer = in.next();
-//             word(myAnswer);
-//             System.out.println("How many?");
-            try
-            {
-                myIntAnswer = in.nextInt();
-            }//try
-            catch(Exception e)
-            {
-                myIntAnswer = 0;
-            }//catch
-            if(myType != BOX_NUM + 1)
-            {
-                buy(myIntAnswer);
-            }//ends if
-            
-//             System.out.println("Would you like to sell?");
-//             myAnswer = in.next();
-//             word(myAnswer);
-//             System.out.println("How Many");
-            try
-            {
-                myIntAnswer = in.nextInt();
-            }//try
-            catch(Exception e)
-            {
-                myIntAnswer = 0;
-            }//catch
-            sell(myIntAnswer);
-        }//ends while
-        
     }//ends game
     
     
@@ -263,22 +218,6 @@ public class BoxIt
             }//ends else if
         }//ends for
     }//ends word
-   
-    /**
-    * This outputs.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post none
-    */
-    public void output()
-    {
-        for(int i = 0; i < BOX_NUM; i++)
-        {
-            System.out.println("You have " + myStock.get(i).getAmount() + " " + myStock.get(i).getName());
-        }//ends for
-        System.out.println("You have " + myMola + " mola");
-    }
     
     /**
     * This randomizes the prices.
@@ -297,6 +236,7 @@ public class BoxIt
         myRandom.set(4, Math.random() * SANEZA_CHANGE);
         myRandom.set(5, Math.random() * THORBY_CHANGE);
         myRandom.set(6, Math.random() * PLARBIN_CHANGE);
+        //this desides if it is positive or negative
         for(int i = 0; i < BOX_NUM; i++)
         {
             
@@ -304,11 +244,7 @@ public class BoxIt
             {
                 myRandom.set(i, -myRandom.get(i));
             }//ends if
-            myRandom.set(i, (double)Math.round(myRandom.get(i) * 100) / 100);
-        }//ends for
-        for(int i = 0; i < BOX_NUM; i++)
-        {
-//             System.out.println(myStock.get(i).getName() + " "  + myRandom.get(i));
+            myRandom.set(i, Math.round(myRandom.get(i) * 100) / 100.0);
         }//ends for
     }//ends randomizePrices
     
@@ -319,15 +255,36 @@ public class BoxIt
     * @return none
     * @post none
     */
-    public void reserch()
+    public void research()
     {
-        if(myMola >= myReserchCost)
+        if(myMola >= myResearchCost)
         {
             myMaxBuy++;
-            myMola -= myReserchCost;
-            myReserchCost *= RESERCH_INCREASE;
+            myMola -= myResearchCost;
+            myResearchCost *= RESEARCH_INCREASE;
+            myResearchCost = Math.round(myResearchCost * 1000) / 1000;
+            round();
         }//ends if
-    }//ends reserch
+    }//ends research
+    
+    /**
+    * This allowes you to buy more boxe types.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post none
+    */
+    public void researchType()
+    {
+        if(myMola >= myResearchTypeCost && myTypeBuy < BOX_NUM)
+        {
+            myTypeBuy++;
+            myMola -= myResearchTypeCost;
+            myResearchTypeCost *= RESEARCH_INCREASE;
+            myResearchTypeCost = Math.round(myResearchTypeCost * 100) / 100;
+            round();
+        }//ends if
+    }//ends research
     
     /**
     * This creates the boxes at the begginging of the game.
@@ -366,6 +323,42 @@ public class BoxIt
     }//ends getMola
     
     /**
+    * This sets myMola.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myMola
+    */
+    public void setMola(double mola)
+    {
+        myMola = mola;
+    }//ends getMola
+    
+    /**
+    * This gets myStock 0 amount.
+    * @pre none
+    * @pram none
+    * @return a part of my stock
+    * @post none
+    */
+    public Box getPaper()
+    {
+        return myStock.get(0);
+    }//ends getMola
+    
+    /**
+    * This sets myStock 0 amount.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post a part of my stock
+    */
+    public void setPaper(Box stock)
+    {
+        myStock.get(0);
+    }//ends getMola
+    
+    /**
     * This sets myType.
     * @pre none
     * @pram none
@@ -374,7 +367,10 @@ public class BoxIt
     */
     public void setType(int type)
     {
-        myType = type;
+        if(type <= myTypeBuy)
+        {
+            myType = type;
+        }//ends if
     }//ends setType
     
     /**
@@ -386,7 +382,7 @@ public class BoxIt
     */
     public String getRandom0()
     {
-        return myStock.get(0).getName() + " "  + myRandom.get(0);
+        return myStock.get(0).getName() + " sells for "  + (Math.round((myStock.get(0).getSell() + myRandom.get(0)) * 100)/ 100.0);
     }//ends getRandom0
     
     /**
@@ -398,7 +394,7 @@ public class BoxIt
     */
     public String getRandom1()
     {
-        return myStock.get(1).getName() + " "  + myRandom.get(1);
+        return myStock.get(1).getName() + " sells for "  + (Math.round((myStock.get(1).getSell() + myRandom.get(1)) * 100)/ 100.0);
     }//ends getRandom1
     
     /**
@@ -410,7 +406,7 @@ public class BoxIt
     */
     public String getRandom2()
     {
-        return myStock.get(2).getName() + " "  + myRandom.get(2);
+        return myStock.get(2).getName() + " sells for "  + (Math.round((myStock.get(2).getSell() + myRandom.get(2)) * 100)/ 100.0);
     }//ends getRandom2
     
     /**
@@ -422,7 +418,7 @@ public class BoxIt
     */
     public String getRandom3()
     {
-        return myStock.get(3).getName() + " "  + myRandom.get(3);
+        return myStock.get(3).getName() + " sells for "  + (Math.round((myStock.get(3).getSell() + myRandom.get(3)) * 100)/ 100.0);
     }//ends getRandom3
     
     /**
@@ -434,7 +430,7 @@ public class BoxIt
     */
     public String getRandom4()
     {
-        return myStock.get(4).getName() + " "  + myRandom.get(4);
+        return myStock.get(4).getName() + " sells for "  + (Math.round((myStock.get(4).getSell() + myRandom.get(4)) * 100)/ 100.0);
     }//ends getRandom4
     
     /**
@@ -446,7 +442,7 @@ public class BoxIt
     */
     public String getRandom5()
     {
-        return myStock.get(5).getName() + " "  + myRandom.get(5);
+        return myStock.get(5).getName() + " sells for "  + (Math.round((myStock.get(5).getSell() + myRandom.get(5)) * 100)/ 100.0);
     }//ends getRandom5
     
     /**
@@ -458,6 +454,66 @@ public class BoxIt
     */
     public String getRandom6()
     {
-        return myStock.get(6).getName() + " "  + myRandom.get(6);
+        return myStock.get(6).getName() + " sells for "  + (Math.round((myStock.get(6).getSell() + myRandom.get(6)) * 100)/ 100.0);
     }//ends getRandom6
+    
+    /**
+    * This gets myResearchCost.
+    * @pre none
+    * @pram none
+    * @return myResearchCost
+    * @post none
+    */
+    public double getResearchCost()
+    {
+        return myResearchCost;
+    }//ends getResearchCost
+    
+    /**
+    * This gets myResearchTypeCost.
+    * @pre none
+    * @pram none
+    * @return myResearchTypeCost
+    * @post none
+    */
+    public double getResearchTypeCost()
+    {
+        return myResearchTypeCost;
+    }//ends getResearchTypeCost
+    
+    /**
+    * This gets myTypeBuy.
+    * @pre none
+    * @pram none
+    * @return myTypeBuy
+    * @post none
+    */
+    public int getTypeBuy()
+    {
+        return myTypeBuy;
+    }//ends myTypeBuy
+    
+    /**
+    * This gets myMaxBuy.
+    * @pre none
+    * @pram none
+    * @return myMaxBuy
+    * @post none
+    */
+    public int getMaxBuy()
+    {
+        return myMaxBuy;
+    }//ends myMaxBuy
+    
+    /**
+    * This sets myMaxBuy.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myMaxBuy
+    */
+    public void setMaxBuy(int buy)
+    {
+        myMaxBuy = buy;
+    }//ends myMaxBuy
 }//ends BoxIt

@@ -19,9 +19,9 @@ public class BoxItDriver
         BoxIt box = new BoxIt();
         GameScreen game = new GameScreen();
         Buttons button = new Buttons(box, game);
-        button.screen1();
+        button.screenx();
         button.activate();
-        button.output();
+        button.output1();
         game.showScreen();
     }//ends main
 }//ends BoxItDriver

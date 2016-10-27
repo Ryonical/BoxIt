@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=box2
+comment0.target=Save(BoxIt)
+comment0.text=\r\n\ This\ will\ construct\ .\r\n\ pre\ none\r\n\ pram\ none\r\n\ return\ none\r\n\ post\ all\r\n
+comment1.params=
+comment1.target=void\ getStats()
+comment1.text=\r\n\ This\ will\ get\ the\ info\ that\ needs\ to\ be\ saved.\r\n\ pre\ none\r\n\ pram\ none\r\n\ return\ none\r\n\ post\ none\r\n
+comment2.params=
+comment2.target=void\ save()
+comment2.text=\r\n\ This\ will\ save\ everything\ that\ needs\ to\ be\ saved.\r\n\ pre\ none\r\n\ pram\ none\r\n\ return\ none\r\n\ post\ none\r\n
+numComments=3

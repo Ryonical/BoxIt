@@ -20,7 +20,8 @@ public class Box
     * @return none
     * @post all
     */
-    public Box(int value, String name, double cost, double sell, double change)
+    public Box(int value, String name, double cost, 
+    double sell, double change)
     {
         myValue = value;
         myAmount = 0;
@@ -31,7 +32,7 @@ public class Box
     }//ends constructer
     
     /**
-    * This will return getSell.
+    * This will return mySell.
     * @pre none
     * @pram none
     * @return mySell
@@ -40,7 +41,7 @@ public class Box
     public double getSell()
     {
         return mySell;
-    }//ends setSell
+    }//ends getSell
     
     /**
     * This will return myAmount.
@@ -64,7 +65,7 @@ public class Box
     public void setAmount(int amount)
     {
         myAmount = amount;
-    }//ends setSell
+    }//ends setAmount
     
     /**
     * This gets the value.
@@ -101,4 +102,18 @@ public class Box
     {
         return myCost;
     }//ends getName
+    
+    /**
+    * This will return a string.
+    * @pre none
+    * @pram none
+    * @return string
+    * @post none
+    */
+    @Override
+    public String toString()
+    {
+        return myName + "\n" + myAmount + "\n" + myValue + "\n" + myCost +
+        "\n" + mySell + "\n" +myChange;
+    }//ends toString
 }//ends box
