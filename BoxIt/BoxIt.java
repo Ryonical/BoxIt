@@ -101,9 +101,9 @@ public class BoxIt
     public BoxIt()
     {
         myStock = new ArrayList<Box>();
-        myDate = 120;
+        myDate = 1;
         myMonth = "January";
-        myDay = "MonDay";
+        myDay = "Monday";
         myHolidayBonus = 1;
         myMola = 0.0;
         myType = 0;
@@ -123,24 +123,26 @@ public class BoxIt
     */
     public void buy(int i)
     {
+        //this lowers how many you buy to the max number you can have if you want more
         if(i > myMaxBuy)
         {
             i = myMaxBuy;
         }//ends if
+        //this is if you can afford all of them
         if(myMola >= myStock.get(myType).getCost() * i && myType != BOX_NUM + 1)
         {
             myStock.get(myType).setAmount(myStock.get(myType).getAmount() + i);
             myMola -= myStock.get(myType).getCost() * i;
         }//ends if
+        //this is if you can't afford all of them
         else if (myType != BOX_NUM + 1)
         {
             i = (int)(myMola / myStock.get(myType).getCost());
             myStock.get(myType).setAmount(myStock.get(myType).getAmount() + i);
             myMola -= myStock.get(myType).getCost() * i;
         }//ends else if
+        //this readys for the next day
         round();
-        randomizePrices();
-        addDay();
     }//ends buy
     
     /**
@@ -152,25 +154,26 @@ public class BoxIt
     */
     public void sell(int i)
     {
-        if(myDay != "Sunday" && myDay != "Saturday")
+        //this is if you ask to sell less than you have
+        if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
         {
-            if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
-            {
-                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
-                myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
-                myTotalMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
-            }//ends if
-            else if (myType != BOX_NUM + 1)
-            {
-                i = myStock.get(myType).getAmount();
-                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
-                myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
-                myTotalMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
-            }//ends else if
-        }
+            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
+            myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
+        }//ends if
+        //this is if you want to sell more than you have
+        else if (myType != BOX_NUM + 1)
+        {
+            i = myStock.get(myType).getAmount();
+            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
+            myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
+        }//ends else if
+        //this readys for the next day
         round();
         roundTotal();
         randomizePrices();
+        addDay();
     }//ends sell
     
     /**
@@ -182,15 +185,16 @@ public class BoxIt
     */
     public void addDay()
     {
-        //this will add to the myDate
+        //this will add to the date
         if(myDate <= DAYS_IN_YEAR)
         {
             myDate++;
         }//ends if
         else
         {
-            myDate = 0;
+            myDate = 1;
         }//ends else
+        //this rotates the day forward
         if(myDay.equals("Sunday"))
         {
             myDay = "Monday";
@@ -217,8 +221,9 @@ public class BoxIt
         }//ends else if
         else if(myDay.equals("Saturday"))
         {
-            myDay = "SunDay";
+            myDay = "Sunday";
         }//ends else if
+        //this rotates the month
         if(myDate <= JAN_END)
         {
             myMonth = "January";
@@ -237,6 +242,7 @@ public class BoxIt
         }//ends else if
         else if(myDate <= MAY_END)
         {
+            //this is for a holiday
             if(myDate <= MOTHERS_DAY && myDate > (MOTHERS_DAY - SHOPING_TIME_SMALL))
             {
                 myHolidayBonus = 2;
@@ -249,6 +255,7 @@ public class BoxIt
         }//ends else if
         else if(myDate <= JUNE_END)
         {
+            //this is for a holiday
             if(myDate <= FATHERS_DAY && myDate > (FATHERS_DAY - SHOPING_TIME_SMALL))
             {
                 myHolidayBonus = 1.5;
@@ -277,6 +284,7 @@ public class BoxIt
         }//ends else if
         else if(myDate <= NOV_END)
         {
+            //this is for a holiday
             if(myDate <= THANKSGIVING && myDate > (THANKSGIVING - SHOPING_TIME_SMALL))
             {
                 myHolidayBonus = 2;
@@ -289,6 +297,7 @@ public class BoxIt
         }//ends else if
         else if(myDate <= DEC_END)
         {
+            //this is for a holiday
             if(myDate <= CRISTMAS && myDate > (CRISTMAS - SHOPING_TIME_BIG))
             {
                 myHolidayBonus = 6;
@@ -324,30 +333,6 @@ public class BoxIt
     {
         myTotalMola = (double)Math.round(myTotalMola * 10000) / 10000;
     }//ends round
-    
-    /**
-    * This checks to see if this is a recognized word.
-    * @pre none
-    * @pram word
-    * @return none
-    * @post none
-    */
-    public void word(String word)
-    {
-        boolean found = false;
-        for(int i = 0; i < BOX_NUM; i++)
-        {
-            if(myStock.get(i).getName().equals(word))
-            {
-                myType = i;
-                found = true;
-            }//ends if
-            else if(!found)
-            {
-                myType = BOX_NUM + 1;
-            }//ends else if
-        }//ends for
-    }//ends word
     
     /**
     * This randomizes the prices.
@@ -438,6 +423,66 @@ public class BoxIt
             myRandom.add(null);
         }//ends fort
     }//ends createBoxes
+    
+    /**
+    * This gets the day.
+    * @pre none
+    * @pram none
+    * @return String
+    * @post none
+    */
+    public String getTheDay()
+    {
+        if(myDate <= JAN_END)
+        {
+            return myDay + ", January, " + (myDate);
+        }//ends if
+        else if(myDate <= FEB_END)
+        {
+            return myDay + ", Febuary, " + (myDate - JAN_END);
+        }//ends else if
+        else if(myDate <= MARCH_END)
+        {
+            return myDay + ", March, " + (myDate - FEB_END);
+        }//ends else if
+        else if(myDate <= APRIL_END)
+        {
+            return myDay + ", April, " + (myDate - MARCH_END);
+        }//ends else if
+        else if(myDate <= MAY_END)
+        {
+            return myDay + ", May, " + (myDate - APRIL_END);
+        }//ends else if
+        else if(myDate <= JUNE_END)
+        {
+            return myDay + ", June, " + (myDate - MAY_END);
+        }//ends else if
+        else if(myDate <= JULY_END)
+        {
+            return myDay + ", July, " + (myDate - JUNE_END);
+        }//ends else if
+        else if(myDate <= AUG_END)
+        {
+            return myDay + ", August, " + (myDate - JULY_END);
+        }//ends else if
+        else if(myDate <= SEP_END)
+        {
+            return myDay + ", September, " + (myDate - AUG_END);
+        }//ends else if
+        else if(myDate <= OCT_END)
+        {
+            return myDay + ", October, " + (myDate - SEP_END);
+        }//ends else if
+        else if(myDate <= NOV_END)
+        {
+            return myDay + ", November, " + (myDate - OCT_END);
+        }//ends else if
+        else if(myDate <= DEC_END)
+        {
+            return myDay + ", December, " + (myDate - NOV_END);
+        }//ends else if
+        return "ERROR";
+    }//ends getTheDay
     
     /**
     * This gets myMola.

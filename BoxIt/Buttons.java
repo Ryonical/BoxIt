@@ -14,7 +14,7 @@ import java.io.*;
  */
 public class Buttons extends JFrame
 {
-    public final int BUTTON_NUM = 23;
+    public final int BUTTON_NUM = 21;
     //buttons for starting
     private JButton jbtPaperAirplane;
     private JButton jbtPaperBox;
@@ -34,8 +34,6 @@ public class Buttons extends JFrame
     private JButton jbtSell1;
     private JButton jbtBuy10;
     private JButton jbtSell10;
-    private JButton jbtBuy100;
-    private JButton jbtSell100;
     private JButton jbtBuyMax;
     private JButton jbtSellMax;
     private JButton jbtSave;
@@ -76,8 +74,6 @@ public class Buttons extends JFrame
         jbtSell1 = new JButton("Sell 1");
         jbtBuy10 = new JButton("Buy 10");
         jbtSell10 = new JButton("Sell 10");
-        jbtBuy100 = new JButton("Buy 100");
-        jbtSell100 = new JButton("Sell 100");
         jbtBuyMax = new JButton("Buy Max");
         jbtSellMax = new JButton("Sell Max");
         jbtSave = new JButton("Save");
@@ -120,8 +116,6 @@ public class Buttons extends JFrame
         jpButtons.add(jbtSell1);
         jpButtons.add(jbtBuy10);
         jpButtons.add(jbtSell10);
-        jpButtons.add(jbtBuy100);
-        jpButtons.add(jbtSell100);
         jpButtons.add(jbtBuyMax);
         jpButtons.add(jbtSellMax);
         jpButtons.add(jbtSave);
@@ -368,27 +362,6 @@ public class Buttons extends JFrame
             }//ends actionPerformed
         });//ends jbtSell10
         
-        //buys 100
-        jbtBuy100.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                box.buy(100);
-                outputx();
-                screenx();
-            }//ends actionPerformed
-        });//ends jbtBuy100
-        //sells 1
-        jbtSell100.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                box.sell(100);
-                outputx();
-                screenx();
-            }//ends actionPerformed
-        });//ends jbtSell100
-        
         //buys Max
         jbtBuyMax.addActionListener(new ActionListener()
         {
@@ -463,8 +436,6 @@ public class Buttons extends JFrame
         buttons[i++] = jbtSell1;
         buttons[i++] = jbtBuy10;
         buttons[i++] = jbtSell10;
-        buttons[i++] = jbtBuy100;
-        buttons[i++] = jbtSell100;
         buttons[i++] = jbtBuyMax;
         buttons[i++] = jbtSellMax;
         buttons[i++] = jbtSave;
@@ -514,6 +485,7 @@ public class Buttons extends JFrame
     {
         int i = 0;
         String[] output = new String [12];
+        output [i++] = "The date is " + box.getTheDay();
         output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
         output [i++] = "You have made a total of " + Double.toString(box.getTotalMola()) + " Mola";
         output [i++] = box.getRandom0() + " and you have " + box.getPaperAmount();
@@ -526,7 +498,6 @@ public class Buttons extends JFrame
         output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
         " and your new type costs " + box.getResearchTypeCost();
         output [i++] = "You can buy " + Integer.toString(box.getMaxBuy()) + " things at a time.";
-        output [i++] = "The date is " + Integer.toString(box.getDate());
         
        
         game.refresh(output);
@@ -560,8 +531,6 @@ public class Buttons extends JFrame
         jbtSell1.setVisible(false);
         jbtBuy10.setVisible(false);
         jbtSell10.setVisible(false);
-        jbtBuy100.setVisible(false);
-        jbtSell100.setVisible(false);
         jbtBuyMax.setVisible(false);
         jbtSellMax.setVisible(false);
         jbtSave.setVisible(false);
@@ -595,8 +564,6 @@ public class Buttons extends JFrame
         jbtSell1.setVisible(false);
         jbtBuy10.setVisible(false);
         jbtSell10.setVisible(false);
-        jbtBuy100.setVisible(false);
-        jbtSell100.setVisible(false);
         jbtBuyMax.setVisible(false);
         jbtSellMax.setVisible(false);
         jbtSave.setVisible(false);
@@ -630,8 +597,6 @@ public class Buttons extends JFrame
         jbtSell1.setVisible(false);
         jbtBuy10.setVisible(false);
         jbtSell10.setVisible(false);
-        jbtBuy100.setVisible(false);
-        jbtSell100.setVisible(false);
         jbtBuyMax.setVisible(false);
         jbtSellMax.setVisible(false);
         jbtSave.setVisible(true);
@@ -665,8 +630,6 @@ public class Buttons extends JFrame
         jbtSell1.setVisible(true);
         jbtBuy10.setVisible(true);
         jbtSell10.setVisible(true);
-        jbtBuy100.setVisible(true);
-        jbtSell100.setVisible(true);
         jbtBuyMax.setVisible(true);
         jbtSellMax.setVisible(true);
         jbtSave.setVisible(true);
