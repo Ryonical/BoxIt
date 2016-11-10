@@ -58,10 +58,10 @@ public class Buttons extends JFrame
         box = box2;
         game = game2;
         //starting buttons
-        jbtPaperAirplane = new JButton("I will make a paper airplane");
-        jbtPaperBox = new JButton("I will make a paper box");
-        jbtPaperFootball = new JButton("I will make a paper football");
-        jbtPaperKnife = new JButton("I will make a paper knife");
+        jbtPaperAirplane = new JButton("I will make 10 paper airplane");
+        jbtPaperBox = new JButton("I will make 5 paper boxes");
+        jbtPaperFootball = new JButton("I will make 30 paper football");
+        jbtPaperKnife = new JButton("I will make 2 paper knife");
         //game buttons
         jbtPaper = new JButton("Paper");
         jbtCardboard = new JButton("Cardboard");
@@ -484,7 +484,7 @@ public class Buttons extends JFrame
     {
         int i = 0;
         String[] output = new String [1];
-        output [i++] = "You have a one square foot peace of paper what would you like to do with it?";
+        output [i++] = "You have a  2 foot  by 2.5 foot peace of paper what would you like to do with it?";
         game.refresh(output);
     }//ends output
     
@@ -498,7 +498,8 @@ public class Buttons extends JFrame
     public void outputFail()
     {
         int i = 0;
-        String[] output = new String [0];
+        String[] output = new String [1];
+        output [i++] = "RLY this is called Box It what do you think you do";
         game.refresh(output);
     }//ends output
     
@@ -512,18 +513,20 @@ public class Buttons extends JFrame
     public void outputx()
     {
         int i = 0;
-        String[] output = new String [10];
+        String[] output = new String [12];
         output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
-        output [i++] = box.getRandom0();
-        output [i++] = box.getRandom1();
-        output [i++] = box.getRandom2();
-        output [i++] = box.getRandom3();
-        output [i++] = box.getRandom4();
-        output [i++] = box.getRandom5();
-        output [i++] = box.getRandom6();
+        output [i++] = "You have made a total of " + Double.toString(box.getTotalMola()) + " Mola";
+        output [i++] = box.getRandom0() + " and you have " + box.getPaperAmount();
+        output [i++] = box.getRandom1() + " and you have " + box.getCardboardAmount();
+        output [i++] = box.getRandom2() + " and you have " + box.getPlasticAmount();
+        output [i++] = box.getRandom3() + " and you have " + box.getSteelAmount();
+        output [i++] = box.getRandom4() + " and you have " + box.getSanezaAmount();
+        output [i++] = box.getRandom5() + " and you have " + box.getThorbyAmount();
+        output [i++] = box.getRandom6() + " and you have " + box.getPlarbinAmount();
         output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
         " and your new type costs " + box.getResearchTypeCost();
         output [i++] = "You can buy " + Integer.toString(box.getMaxBuy()) + " things at a time.";
+        output [i++] = "The date is " + Integer.toString(box.getDate());
         
        
         game.refresh(output);

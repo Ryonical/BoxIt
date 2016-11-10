@@ -10,10 +10,12 @@ import java.math.*;
 public class BoxIt
 {
     //prices
+    public final int STARTING_AMOUNT = 0;
         //paper
     public final double PAPER_SELL = .1;//This is the base price of paper
     public final double PAPER_COST = .05;//This is the base cost of paper
     public final double PAPER_CHANGE = 0.05;//This is how much the paper value can change
+    public final int PAPER_STARTING_AMOUNT = 5;
         //cardboard
     public final double CARDBOARD_SELL = 1.25;//This is the base price of cardboard
     public final double CARDBOARD_COST = 1;//This is the base cost of cardboard
@@ -21,7 +23,7 @@ public class BoxIt
         //plastic
     public final double PLASTIC_SELL = 5;//This is the base price of plastic
     public final double PLASTIC_COST = 3;//This is the base cost of plastic
-    public final double PLASTIC_CHANGE = 0.25;//This is how much the plastic value can change
+    public final double PLASTIC_CHANGE = 0.5;//This is how much the plastic value can change
         //steel
     public final double STEEL_SELL = 10;//This is the base price of steel
     public final double STEEL_COST = 6;//This is the base cost of steel
@@ -42,18 +44,44 @@ public class BoxIt
     public final int BOX_NUM = 7;
     //research finals
     public final double RESEARCH_INCREASE = 1.5;
+    public final double RESEARCH_TYPE_INCREASE = 4.0;
     //final answers
     public final String YES = "y";
     public final String BOX_BUILD = "build a box";
     public final String SAVE = "save";
     public final String EXIT = "exit";
-    
     //gives random chance
     public final double FIFTY_FIFTY = .5;
+    //this is myDate finals
+    public final int SHOPING_TIME_SMALL = 7;
+    public final int SHOPING_TIME_BIG = 28;
+    public final int DAYS_IN_YEAR = 365;
+    public final int JAN_END = 31;
+    public final int FEB_END = 59;
+    public final int MARCH_END = 90;
+    public final int APRIL_END = 120;
+    public final int MOTHERS_DAY = 128;
+    public final int MAY_END = 151;
+    public final int FATHERS_DAY = 170;
+    public final int JUNE_END = 181;
+    public final int JULY_END = 212;
+    public final int AUG_END = 243;
+    public final int SEP_END = 273;
+    public final int OCT_END = 304;
+    public final int THANKSGIVING = 328;
+    public final int NOV_END = 334;
+    public final int CRISTMAS = 359;
+    public final int DEC_END = 365;
     //what you have in stock
     public ArrayList <Box> myStock;
+    //this is the myDate
+    private int myDate;
+    private String myMonth;
+    private String myDay;
+    private double myHolidayBonus;
     //money
     private double myMola;//This is how much mola you have
+    private double myTotalMola;//this is how much mola you have ever had
     //is the int value of the box type
     private int myType;
     //this is research related
@@ -73,7 +101,11 @@ public class BoxIt
     public BoxIt()
     {
         myStock = new ArrayList<Box>();
-        myMola = 0.50;
+        myDate = 120;
+        myMonth = "January";
+        myDay = "MonDay";
+        myHolidayBonus = 1;
+        myMola = 0.0;
         myType = 0;
         myResearchCost = 5.0;
         myMaxBuy = 10;
@@ -81,55 +113,6 @@ public class BoxIt
         myTypeBuy = 0;
         myRandom = new ArrayList<Double>();
     }//ends constructer
-    
-    /**
-    * This is the main game.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post most
-    */
-    public void game()
-    {
-                    //         System.out.println("What is your name");
-                    //         myName = in.nextLine();
-                    //         System.out.println("Are you sure that " + myName + " will be your name y/n");
-                    //         myAnswer = in.nextLine();
-                    //         while(!myAnswer.equals(YES))
-                    //         {
-                    //             System.out.println("Ok name yourself again");
-                    //             myName = in.nextLine();
-                    //             System.out.println("Are you sure that " + myName + " will be your name y/n");
-                    //             myAnswer = in.nextLine();
-                    //         }//ends while
-                    //         
-                    //         
-                    //         System.out.println("sucsess, " + myName);
-                    //         System.out.println("You have 1\" of paper what do you want do do with it?");
-                    //         System.out.println("build a box, make a paper airplane, start a paper football company");
-                    //         myAnswer = in.nextLine();
-                    //         while(!myAnswer.equals(BOX_BUILD))
-                    //         {
-                    //             System.out.println("YOU WILL FAIL NOOB DO SOMETHING ELSE!");
-                    //             myAnswer = in.nextLine();
-                    //         }//ends while
-                    //         System.out.println("Good Choice");
-                    //         System.out.println("You go to sell it and you find a person who needs it so badly.\n" + 
-                    //         "They offer to pay you 10 moola and you accept.\nYou probaly will never be so lucky again.\n" +
-                    //         "You now have started your company what would you like to call it?");
-                            
-                    //         myCompName = in.nextLine();
-                    //         System.out.println("Are you sure that " + myCompName + " will be your company name y/n");
-                    //         myAnswer = in.nextLine();
-                    //         while(!myAnswer.equals(YES))
-                    //         {
-                    //             System.out.println("Ok name your company again");
-                    //             myCompName = in.nextLine();
-                    //             System.out.println("Are you sure that " + myCompName + " will be your company name y/n");
-                    //             myAnswer = in.nextLine();
-                    //       }//ends while
-    }//ends game
-    
     
     /**
     * This buys.
@@ -157,6 +140,7 @@ public class BoxIt
         }//ends else if
         round();
         randomizePrices();
+        addDay();
     }//ends buy
     
     /**
@@ -168,20 +152,154 @@ public class BoxIt
     */
     public void sell(int i)
     {
-        if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
+        if(myDay != "Sunday" && myDay != "Saturday")
         {
-            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
-            myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
-        }//ends if
-        else if (myType != BOX_NUM + 1)
-        {
-            i = myStock.get(myType).getAmount();
-            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
-            myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
-        }//ends else if
+            if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
+            {
+                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
+                myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
+                myTotalMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
+            }//ends if
+            else if (myType != BOX_NUM + 1)
+            {
+                i = myStock.get(myType).getAmount();
+                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
+                myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
+                myTotalMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
+            }//ends else if
+        }
         round();
+        roundTotal();
         randomizePrices();
     }//ends sell
+    
+    /**
+    * This will add a myDay.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myDay, myMonth, myDate
+    */
+    public void addDay()
+    {
+        //this will add to the myDate
+        if(myDate <= DAYS_IN_YEAR)
+        {
+            myDate++;
+        }//ends if
+        else
+        {
+            myDate = 0;
+        }//ends else
+        if(myDay.equals("Sunday"))
+        {
+            myDay = "Monday";
+        }//ends if
+        else if(myDay.equals("Monday"))
+        {
+            myDay = "Tuesday";
+        }//ends else if
+        else if(myDay.equals("Tuesday"))
+        {
+            myDay = "Wendsday";
+        }//ends else if
+        else if(myDay.equals("Wendsday"))
+        {
+            myDay = "Thursday";
+        }//ends else if
+        else if(myDay.equals("Thursday"))
+        {
+            myDay = "Friday";
+        }//ends else if
+        else if(myDay.equals("Friday"))
+        {
+            myDay = "Saturday";
+        }//ends else if
+        else if(myDay.equals("Saturday"))
+        {
+            myDay = "SunDay";
+        }//ends else if
+        if(myDate <= JAN_END)
+        {
+            myMonth = "January";
+        }//ends if
+        else if(myDate <= FEB_END)
+        {
+            myMonth = "Febuary";
+        }//ends else if
+        else if(myDate <= MARCH_END)
+        {
+            myMonth = "March";
+        }//ends else if
+        else if(myDate <= APRIL_END)
+        {
+            myMonth = "April";
+        }//ends else if
+        else if(myDate <= MAY_END)
+        {
+            if(myDate <= MOTHERS_DAY && myDate > (MOTHERS_DAY - SHOPING_TIME_SMALL))
+            {
+                myHolidayBonus = 2;
+            }//ends if
+            else
+            {
+                myHolidayBonus = 1;
+            }//ends else
+            myMonth = "May";
+        }//ends else if
+        else if(myDate <= JUNE_END)
+        {
+            if(myDate <= FATHERS_DAY && myDate > (FATHERS_DAY - SHOPING_TIME_SMALL))
+            {
+                myHolidayBonus = 1.5;
+            }//ends if
+            else
+            {
+                myHolidayBonus = 1;
+            }//ends else
+            myMonth = "June";
+        }//ends else if
+        else if(myDate <= JULY_END)
+        {
+            myMonth = "July";
+        }//ends else if
+        else if(myDate <= AUG_END)
+        {
+            myMonth = "August";
+        }//ends else if
+        else if(myDate <= SEP_END)
+        {
+            myMonth = "September";
+        }//ends else if
+        else if(myDate <= OCT_END)
+        {
+            myMonth = "October";
+        }//ends else if
+        else if(myDate <= NOV_END)
+        {
+            if(myDate <= THANKSGIVING && myDate > (THANKSGIVING - SHOPING_TIME_SMALL))
+            {
+                myHolidayBonus = 2;
+            }//ends if
+            else
+            {
+                myHolidayBonus = 1;
+            }//ends else
+            myMonth = "November";
+        }//ends else if
+        else if(myDate <= DEC_END)
+        {
+            if(myDate <= CRISTMAS && myDate > (CRISTMAS - SHOPING_TIME_BIG))
+            {
+                myHolidayBonus = 6;
+            }//ends if
+            else
+            {
+                myHolidayBonus = 1;
+            }//ends else
+            myMonth = "December";
+        }//ends else if
+    }//ends add myDay
     
     /**
     * This will round myMola.
@@ -193,6 +311,18 @@ public class BoxIt
     public void round()
     {
         myMola = (double)Math.round(myMola * 10000) / 10000;
+    }//ends round
+    
+    /**
+    * This will round myTotalMola.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myTotalMola
+    */
+    public void roundTotal()
+    {
+        myTotalMola = (double)Math.round(myTotalMola * 10000) / 10000;
     }//ends round
     
     /**
@@ -229,18 +359,17 @@ public class BoxIt
     public void randomizePrices()
     {
         //this randomizes prices and rounds them
-        myRandom.set(0, Math.random() * PAPER_CHANGE);
-        myRandom.set(1, Math.random() * CARDBOARD_CHANGE);
-        myRandom.set(2, Math.random() * PLASTIC_CHANGE);
-        myRandom.set(3, Math.random() * STEEL_CHANGE);
-        myRandom.set(4, Math.random() * SANEZA_CHANGE);
-        myRandom.set(5, Math.random() * THORBY_CHANGE);
-        myRandom.set(6, Math.random() * PLARBIN_CHANGE);
+        myRandom.set(0, Math.random() * (PAPER_CHANGE * myHolidayBonus));
+        myRandom.set(1, Math.random() * (CARDBOARD_CHANGE * myHolidayBonus));
+        myRandom.set(2, Math.random() * (PLASTIC_CHANGE * myHolidayBonus));
+        myRandom.set(3, Math.random() * (STEEL_CHANGE * myHolidayBonus));
+        myRandom.set(4, Math.random() * (SANEZA_CHANGE * myHolidayBonus));
+        myRandom.set(5, Math.random() * (THORBY_CHANGE * myHolidayBonus));
+        myRandom.set(6, Math.random() * (PLARBIN_CHANGE * myHolidayBonus));
         //this desides if it is positive or negative
         for(int i = 0; i < BOX_NUM; i++)
         {
-            
-            if(Math.random() < FIFTY_FIFTY)
+            if(Math.random() < FIFTY_FIFTY && myHolidayBonus == 1)
             {
                 myRandom.set(i, -myRandom.get(i));
             }//ends if
@@ -257,7 +386,7 @@ public class BoxIt
     */
     public void research()
     {
-        if(myMola >= myResearchCost)
+        if(myMola >= (myResearchCost + PAPER_COST))
         {
             myMaxBuy++;
             myMola -= myResearchCost;
@@ -276,11 +405,11 @@ public class BoxIt
     */
     public void researchType()
     {
-        if(myMola >= myResearchTypeCost && myTypeBuy < BOX_NUM)
+        if(myMola >= (myResearchTypeCost + PAPER_COST) && myTypeBuy < BOX_NUM)
         {
             myTypeBuy++;
             myMola -= myResearchTypeCost;
-            myResearchTypeCost *= RESEARCH_INCREASE;
+            myResearchTypeCost *= RESEARCH_TYPE_INCREASE;
             myResearchTypeCost = Math.round(myResearchTypeCost * 100) / 100;
             round();
         }//ends if
@@ -296,13 +425,13 @@ public class BoxIt
     public void createBoxes()
     {
         //this constructs the boxes
-        myStock.add(new Box(0, "paper", PAPER_COST, PAPER_SELL, PAPER_CHANGE));
-        myStock.add(new Box(1, "cardboard", CARDBOARD_COST, CARDBOARD_SELL, CARDBOARD_CHANGE));
-        myStock.add(new Box(2, "plastic", PLASTIC_COST, PLASTIC_SELL, PLASTIC_CHANGE));
-        myStock.add(new Box(3, "steel", STEEL_COST, STEEL_SELL, STEEL_CHANGE));
-        myStock.add(new Box(4, "saneza", SANEZA_COST, SANEZA_SELL, SANEZA_CHANGE));
-        myStock.add(new Box(5, "thorby", THORBY_COST, THORBY_SELL, THORBY_CHANGE));
-        myStock.add(new Box(6, "plarbin", PLARBIN_COST, PLARBIN_SELL, PLARBIN_CHANGE));
+        myStock.add(new Box(0, "paper", PAPER_COST, PAPER_SELL, PAPER_CHANGE, PAPER_STARTING_AMOUNT));
+        myStock.add(new Box(1, "cardboard", CARDBOARD_COST, CARDBOARD_SELL, CARDBOARD_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(2, "plastic", PLASTIC_COST, PLASTIC_SELL, PLASTIC_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(3, "steel", STEEL_COST, STEEL_SELL, STEEL_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(4, "saneza", SANEZA_COST, SANEZA_SELL, SANEZA_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(5, "thorby", THORBY_COST, THORBY_SELL, THORBY_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(6, "plarbin", PLARBIN_COST, PLARBIN_SELL, PLARBIN_CHANGE, STARTING_AMOUNT));
         //this adds box_num null places to myRandom so it will have the spaces
         for(int i = 0; i < BOX_NUM; i++)
         {
@@ -333,6 +462,102 @@ public class BoxIt
     {
         myMola = mola;
     }//ends getMola
+    
+    /**
+    * This gets myTotalMola.
+    * @pre none
+    * @pram none
+    * @return myTotalMola
+    * @post none
+    */
+    public double getTotalMola()
+    {
+        return myTotalMola;
+    }//ends getMola
+    
+    /**
+    * This sets myTotalMola.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myTotalMola
+    */
+    public void setTotalMola(double mola)
+    {
+        myTotalMola = mola;
+    }//ends getMola
+    
+    /**
+    * This gets myDate.
+    * @pre none
+    * @pram none
+    * @return myDate
+    * @post none
+    */
+    public int getDate()
+    {
+        return myDate;
+    }//ends getPaperAmount
+    
+    /**
+    * This sets myDate.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myDate
+    */
+    public void setDate(int date)
+    {
+        myDate = date;
+    }//ends setPaperAmount
+    
+    /**
+    * This gets myMonth.
+    * @pre none
+    * @pram none
+    * @return myMonth
+    * @post none
+    */
+    public String getMonth()
+    {
+        return myMonth;
+    }//ends getPaperAmount
+    
+    /**
+    * This sets myMonth.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myMonth
+    */
+    public void setMonth(String month)
+    {
+        myMonth = month;
+    }//ends getPaperAmount
+    
+    /**
+    * This gets myDay.
+    * @pre none
+    * @pram none
+    * @return myDay
+    * @post none
+    */
+    public String getDay()
+    {
+        return myDay;
+    }//ends getPaperAmount
+    
+    /**
+    * This sets myDay.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myDay
+    */
+    public void setDay(String day)
+    {
+        myDay = day;
+    }//ends getPaperAmount
     
     /**
     * This gets myStock 0 amount.
@@ -614,6 +839,18 @@ public class BoxIt
     }//ends getResearchCost
     
     /**
+    * This sets myResearchCost.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myResearchCost
+    */
+    public void setResearchCost(double cost)
+    {
+        myResearchCost = cost;
+    }//ends getResearchCost
+    
+    /**
     * This gets myResearchTypeCost.
     * @pre none
     * @pram none
@@ -626,6 +863,18 @@ public class BoxIt
     }//ends getResearchTypeCost
     
     /**
+    * This sets myResearchTypeCost.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myResearchTypeCost
+    */
+    public void setResearchTypeCost(double cost)
+    {
+        myResearchTypeCost = cost;
+    }//ends getResearchTypeCost
+    
+    /**
     * This gets myTypeBuy.
     * @pre none
     * @pram none
@@ -635,6 +884,18 @@ public class BoxIt
     public int getTypeBuy()
     {
         return myTypeBuy;
+    }//ends myTypeBuy
+    
+    /**
+    * This sets myTypeBuy.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myTypeBuy
+    */
+    public void setTypeBuy(int buy)
+    {
+        myTypeBuy = buy;
     }//ends myTypeBuy
     
     /**

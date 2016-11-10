@@ -15,11 +15,13 @@ public class Save
     FileWriter fileInt;
     FileWriter fileDouble;
     FileWriter fileAmount;
+    FileWriter fileString;
     
     //arraylist
     private ArrayList <String> mySaveInt;
     private ArrayList <String> mySaveDouble;
     private ArrayList <String> mySaveAmount;
+    private ArrayList <String> mySaveString;
     
     //classes
     BoxIt box;
@@ -37,6 +39,7 @@ public class Save
             fileInt = new FileWriter("saveInt.txt");
             fileDouble = new FileWriter("saveDouble.txt");
             fileAmount = new FileWriter("saveAmount.txt");
+            fileString = new FileWriter("saveString.txt");
         }catch(Exception e)
         {
             System.out.println(e);
@@ -46,6 +49,7 @@ public class Save
         mySaveInt = new ArrayList<String>();
         mySaveDouble = new ArrayList<String>();
         mySaveAmount = new ArrayList<String>();
+        mySaveString = new ArrayList<String>();
     }
     
     /**
@@ -59,8 +63,13 @@ public class Save
     {
         //ints
         mySaveInt.add(Integer.toString(box.getMaxBuy()));
+        mySaveInt.add(Integer.toString(box.getTypeBuy()));
+        mySaveInt.add(Integer.toString(box.getDate()));
         //doubles
         mySaveDouble.add(Double.toString(box.getMola()));
+        mySaveDouble.add(Double.toString(box.getTotalMola()));
+        mySaveDouble.add(Double.toString(box.getResearchCost()));
+        mySaveDouble.add(Double.toString(box.getResearchTypeCost()));
         //box
         mySaveAmount.add(Integer.toString(box.getPaperAmount()));
         mySaveAmount.add(Integer.toString(box.getCardboardAmount()));
@@ -69,6 +78,9 @@ public class Save
         mySaveAmount.add(Integer.toString(box.getSanezaAmount()));
         mySaveAmount.add(Integer.toString(box.getThorbyAmount()));
         mySaveAmount.add(Integer.toString(box.getPlarbinAmount()));
+        //string
+        mySaveString.add(box.getDay());
+        mySaveString.add(box.getMonth());
     }//ends getStats
     
     /**
@@ -100,6 +112,12 @@ public class Save
                 fileAmount.write((mySaveAmount.get(i) + System.lineSeparator()));
             }//ends for
             fileAmount.close();
+            //to save string
+            for(int i = 0; i < mySaveString.size(); i++)
+            {
+                fileString.write((mySaveString.get(i) + System.lineSeparator()));
+            }//ends for
+            fileString.close();
         }catch(Exception e)
         {
             System.out.println(e);

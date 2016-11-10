@@ -15,14 +15,17 @@ public class Load
     private File fileInt = null;
     private File fileDouble = null;
     private File fileAmount = null;
+    private File fileString = null;
     private Scanner inFileInt = null;
     private Scanner inFileDouble = null;
     private Scanner inFileAmount = null;
+    private Scanner inFileString = null;
 
     //vars
     private ArrayList <Integer> mySaveInt;
     private ArrayList <Double> mySaveDouble;
     private ArrayList <Integer> mySaveAmount;
+    private ArrayList <String> mySaveString;
 
     //classes
     BoxIt box;
@@ -43,6 +46,8 @@ public class Load
             inFileDouble = new Scanner(fileDouble);
             fileAmount = new File("saveAmount.txt");
             inFileAmount = new Scanner(fileAmount);
+            fileString = new File("saveString.txt");
+            inFileString = new Scanner(fileString);
         }catch(Exception e)
         {
             System.out.println(e);
@@ -52,6 +57,7 @@ public class Load
         mySaveInt = new ArrayList<Integer>();
         mySaveDouble = new ArrayList<Double>();
         mySaveAmount = new ArrayList<Integer>();
+        mySaveString = new ArrayList<String>();
     }//ends constructer
 
     /**
@@ -88,7 +94,15 @@ public class Load
                 {
                     mySaveAmount.add(Integer.valueOf(inFileAmount.nextInt()).intValue());
                 }//ends while
-            }//ends if            
+            }//ends if    
+            //string
+            if(fileString != null)
+            {
+                while(inFileString.hasNext())
+                {
+                    mySaveString.add(inFileString.next());
+                }//ends while
+            }//ends if    
         }//ends try
         catch(Exception e)
         {
@@ -109,12 +123,24 @@ public class Load
         int countInt = 0;
         int countDouble = 0;
         int countAmount = 0;
+        int countString = 0;
+        
         //the input for ints
         box.setMaxBuy(mySaveInt.get(countInt));
+        countInt++;
+        box.setTypeBuy(mySaveInt.get(countInt));
+        countInt++;
+        box.setDate(mySaveInt.get(countInt));
         countInt++;
         
         //the input for doubles
         box.setMola(mySaveDouble.get(countDouble));
+        countDouble++;
+        box.setTotalMola(mySaveDouble.get(countDouble));
+        countDouble++;
+        box.setResearchCost(mySaveDouble.get(countDouble));
+        countDouble++;
+        box.setResearchTypeCost(mySaveDouble.get(countDouble));
         countDouble++;
         
         //the input for boxes
@@ -132,5 +158,10 @@ public class Load
         countAmount++;
         box.setPlarbinAmount(mySaveAmount.get(countAmount));
         countAmount++;
+        
+        box.setDay(mySaveString.get(countString));
+        countAmount++;
+        box.setMonth(mySaveString.get(countString));
+        countString++;
     }//ends load
 }//ends Save

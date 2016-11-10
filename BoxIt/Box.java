@@ -21,7 +21,7 @@ public class Box
     * @post all
     */
     public Box(int value, String name, double cost, 
-    double sell, double change)
+    double sell, double change, int amount)
     {
         myValue = value;
         myAmount = 0;
@@ -29,6 +29,7 @@ public class Box
         myCost = cost;
         mySell = sell;
         myChange = change;
+        myAmount = amount;
     }//ends constructer
     
     /**
