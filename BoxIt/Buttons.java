@@ -55,16 +55,20 @@ public class Buttons extends JFrame
     {
         box = box2;
         game = game2;
+        ImageIcon paperPic = new ImageIcon("SmallZoomedPaper.png");
+        ImageIcon cardPic = new ImageIcon("Cardboard.png");
+        ImageIcon plasticPic = new ImageIcon("plastic.png");
+        ImageIcon steelPic = new ImageIcon("Steel.png");
         //starting buttons
         jbtPaperAirplane = new JButton("I will make 10 paper airplane");
         jbtPaperBox = new JButton("I will make 5 paper boxes");
         jbtPaperFootball = new JButton("I will make 30 paper football");
         jbtPaperKnife = new JButton("I will make 2 paper knife");
         //game buttons
-        jbtPaper = new JButton("Paper");
-        jbtCardboard = new JButton("Cardboard");
-        jbtPlastic = new JButton("Plastic");
-        jbtSteel = new JButton("Steel");
+        jbtPaper = new JButton(paperPic);
+        jbtCardboard = new JButton(cardPic);
+        jbtPlastic = new JButton(plasticPic);
+        jbtSteel = new JButton(steelPic);
         jbtSaneza = new JButton("Saneza");
         jbtThorby = new JButton("Thorby");
         jbtPlarbin = new JButton("Plarbin");

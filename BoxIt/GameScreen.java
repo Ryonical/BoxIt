@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 /**
  * Write a description of class GameScreen here.
  * 
@@ -22,7 +23,7 @@ public class GameScreen extends JFrame
     {
         super("Box It");
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        height = 255;
+        height = 325;
         width = 1300;
         setSize(width, height);
         setLocation(200, 300);
@@ -51,7 +52,10 @@ public class GameScreen extends JFrame
     {
         for(String current : text)
         {
-            add(new JLabel(current));
+            JLabel thing;
+            thing = new JLabel(current);
+            thing.setAlignmentX(RIGHT_ALIGNMENT);
+            add(thing);
         }//ends forEach
     }//ends addText
     
