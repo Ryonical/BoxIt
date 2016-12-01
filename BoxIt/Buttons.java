@@ -56,9 +56,12 @@ public class Buttons extends JFrame
         box = box2;
         game = game2;
         ImageIcon paperPic = new ImageIcon("SmallZoomedPaper.png");
-        ImageIcon cardPic = new ImageIcon("Cardboard.png");
-        ImageIcon plasticPic = new ImageIcon("plastic.png");
-        ImageIcon steelPic = new ImageIcon("Steel.png");
+        ImageIcon cardPic = new ImageIcon("LockedCardboard.png");
+        ImageIcon plasticPic = new ImageIcon("LockedPlastic.png");
+        ImageIcon steelPic = new ImageIcon("LockedSteel.png");
+        ImageIcon sanezaPic = new ImageIcon("LockedSaneza.png");
+        ImageIcon thorbyPic = new ImageIcon("LockedThorby.png");
+        ImageIcon plarbinPic = new ImageIcon("LockedPlarbin.png");
         //starting buttons
         jbtPaperAirplane = new JButton("I will make 10 paper airplane");
         jbtPaperBox = new JButton("I will make 5 paper boxes");
@@ -69,9 +72,9 @@ public class Buttons extends JFrame
         jbtCardboard = new JButton(cardPic);
         jbtPlastic = new JButton(plasticPic);
         jbtSteel = new JButton(steelPic);
-        jbtSaneza = new JButton("Saneza");
-        jbtThorby = new JButton("Thorby");
-        jbtPlarbin = new JButton("Plarbin");
+        jbtSaneza = new JButton(sanezaPic);
+        jbtThorby = new JButton(thorbyPic);
+        jbtPlarbin = new JButton(plarbinPic);
         jbtResearch = new JButton("Research");
         jbtResearchBox = new JButton("Research Box");
         jbtBuy1 = new JButton("Buy 1");
