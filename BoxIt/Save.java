@@ -64,12 +64,12 @@ public class Save
         //ints
         mySaveInt.add(Integer.toString(box.getMaxBuy()));
         mySaveInt.add(Integer.toString(box.getTypeBuy()));
-        mySaveInt.add(Integer.toString(box.getDate()));
         //doubles
         mySaveDouble.add(Double.toString(box.getMola()));
         mySaveDouble.add(Double.toString(box.getTotalMola()));
         mySaveDouble.add(Double.toString(box.getResearchCost()));
         mySaveDouble.add(Double.toString(box.getResearchTypeCost()));
+        mySaveDouble.add(Double.toString(box.getDate()));
         //box
         mySaveAmount.add(Integer.toString(box.getPaperAmount()));
         mySaveAmount.add(Integer.toString(box.getCardboardAmount()));

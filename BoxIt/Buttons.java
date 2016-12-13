@@ -14,20 +14,39 @@ import java.io.*;
  */
 public class Buttons extends JFrame
 {
-    public final int BUTTON_NUM = 21;
+    public final int BUTTON_NUM = 27;
+    ImageIcon paperPic;
+    ImageIcon cardPic;
+    ImageIcon lockedCardPic;
+    ImageIcon plasticPic;
+    ImageIcon lockedPlasticPic;
+    ImageIcon steelPic;
+    ImageIcon lockedSteelPic;
+    ImageIcon sanezaPic;
+    ImageIcon lockedSanezaPic;
+    ImageIcon thorbyPic;
+    ImageIcon lockedThorbyPic;
+    ImageIcon plarbinPic;
+    ImageIcon lockedPlarbinPic;
     //buttons for starting
-    private JButton jbtPaperAirplane;
-    private JButton jbtPaperBox;
-    private JButton jbtPaperFootball;
-    private JButton jbtPaperKnife;
-    //buttons for playing  
+    private JButton jbtTutorialYes;
+    private JButton jbtTutorialNo;
+    private JButton jbtTutorialPaper;
+    private JButton jbtTutorialBuy;
+    //buttons for playing 
     private JButton jbtPaper;
     private JButton jbtCardboard;
+    private JButton lockedJbtCardboard;
     private JButton jbtPlastic;
+    private JButton lockedJbtPlastic;
     private JButton jbtSteel;
+    private JButton lockedJbtSteel;
     private JButton jbtSaneza;
+    private JButton lockedJbtSaneza;
     private JButton jbtThorby;
+    private JButton lockedJbtThorby;
     private JButton jbtPlarbin;
+    private JButton lockedJbtPlarbin;
     private JButton jbtResearch;
     private JButton jbtResearchBox;
     private JButton jbtBuy1;
@@ -55,26 +74,38 @@ public class Buttons extends JFrame
     {
         box = box2;
         game = game2;
-        ImageIcon paperPic = new ImageIcon("SmallZoomedPaper.png");
-        ImageIcon cardPic = new ImageIcon("LockedCardboard.png");
-        ImageIcon plasticPic = new ImageIcon("LockedPlastic.png");
-        ImageIcon steelPic = new ImageIcon("LockedSteel.png");
-        ImageIcon sanezaPic = new ImageIcon("LockedSaneza.png");
-        ImageIcon thorbyPic = new ImageIcon("LockedThorby.png");
-        ImageIcon plarbinPic = new ImageIcon("LockedPlarbin.png");
+        paperPic = new ImageIcon("SmallZoomedPaper.png");
+        cardPic = new ImageIcon("Cardboard.png");
+        lockedCardPic = new ImageIcon("LockedCardboard.png");
+        plasticPic = new ImageIcon("Plastic.png");
+        lockedPlasticPic = new ImageIcon("LockedPlastic.png");
+        steelPic = new ImageIcon("Steel.png");
+        lockedSteelPic = new ImageIcon("LockedSteel.png");
+        sanezaPic = new ImageIcon("Saneza.png");
+        lockedSanezaPic = new ImageIcon("LockedSaneza.png");
+        thorbyPic = new ImageIcon("Thorby.png");
+        lockedThorbyPic = new ImageIcon("LockedThorby.png");
+        plarbinPic = new ImageIcon("Plarbin.png");
+        lockedPlarbinPic = new ImageIcon("LockedPlarbin.png");
         //starting buttons
-        jbtPaperAirplane = new JButton("I will make 10 paper airplane");
-        jbtPaperBox = new JButton("I will make 5 paper boxes");
-        jbtPaperFootball = new JButton("I will make 30 paper football");
-        jbtPaperKnife = new JButton("I will make 2 paper knife");
+        jbtTutorialYes = new JButton("Yes");
+        jbtTutorialNo = new JButton("No");
+        jbtTutorialPaper = new JButton(paperPic);
+        jbtTutorialBuy = new JButton("I will make 2 paper knife");
         //game buttons
         jbtPaper = new JButton(paperPic);
         jbtCardboard = new JButton(cardPic);
+        lockedJbtCardboard = new JButton(lockedCardPic);
         jbtPlastic = new JButton(plasticPic);
+        lockedJbtPlastic = new JButton(lockedPlasticPic);
         jbtSteel = new JButton(steelPic);
+        lockedJbtSteel = new JButton(lockedSteelPic);
         jbtSaneza = new JButton(sanezaPic);
+        lockedJbtSaneza = new JButton(lockedSanezaPic);
         jbtThorby = new JButton(thorbyPic);
+        lockedJbtThorby = new JButton(lockedThorbyPic);
         jbtPlarbin = new JButton(plarbinPic);
+        lockedJbtPlarbin = new JButton(lockedPlarbinPic);
         jbtResearch = new JButton("Research");
         jbtResearchBox = new JButton("Research Box");
         jbtBuy1 = new JButton("Buy 1");
@@ -105,18 +136,24 @@ public class Buttons extends JFrame
         JPanel jpButtons = new JPanel();
         jpButtons.setLayout(new FlowLayout());
         //starting buttons
-        jpButtons.add(jbtPaperAirplane);
-        jpButtons.add(jbtPaperBox);
-        jpButtons.add(jbtPaperFootball);
-        jpButtons.add(jbtPaperKnife);
+        jpButtons.add(jbtTutorialYes);
+        jpButtons.add(jbtTutorialNo);
+        jpButtons.add(jbtTutorialPaper);
+        jpButtons.add(jbtTutorialBuy);
         //main buttons
         jpButtons.add(jbtPaper);
         jpButtons.add(jbtCardboard);
+        jpButtons.add(lockedJbtCardboard);
         jpButtons.add(jbtPlastic);
+        jpButtons.add(lockedJbtPlastic);
         jpButtons.add(jbtSteel);
+        jpButtons.add(lockedJbtSteel);
         jpButtons.add(jbtSaneza);
+        jpButtons.add(lockedJbtSaneza);
         jpButtons.add(jbtThorby);
+        jpButtons.add(lockedJbtThorby);
         jpButtons.add(jbtPlarbin);
+        jpButtons.add(lockedJbtPlarbin);
         jpButtons.add(jbtResearch);
         jpButtons.add(jbtResearchBox);
         jpButtons.add(jbtBuy1);
@@ -132,51 +169,49 @@ public class Buttons extends JFrame
         box.createBoxes();
         box.randomizePrices();
         game.addButtons(getButtons());
-        screen1();
-        output1();
+        startScreen();
+        outputStartTutorial();
         
         
         
         //starting button
         //picks Paper Airplane
-        jbtPaperAirplane.addActionListener(new ActionListener()
+        jbtTutorialYes.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                outputFail();
-                screenFail();
+                outputTutorialYes();
+                pickStartTutorial();
             }//ends actionPerformed
-        });//ends jbtPaperAirplane
+        });//ends jbtTutorialYes
         
         //picks Paper Box
-        jbtPaperBox.addActionListener(new ActionListener()
+        jbtTutorialNo.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
                 outputx();
-                screenx();
+                pickScreen();
             }//ends actionPerformed
-        });//ends jbtPaperBox
+        });//ends jbtTutorialNo
         
         //picks Paper Football
-        jbtPaperFootball.addActionListener(new ActionListener()
+        jbtTutorialPaper.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                outputFail();
-                screenFail();
+                outputTutorialYes();
             }//ends actionPerformed
-        });//ends jbtPaperFootball
+        });//ends jbtTutorialPaper
         
         //picks Paper Knife
-        jbtPaperKnife.addActionListener(new ActionListener()
+        jbtTutorialBuy.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                outputFail();
-                screenFail();
+                outputTutorialYes();
             }//ends actionPerformed
-        });//ends jbtPaperKnife
+        });//ends jbtTutorialBuy
         
         //game buttons
         //picks paper
@@ -188,11 +223,11 @@ public class Buttons extends JFrame
                 {
                     box.setType(0);
                     outputx();
-                    screeny();
+                    sellScreen();
                 }//ends if
                 else
                 {
-                    screenx();
+                    pickScreen();
                 }//ends else
             }//ends actionPerformed
         });//ends jbtPaper
@@ -206,11 +241,11 @@ public class Buttons extends JFrame
                 {
                     box.setType(1);
                     outputx();
-                    screeny();
+                    sellScreen();
                 }//ends if
                 else
                 {
-                    screenx();
+                    pickScreen();
                 }//ends else
             }//ends actionPerformed
         });//ends jbtCardboard
@@ -224,11 +259,11 @@ public class Buttons extends JFrame
                 {
                     box.setType(2);
                     outputx();
-                    screeny();
+                    sellScreen();
                 }//ends if
                 else
                 {
-                    screenx();
+                    pickScreen();
                 }//ends else
             }//ends actionPerformed
         });//ends jbtPlastic
@@ -242,11 +277,11 @@ public class Buttons extends JFrame
                 {
                     box.setType(3);
                     outputx();
-                    screeny();
+                    sellScreen();
                 }//ends if
                 else
                 {
-                    screenx();
+                    pickScreen();
                 }//ends else
             }//ends actionPerformed
         });//ends jbtSteel
@@ -260,11 +295,11 @@ public class Buttons extends JFrame
                 {
                     box.setType(4);
                     outputx();
-                    screeny();
+                    sellScreen();
                 }//ends if
                 else
                 {
-                    screenx();
+                    pickScreen();
                 }//ends else
             }//ends actionPerformed
         });//ends jbtSaneza
@@ -278,11 +313,11 @@ public class Buttons extends JFrame
                 {
                     box.setType(5);
                     outputx();
-                    screeny();
+                    sellScreen();
                 }//ends if
                 else
                 {
-                    screenx();
+                    pickScreen();
                 }//ends else
             }//ends actionPerformed
         });//ends jbtThorby
@@ -296,11 +331,11 @@ public class Buttons extends JFrame
                 {
                     box.setType(6);
                     outputx();
-                    screeny();
+                    sellScreen();
                 }//ends if
                 else
                 {
-                    screenx();
+                    pickScreen();
                 }//ends else
             }//ends actionPerformed
         });//ends jbtPlarbin
@@ -312,7 +347,7 @@ public class Buttons extends JFrame
             {
                 box.research();
                 outputx();
-                screenx();
+                pickScreen();
             }//ends actionPerformed
         });//ends jbtResearch
         
@@ -323,7 +358,7 @@ public class Buttons extends JFrame
             {
                 box.researchType();
                 outputx();
-                screenx();
+                pickScreen();
             }//ends actionPerformed
         });//ends jbtResearchBox
         
@@ -334,7 +369,7 @@ public class Buttons extends JFrame
             {
                 box.buy(1);
                 outputx();
-                screenx();
+                pickScreen();
             }//ends actionPerformed
         });//ends jbtBuy1
         //sells 1
@@ -344,7 +379,7 @@ public class Buttons extends JFrame
             {
                 box.sell(1);
                 outputx();
-                screenx();
+                pickScreen();
             }//ends actionPerformed
         });//ends jbtSell1
         
@@ -355,7 +390,7 @@ public class Buttons extends JFrame
             {
                 box.buy(10);
                 outputx();
-                screenx();
+                pickScreen();
             }//ends actionPerformed
         });//ends jbtBuy1
         //sells 1
@@ -365,7 +400,7 @@ public class Buttons extends JFrame
             {
                 box.sell(10);
                 outputx();
-                screenx();
+                pickScreen();
             }//ends actionPerformed
         });//ends jbtSell10
         
@@ -376,7 +411,7 @@ public class Buttons extends JFrame
             {
                 box.buy(999999999);
                 outputx();
-                screenx();
+                pickScreen();
             }//ends actionPerformed
         });//ends jbtBuyMax
         //sells Max
@@ -386,7 +421,7 @@ public class Buttons extends JFrame
             {
                 box.sell(999999999);
                 outputx();
-                screenx();
+                pickScreen();
             }//ends actionPerformed
         });//ends jbtSellMax
         
@@ -410,7 +445,7 @@ public class Buttons extends JFrame
                 load.reader();
                 load.load();
                 outputx();
-                screenx();
+                pickScreen();
             }//ends actionPerformed
         });//ends jbtLoad
     }
@@ -426,17 +461,23 @@ public class Buttons extends JFrame
     {
         int i = 0;
         JButton[] buttons = new JButton[BUTTON_NUM];
-        buttons[i++] = jbtPaperAirplane;
-        buttons[i++] = jbtPaperBox;
-        buttons[i++] = jbtPaperFootball;
-        buttons[i++] = jbtPaperKnife;
+        buttons[i++] = jbtTutorialYes;
+        buttons[i++] = jbtTutorialNo;
+        buttons[i++] = jbtTutorialPaper;
+        buttons[i++] = jbtTutorialBuy;
         buttons[i++] = jbtPaper;
         buttons[i++] = jbtCardboard;
+        buttons[i++] = lockedJbtCardboard;
         buttons[i++] = jbtPlastic;
+        buttons[i++] = lockedJbtPlastic;
         buttons[i++] = jbtSteel;
+        buttons[i++] = lockedJbtSteel;
         buttons[i++] = jbtSaneza;
+        buttons[i++] = lockedJbtSaneza;
         buttons[i++] = jbtThorby;
+        buttons[i++] = lockedJbtThorby;
         buttons[i++] = jbtPlarbin;
+        buttons[i++] = lockedJbtPlarbin;
         buttons[i++] = jbtResearch;
         buttons[i++] = jbtResearchBox;
         buttons[i++] = jbtBuy1;
@@ -458,11 +499,11 @@ public class Buttons extends JFrame
     * return none
     * post none
     */
-    public void output1()
+    public void outputStartTutorial()
     {
         int i = 0;
         String[] output = new String [1];
-        output [i++] = "You have a  2 foot  by 2.5 foot peace of paper what would you like to do with it?";
+        output [i++] = "Would you like to go through the tutorial";
         game.refresh(output);
     }//ends output
     
@@ -473,11 +514,14 @@ public class Buttons extends JFrame
     * return none
     * post none
     */
-    public void outputFail()
+    public void outputTutorialYes()
     {
         int i = 0;
-        String[] output = new String [1];
-        output [i++] = "RLY this is called Box It what do you think you do";
+        String[] output = new String [4];
+        output [i++] = "OK get ready to get your learn on.";
+        output [i++] = "What you do now is buy some paper";
+        output [i++] = "Paper is the first tier of boxes you can make.";
+        output [i++] = "Click the box under this text";
         game.refresh(output);
     }//ends output
     
@@ -491,10 +535,9 @@ public class Buttons extends JFrame
     public void outputx()
     {
         int i = 0;
-        String[] output = new String [12];
+        String[] output = new String [11];
         output [i++] = "The date is " + box.getTheDay();
         output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
-        output [i++] = "You have made a total of " + Double.toString(box.getTotalMola()) + " Mola";
         output [i++] = box.getRandom0() + " and you have " + box.getPaperAmount();
         output [i++] = box.getRandom1() + " and you have " + box.getCardboardAmount();
         output [i++] = box.getRandom2() + " and you have " + box.getPlasticAmount();
@@ -510,119 +553,117 @@ public class Buttons extends JFrame
         game.refresh(output);
     }//ends output
     
-    
     /**
-    * This will show the first screen.
+    * This will show the first 2 buttons screen.
     * pre none
     * pram none
     * return none
     * post none
     */
-    public void screen1()
+    public void startScreenTrue()
     {   
-        jbtPaperAirplane.setVisible(true);
-        jbtPaperBox.setVisible(true);
-        jbtPaperFootball.setVisible(true);
-        jbtPaperKnife.setVisible(true);
-        jbtPaper.setVisible(false);
-        jbtCardboard.setVisible(false);
-        jbtPlastic.setVisible(false);
-        jbtSteel.setVisible(false);
-        jbtSaneza.setVisible(false);
-        jbtThorby.setVisible(false);
-        jbtPlarbin.setVisible(false);
-        jbtPlarbin.setVisible(false);
-        jbtResearch.setVisible(false);
-        jbtResearchBox.setVisible(false);
-        jbtBuy1.setVisible(false);
-        jbtSell1.setVisible(false);
-        jbtBuy10.setVisible(false);
-        jbtSell10.setVisible(false);
-        jbtBuyMax.setVisible(false);
-        jbtSellMax.setVisible(false);
-        jbtSave.setVisible(false);
-        jbtLoad.setVisible(true);
-    }//ends screen1
+        jbtTutorialYes.setVisible(true);
+        jbtTutorialNo.setVisible(true);
+    }//ends startScreenTrue
     
     /**
-    * This will show the first screen.
+    * This will not show the first 2 buttons screen.
     * pre none
     * pram none
     * return none
     * post none
     */
-    public void screenFail()
+    public void startScreenFalse()
     {   
-        jbtPaperAirplane.setVisible(false);
-        jbtPaperBox.setVisible(false);
-        jbtPaperFootball.setVisible(false);
-        jbtPaperKnife.setVisible(false);
-        jbtPaper.setVisible(false);
-        jbtCardboard.setVisible(false);
-        jbtPlastic.setVisible(false);
-        jbtSteel.setVisible(false);
-        jbtSaneza.setVisible(false);
-        jbtThorby.setVisible(false);
-        jbtPlarbin.setVisible(false);
-        jbtPlarbin.setVisible(false);
-        jbtResearch.setVisible(false);
-        jbtResearchBox.setVisible(false);
-        jbtBuy1.setVisible(false);
-        jbtSell1.setVisible(false);
-        jbtBuy10.setVisible(false);
-        jbtSell10.setVisible(false);
-        jbtBuyMax.setVisible(false);
-        jbtSellMax.setVisible(false);
-        jbtSave.setVisible(false);
-        jbtLoad.setVisible(false);
-    }//ends screen1
-   
+        jbtTutorialYes.setVisible(false);
+        jbtTutorialNo.setVisible(false);
+    }//ends startScreenFalse
     
     /**
-    * This will show the first screen.
+    * This will show tutorial paper.
     * pre none
     * pram none
     * return none
     * post none
     */
-    public void screenx()
-    {
-        jbtPaperAirplane.setVisible(false);
-        jbtPaperBox.setVisible(false);
-        jbtPaperFootball.setVisible(false);
-        jbtPaperKnife.setVisible(false);
+    public void paperTrue()
+    {   
+        jbtTutorialPaper.setVisible(true);
+    }//ends paperTrue
+    
+    /**
+    * This will not show tutorial paper.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void paperFalse()
+    {   
+        jbtTutorialPaper.setVisible(false);
+    }//ends paperFalse
+    
+    /**
+    * This will show tutorial buy.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void buyTrue()
+    {   
+        jbtTutorialBuy.setVisible(true);
+    }//ends buyTrue
+    
+    /**
+    * This will not show tutorial buy.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void buyFalse()
+    {   
+        jbtTutorialBuy.setVisible(false);
+    }//ends buyFalse
+    
+    /**
+    * This will show the picking buttons screen.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void pickScreenTrue()
+    {   
         jbtPaper.setVisible(true);
-        jbtCardboard.setVisible(true);
-        jbtPlastic.setVisible(true);
-        jbtSteel.setVisible(true);
-        jbtSaneza.setVisible(true);
-        jbtThorby.setVisible(true);
-        jbtPlarbin.setVisible(true);
+        showCardboard();
+        showPlastic();
+        showSteel();
+        showSaneza();
+        showThorby();
+        showPlarbin();
         jbtResearch.setVisible(true);
         jbtResearchBox.setVisible(true);
-        jbtBuy1.setVisible(false);
-        jbtSell1.setVisible(false);
-        jbtBuy10.setVisible(false);
-        jbtSell10.setVisible(false);
-        jbtBuyMax.setVisible(false);
-        jbtSellMax.setVisible(false);
-        jbtSave.setVisible(true);
-        jbtLoad.setVisible(false);
-    }//ends screenx
+    }//ends pickScreenTrue
     
     /**
-    * This will show the first screen.
+    * This will not show the picking buttons screen.
     * pre none
     * pram none
     * return none
     * post none
     */
-    public void screeny()
-    {
-        jbtPaperAirplane.setVisible(false);
-        jbtPaperBox.setVisible(false);
-        jbtPaperFootball.setVisible(false);
-        jbtPaperKnife.setVisible(false);
+    public void pickScreenFalse()
+    {   
+        lockedJbtCardboard.setVisible(false);
+        lockedJbtPlastic.setVisible(false);
+        lockedJbtSteel.setVisible(false);
+        lockedJbtSaneza.setVisible(false);
+        lockedJbtThorby.setVisible(false);
+        lockedJbtPlarbin.setVisible(false);
+        lockedJbtPlarbin.setVisible(false);
+        
         jbtPaper.setVisible(false);
         jbtCardboard.setVisible(false);
         jbtPlastic.setVisible(false);
@@ -633,13 +674,255 @@ public class Buttons extends JFrame
         jbtPlarbin.setVisible(false);
         jbtResearch.setVisible(false);
         jbtResearchBox.setVisible(false);
+    }//ends pickScreenFalse
+    
+    /**
+    * This will show the selling buttons screen.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void sellScreenTrue()
+    {   
         jbtBuy1.setVisible(true);
         jbtSell1.setVisible(true);
         jbtBuy10.setVisible(true);
         jbtSell10.setVisible(true);
         jbtBuyMax.setVisible(true);
         jbtSellMax.setVisible(true);
+    }//ends sellScreentTrue
+    
+    /**
+    * This will not show the selling buttons screen.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void sellScreenFalse()
+    {   
+        jbtBuy1.setVisible(false);
+        jbtSell1.setVisible(false);
+        jbtBuy10.setVisible(false);
+        jbtSell10.setVisible(false);
+        jbtBuyMax.setVisible(false);
+        jbtSellMax.setVisible(false);
+    }//ends sellScreenFalse
+    
+    /**
+    * This will show the first screen.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void startScreen()
+    {   
+        startScreenTrue();
+        paperFalse();
+        buyFalse();
+        pickScreenFalse();
+        sellScreenFalse();
+        jbtSave.setVisible(false);
+        jbtLoad.setVisible(true);
+    }//ends screen1
+    
+    /**
+    * This will show the first part of the tutorial.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void pickStartTutorial()
+    {   
+        startScreenFalse();
+        paperTrue();
+        buyFalse();
+        pickScreenFalse();
+        sellScreenFalse();
+        jbtSave.setVisible(false);
+        jbtLoad.setVisible(false);
+    }//ends pickStartTutorial
+    
+    /**
+    * This will show the first part of the tutorial.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void pickBuyTutorial()
+    {   
+        startScreenFalse();
+        paperFalse();
+        buyTrue();
+        pickScreenFalse();
+        sellScreenFalse();
+        jbtSave.setVisible(false);
+        jbtLoad.setVisible(false);
+    }//ends pickStartTutorial
+    
+    /**
+    * This will show the pick screen.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void pickScreen()
+    {
+        startScreenFalse();
+        paperFalse();
+        buyFalse();
+        pickScreenTrue();
+        sellScreenFalse();
         jbtSave.setVisible(true);
         jbtLoad.setVisible(false);
-    }//ends screeny
+    }//ends pickScreen
+    
+    /**
+    * This will show the sell screen.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void sellScreen()
+    {
+        startScreenFalse();
+        paperFalse();
+        buyFalse();
+        pickScreenFalse();
+        sellScreenTrue();
+        jbtSave.setVisible(true);
+        jbtLoad.setVisible(false);
+    }//ends sellScreen
+    
+    /**
+    * This will show the proper cardboard.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void showCardboard()
+    {
+        if(box.getTypeBuy() >= 1)
+        {
+            jbtCardboard.setVisible(true);
+            lockedJbtCardboard.setVisible(false);
+        }//ends if
+        else
+        {
+            jbtCardboard.setVisible(false);
+            lockedJbtCardboard.setVisible(true);
+        }//ends else
+    }//ends showCardboard
+    
+    /**
+    * This will show the proper plastic.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void showPlastic()
+    {
+        if(box.getTypeBuy() >= 2)
+        {
+            jbtPlastic.setVisible(true);
+            lockedJbtPlastic.setVisible(false);
+        }
+        else
+        {
+            jbtPlastic.setVisible(false);
+            lockedJbtPlastic.setVisible(true);
+        }
+    }//ends showPlastic
+    
+    /**
+    * This will show the proper steel.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void showSteel()
+    {
+        if(box.getTypeBuy() >= 3)
+        {
+            jbtSteel.setVisible(true);
+            lockedJbtSteel.setVisible(false);
+        }
+        else
+        {
+            jbtSteel.setVisible(false);
+            lockedJbtSteel.setVisible(true);
+        }
+    }//ends showSteel
+    
+    /**
+    * This will show the proper saneza.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void showSaneza()
+    {
+        if(box.getTypeBuy() >= 4)
+        {
+            jbtSaneza.setVisible(true);
+            lockedJbtSaneza.setVisible(false);
+        }
+        else
+        {
+            jbtSaneza.setVisible(false);
+            lockedJbtSaneza.setVisible(true);
+        }
+    }//ends showSaneza
+    
+    /**
+    * This will show the proper thorby.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void showThorby()
+    {
+        if(box.getTypeBuy() >= 5)
+        {
+            jbtThorby.setVisible(true);
+            lockedJbtThorby.setVisible(false);
+        }
+        else
+        {
+            jbtThorby.setVisible(false);
+            lockedJbtThorby.setVisible(true);
+        }
+    }//ends showThorby
+    
+    /**
+    * This will show the proper plarbin.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void showPlarbin()
+    {
+        if(box.getTypeBuy() >= 6)
+        {
+            jbtPlarbin.setVisible(true);
+            lockedJbtPlarbin.setVisible(false);
+        }
+        else
+        {
+            jbtPlarbin.setVisible(false);
+            lockedJbtPlarbin.setVisible(true);
+        }
+    }//ends showThorby
 }//ends Buttons

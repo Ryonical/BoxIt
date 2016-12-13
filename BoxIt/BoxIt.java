@@ -75,7 +75,7 @@ public class BoxIt
     //what you have in stock
     public ArrayList <Box> myStock;
     //this is the myDate
-    private int myDate;
+    private double myDate;
     private String myMonth;
     private String myDay;
     private double myHolidayBonus;
@@ -143,6 +143,8 @@ public class BoxIt
         }//ends else if
         //this readys for the next day
         round();
+        randomizePrices();
+        addDay();
     }//ends buy
     
     /**
@@ -188,38 +190,38 @@ public class BoxIt
         //this will add to the date
         if(myDate <= DAYS_IN_YEAR)
         {
-            myDate++;
+            myDate+=0.5;
         }//ends if
         else
         {
             myDate = 1;
         }//ends else
         //this rotates the day forward
-        if(myDay.equals("Sunday"))
+        if(myDay.equals("Sunday") && (myDate - (int)myDate) == 0)
         {
             myDay = "Monday";
         }//ends if
-        else if(myDay.equals("Monday"))
+        else if(myDay.equals("Monday") && (myDate - (int)myDate) == 0)
         {
             myDay = "Tuesday";
         }//ends else if
-        else if(myDay.equals("Tuesday"))
+        else if(myDay.equals("Tuesday") && (myDate - (int)myDate) == 0)
         {
             myDay = "Wendsday";
         }//ends else if
-        else if(myDay.equals("Wendsday"))
+        else if(myDay.equals("Wendsday") && (myDate - (int)myDate) == 0)
         {
             myDay = "Thursday";
         }//ends else if
-        else if(myDay.equals("Thursday"))
+        else if(myDay.equals("Thursday") && (myDate - (int)myDate) == 0)
         {
             myDay = "Friday";
         }//ends else if
-        else if(myDay.equals("Friday"))
+        else if(myDay.equals("Friday") && (myDate - (int)myDate) == 0)
         {
             myDay = "Saturday";
         }//ends else if
-        else if(myDay.equals("Saturday"))
+        else if(myDay.equals("Saturday") && (myDate - (int)myDate) == 0)
         {
             myDay = "Sunday";
         }//ends else if
@@ -382,7 +384,7 @@ public class BoxIt
     }//ends research
     
     /**
-    * This allowes you to buy more boxe types.
+    * This allowes you to buy more box types.
     * @pre none
     * @pram none
     * @return none
@@ -435,51 +437,51 @@ public class BoxIt
     {
         if(myDate <= JAN_END)
         {
-            return myDay + ", January, " + (myDate);
+            return myDay + ", January, " + ((int)myDate);
         }//ends if
         else if(myDate <= FEB_END)
         {
-            return myDay + ", Febuary, " + (myDate - JAN_END);
+            return myDay + ", Febuary, " + ((int)myDate - JAN_END);
         }//ends else if
         else if(myDate <= MARCH_END)
         {
-            return myDay + ", March, " + (myDate - FEB_END);
+            return myDay + ", March, " + ((int)myDate - FEB_END);
         }//ends else if
         else if(myDate <= APRIL_END)
         {
-            return myDay + ", April, " + (myDate - MARCH_END);
+            return myDay + ", April, " + ((int)myDate - MARCH_END);
         }//ends else if
         else if(myDate <= MAY_END)
         {
-            return myDay + ", May, " + (myDate - APRIL_END);
+            return myDay + ", May, " + ((int)myDate - APRIL_END);
         }//ends else if
         else if(myDate <= JUNE_END)
         {
-            return myDay + ", June, " + (myDate - MAY_END);
+            return myDay + ", June, " + ((int)myDate - MAY_END);
         }//ends else if
         else if(myDate <= JULY_END)
         {
-            return myDay + ", July, " + (myDate - JUNE_END);
+            return myDay + ", July, " + ((int)myDate - JUNE_END);
         }//ends else if
         else if(myDate <= AUG_END)
         {
-            return myDay + ", August, " + (myDate - JULY_END);
+            return myDay + ", August, " + ((int)myDate - JULY_END);
         }//ends else if
         else if(myDate <= SEP_END)
         {
-            return myDay + ", September, " + (myDate - AUG_END);
+            return myDay + ", September, " + ((int)myDate - AUG_END);
         }//ends else if
         else if(myDate <= OCT_END)
         {
-            return myDay + ", October, " + (myDate - SEP_END);
+            return myDay + ", October, " + ((int)myDate - SEP_END);
         }//ends else if
         else if(myDate <= NOV_END)
         {
-            return myDay + ", November, " + (myDate - OCT_END);
+            return myDay + ", November, " + ((int)myDate - OCT_END);
         }//ends else if
         else if(myDate <= DEC_END)
         {
-            return myDay + ", December, " + (myDate - NOV_END);
+            return myDay + ", December, " + ((int)myDate - NOV_END);
         }//ends else if
         return "ERROR";
     }//ends getTheDay
@@ -539,7 +541,7 @@ public class BoxIt
     * @return myDate
     * @post none
     */
-    public int getDate()
+    public double getDate()
     {
         return myDate;
     }//ends getPaperAmount
@@ -551,7 +553,7 @@ public class BoxIt
     * @return none
     * @post myDate
     */
-    public void setDate(int date)
+    public void setDate(double date)
     {
         myDate = date;
     }//ends setPaperAmount
@@ -796,7 +798,7 @@ public class BoxIt
     */
     public String getRandom0()
     {
-        return myStock.get(0).getName() + " sells for "  + (Math.round((myStock.get(0).getSell() + myRandom.get(0)) * 100)/ 100.0);
+        return myStock.get(0).getName() + " sells for $"  + (Math.round((myStock.get(0).getSell() + myRandom.get(0)) * 100)/ 100.0);
     }//ends getRandom0
     
     /**
@@ -808,7 +810,7 @@ public class BoxIt
     */
     public String getRandom1()
     {
-        return myStock.get(1).getName() + " sells for "  + (Math.round((myStock.get(1).getSell() + myRandom.get(1)) * 100)/ 100.0);
+        return myStock.get(1).getName() + " sells for $"  + (Math.round((myStock.get(1).getSell() + myRandom.get(1)) * 100)/ 100.0);
     }//ends getRandom1
     
     /**
@@ -820,7 +822,7 @@ public class BoxIt
     */
     public String getRandom2()
     {
-        return myStock.get(2).getName() + " sells for "  + (Math.round((myStock.get(2).getSell() + myRandom.get(2)) * 100)/ 100.0);
+        return myStock.get(2).getName() + " sells for $"  + (Math.round((myStock.get(2).getSell() + myRandom.get(2)) * 100)/ 100.0);
     }//ends getRandom2
     
     /**
@@ -832,7 +834,7 @@ public class BoxIt
     */
     public String getRandom3()
     {
-        return myStock.get(3).getName() + " sells for "  + (Math.round((myStock.get(3).getSell() + myRandom.get(3)) * 100)/ 100.0);
+        return myStock.get(3).getName() + " sells for $"  + (Math.round((myStock.get(3).getSell() + myRandom.get(3)) * 100)/ 100.0);
     }//ends getRandom3
     
     /**
@@ -844,7 +846,7 @@ public class BoxIt
     */
     public String getRandom4()
     {
-        return myStock.get(4).getName() + " sells for "  + (Math.round((myStock.get(4).getSell() + myRandom.get(4)) * 100)/ 100.0);
+        return myStock.get(4).getName() + " sells for $"  + (Math.round((myStock.get(4).getSell() + myRandom.get(4)) * 100)/ 100.0);
     }//ends getRandom4
     
     /**
@@ -856,7 +858,7 @@ public class BoxIt
     */
     public String getRandom5()
     {
-        return myStock.get(5).getName() + " sells for "  + (Math.round((myStock.get(5).getSell() + myRandom.get(5)) * 100)/ 100.0);
+        return myStock.get(5).getName() + " sells for $"  + (Math.round((myStock.get(5).getSell() + myRandom.get(5)) * 100)/ 100.0);
     }//ends getRandom5
     
     /**
@@ -868,7 +870,7 @@ public class BoxIt
     */
     public String getRandom6()
     {
-        return myStock.get(6).getName() + " sells for "  + (Math.round((myStock.get(6).getSell() + myRandom.get(6)) * 100)/ 100.0);
+        return myStock.get(6).getName() + " sells for $"  + (Math.round((myStock.get(6).getSell() + myRandom.get(6)) * 100)/ 100.0);
     }//ends getRandom6
     
     /**

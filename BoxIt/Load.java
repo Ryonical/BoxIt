@@ -130,8 +130,7 @@ public class Load
         countInt++;
         box.setTypeBuy(mySaveInt.get(countInt));
         countInt++;
-        box.setDate(mySaveInt.get(countInt));
-        countInt++;
+        
         
         //the input for doubles
         box.setMola(mySaveDouble.get(countDouble));
@@ -141,6 +140,8 @@ public class Load
         box.setResearchCost(mySaveDouble.get(countDouble));
         countDouble++;
         box.setResearchTypeCost(mySaveDouble.get(countDouble));
+        countDouble++;
+        box.setDate(mySaveDouble.get(countDouble));
         countDouble++;
         
         //the input for boxes
