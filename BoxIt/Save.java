@@ -71,13 +71,7 @@ public class Save
         mySaveDouble.add(Double.toString(box.getResearchTypeCost()));
         mySaveDouble.add(Double.toString(box.getDate()));
         //box
-        mySaveAmount.add(Integer.toString(box.getPaperAmount()));
-        mySaveAmount.add(Integer.toString(box.getCardboardAmount()));
-        mySaveAmount.add(Integer.toString(box.getPlasticAmount()));
-        mySaveAmount.add(Integer.toString(box.getSteelAmount()));
-        mySaveAmount.add(Integer.toString(box.getSanezaAmount()));
-        mySaveAmount.add(Integer.toString(box.getThorbyAmount()));
-        mySaveAmount.add(Integer.toString(box.getPlarbinAmount()));
+        mySaveAmount.add(box.getBoxAmount());
         //string
         mySaveString.add(box.getDay());
         mySaveString.add(box.getMonth());

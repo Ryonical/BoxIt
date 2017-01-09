@@ -14,7 +14,7 @@ import java.io.*;
  */
 public class Buttons extends JFrame
 {
-    public final int BUTTON_NUM = 27;
+    public final int BUTTON_NUM = 29;
     ImageIcon paperPic;
     ImageIcon cardPic;
     ImageIcon lockedCardPic;
@@ -33,6 +33,8 @@ public class Buttons extends JFrame
     private JButton jbtTutorialNo;
     private JButton jbtTutorialPaper;
     private JButton jbtTutorialBuy;
+    private JButton jbtTutorialSell;
+    private JButton jbtStart;
     //buttons for playing 
     private JButton jbtPaper;
     private JButton jbtCardboard;
@@ -91,7 +93,9 @@ public class Buttons extends JFrame
         jbtTutorialYes = new JButton("Yes");
         jbtTutorialNo = new JButton("No");
         jbtTutorialPaper = new JButton(paperPic);
-        jbtTutorialBuy = new JButton("I will make 2 paper knife");
+        jbtTutorialBuy = new JButton("Buy 1");
+        jbtTutorialSell = new JButton("Sell 1");
+        jbtStart = new JButton("Start");
         //game buttons
         jbtPaper = new JButton(paperPic);
         jbtCardboard = new JButton(cardPic);
@@ -140,6 +144,8 @@ public class Buttons extends JFrame
         jpButtons.add(jbtTutorialNo);
         jpButtons.add(jbtTutorialPaper);
         jpButtons.add(jbtTutorialBuy);
+        jpButtons.add(jbtTutorialSell);
+        jpButtons.add(jbtStart);
         //main buttons
         jpButtons.add(jbtPaper);
         jpButtons.add(jbtCardboard);
@@ -175,7 +181,7 @@ public class Buttons extends JFrame
         
         
         //starting button
-        //picks Paper Airplane
+        //picks tutorial yes
         jbtTutorialYes.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -185,33 +191,55 @@ public class Buttons extends JFrame
             }//ends actionPerformed
         });//ends jbtTutorialYes
         
-        //picks Paper Box
+        //picks tutorial no
         jbtTutorialNo.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                outputStart();
+                pickScreenStart();
+            }//ends actionPerformed
+        });//ends jbtTutorialNo
+        
+        //picks tutorial paper
+        jbtTutorialPaper.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                outputTutorialBuy();
+                pickBuyTutorial();
+            }//ends actionPerformed
+        });//ends jbtTutorialPaper
+        
+        //picks tutorial buy
+        jbtTutorialBuy.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                outputTutorialSell();
+                pickSellTutorial();
+            }//ends actionPerformed
+        });//ends jbtTutorialBuy
+        
+        //picks tutorial sell
+        jbtTutorialSell.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                outputStart();
+                pickScreenStart();
+            }//ends actionPerformed
+        });//ends jbtTutorialSell
+        
+        //picks Start
+        jbtStart.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
                 outputx();
                 pickScreen();
             }//ends actionPerformed
-        });//ends jbtTutorialNo
-        
-        //picks Paper Football
-        jbtTutorialPaper.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                outputTutorialYes();
-            }//ends actionPerformed
-        });//ends jbtTutorialPaper
-        
-        //picks Paper Knife
-        jbtTutorialBuy.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                outputTutorialYes();
-            }//ends actionPerformed
-        });//ends jbtTutorialBuy
+        });//ends jbtStart
         
         //game buttons
         //picks paper
@@ -465,6 +493,8 @@ public class Buttons extends JFrame
         buttons[i++] = jbtTutorialNo;
         buttons[i++] = jbtTutorialPaper;
         buttons[i++] = jbtTutorialBuy;
+        buttons[i++] = jbtTutorialSell;
+        buttons[i++] = jbtStart;
         buttons[i++] = jbtPaper;
         buttons[i++] = jbtCardboard;
         buttons[i++] = lockedJbtCardboard;
@@ -490,7 +520,7 @@ public class Buttons extends JFrame
         buttons[i++] = jbtLoad;
         
         return buttons;
-    }//getButtons
+    }//ends getButtons
     
     /**
     * This will output the starting words.
@@ -505,7 +535,7 @@ public class Buttons extends JFrame
         String[] output = new String [1];
         output [i++] = "Would you like to go through the tutorial";
         game.refresh(output);
-    }//ends output
+    }//ends outputStartTutorial
     
     /**
     * This will output the starting words.
@@ -518,12 +548,62 @@ public class Buttons extends JFrame
     {
         int i = 0;
         String[] output = new String [4];
-        output [i++] = "OK get ready to get your learn on.";
+        output [i++] = "OK get ready to get your learn on";
         output [i++] = "What you do now is buy some paper";
-        output [i++] = "Paper is the first tier of boxes you can make.";
-        output [i++] = "Click the box under this text";
+        output [i++] = "Paper is the first tier of boxes";
+        output [i++] = "Click the box under this text to select paper";
         game.refresh(output);
-    }//ends output
+    }//ends outputTutorialYes
+    
+    /**
+    * This will output the buying words.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void outputTutorialBuy()
+    {
+        int i = 0;
+        String[] output = new String [3];
+        output [i++] = "Good now you have selected paper";
+        output [i++] = "The next thing you need to do is";
+        output [i++] = "Buy some paper so you cas sell the boxed version of it";
+        game.refresh(output);
+    }//ends outputBuy
+    
+    /**
+    * This will output the selling words.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void outputTutorialSell()
+    {
+        int i = 0;
+        String[] output = new String [3];
+        output [i++] = "Ok now you need to sell";
+        output [i++] = "This makes you mola and removes the";
+        output [i++] = "Item from you inventory";
+        game.refresh(output);
+    }//ends outputSell
+    
+    /**
+    * This will output the starting words.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void outputStart()
+    {
+        int i = 0;
+        String[] output = new String [3];
+        output [i++] = "OK ARE YOU READY TO MAKE SOME MOLA";
+        output [i++] = "IF YOU ARE PRESS THE START BUTTON";
+        game.refresh(output);
+    }//ends outputStarting
     
     /**
     * This will output.
@@ -538,13 +618,13 @@ public class Buttons extends JFrame
         String[] output = new String [11];
         output [i++] = "The date is " + box.getTheDay();
         output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
-        output [i++] = box.getRandom0() + " and you have " + box.getPaperAmount();
-        output [i++] = box.getRandom1() + " and you have " + box.getCardboardAmount();
-        output [i++] = box.getRandom2() + " and you have " + box.getPlasticAmount();
-        output [i++] = box.getRandom3() + " and you have " + box.getSteelAmount();
-        output [i++] = box.getRandom4() + " and you have " + box.getSanezaAmount();
-        output [i++] = box.getRandom5() + " and you have " + box.getThorbyAmount();
-        output [i++] = box.getRandom6() + " and you have " + box.getPlarbinAmount();
+        output [i++] = box.getRandom0() + " and you have " + box.getBoxAmountOutput(0);
+        output [i++] = box.getRandom1() + " and you have " + box.getBoxAmountOutput(1);
+        output [i++] = box.getRandom2() + " and you have " + box.getBoxAmountOutput(2);
+        output [i++] = box.getRandom3() + " and you have " + box.getBoxAmountOutput(3);
+        output [i++] = box.getRandom4() + " and you have " + box.getBoxAmountOutput(4);
+        output [i++] = box.getRandom5() + " and you have " + box.getBoxAmountOutput(5);
+        output [i++] = box.getRandom6() + " and you have " + box.getBoxAmountOutput(6);
         output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
         " and your new type costs " + box.getResearchTypeCost();
         output [i++] = "You can buy " + Integer.toString(box.getMaxBuy()) + " things at a time.";
@@ -626,6 +706,54 @@ public class Buttons extends JFrame
     {   
         jbtTutorialBuy.setVisible(false);
     }//ends buyFalse
+    
+    /**
+    * This will show tutorial sell.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void sellTrue()
+    {   
+        jbtTutorialSell.setVisible(true);
+    }//ends sellTrue
+    
+    /**
+    * This will not show tutorial sell.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void sellFalse()
+    {   
+        jbtTutorialSell.setVisible(false);
+    }//ends sellFalse
+    
+    /**
+    * This will show start.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void startTrue()
+    {   
+        jbtStart.setVisible(true);
+    }//ends startTrue
+    
+    /**
+    * This will not show start.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void startFalse()
+    {   
+        jbtStart.setVisible(false);
+    }//ends startFalse
     
     /**
     * This will show the picking buttons screen.
@@ -722,6 +850,8 @@ public class Buttons extends JFrame
         startScreenTrue();
         paperFalse();
         buyFalse();
+        sellFalse();
+        startFalse();
         pickScreenFalse();
         sellScreenFalse();
         jbtSave.setVisible(false);
@@ -740,6 +870,8 @@ public class Buttons extends JFrame
         startScreenFalse();
         paperTrue();
         buyFalse();
+        sellFalse();
+        startFalse();
         pickScreenFalse();
         sellScreenFalse();
         jbtSave.setVisible(false);
@@ -747,7 +879,7 @@ public class Buttons extends JFrame
     }//ends pickStartTutorial
     
     /**
-    * This will show the first part of the tutorial.
+    * This will show the buying part of the tutorial.
     * pre none
     * pram none
     * return none
@@ -758,11 +890,53 @@ public class Buttons extends JFrame
         startScreenFalse();
         paperFalse();
         buyTrue();
+        sellFalse();
+        startFalse();
         pickScreenFalse();
         sellScreenFalse();
         jbtSave.setVisible(false);
         jbtLoad.setVisible(false);
-    }//ends pickStartTutorial
+    }//ends pickBuyTutorial
+    
+    /**
+    * This will show the selling part of the tutorial.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void pickSellTutorial()
+    {   
+        startScreenFalse();
+        paperFalse();
+        buyFalse();
+        sellTrue();
+        startFalse();
+        pickScreenFalse();
+        sellScreenFalse();
+        jbtSave.setVisible(false);
+        jbtLoad.setVisible(false);
+    }//ends pickSellTutorial
+    
+    /**
+    * This will show the selling part of the tutorial.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void pickScreenStart()
+    {   
+        startScreenFalse();
+        paperFalse();
+        buyFalse();
+        sellFalse();
+        startTrue();
+        pickScreenFalse();
+        sellScreenFalse();
+        jbtSave.setVisible(false);
+        jbtLoad.setVisible(true);
+    }//ends pickSellTutorial
     
     /**
     * This will show the pick screen.
@@ -776,6 +950,8 @@ public class Buttons extends JFrame
         startScreenFalse();
         paperFalse();
         buyFalse();
+        sellFalse();
+        startFalse();
         pickScreenTrue();
         sellScreenFalse();
         jbtSave.setVisible(true);
@@ -794,6 +970,8 @@ public class Buttons extends JFrame
         startScreenFalse();
         paperFalse();
         buyFalse();
+        sellFalse();
+        startFalse();
         pickScreenFalse();
         sellScreenTrue();
         jbtSave.setVisible(true);

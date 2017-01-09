@@ -13,32 +13,25 @@ public class BoxIt
     public final int STARTING_AMOUNT = 0;
         //paper
     public final double PAPER_SELL = .1;//This is the base price of paper
-    public final double PAPER_COST = .05;//This is the base cost of paper
     public final double PAPER_CHANGE = 0.05;//This is how much the paper value can change
     public final int PAPER_STARTING_AMOUNT = 5;
         //cardboard
     public final double CARDBOARD_SELL = 1.25;//This is the base price of cardboard
-    public final double CARDBOARD_COST = 1;//This is the base cost of cardboard
     public final double CARDBOARD_CHANGE = .2;//This is how much the cardboard value can change
         //plastic
     public final double PLASTIC_SELL = 5;//This is the base price of plastic
-    public final double PLASTIC_COST = 3;//This is the base cost of plastic
     public final double PLASTIC_CHANGE = 0.5;//This is how much the plastic value can change
         //steel
     public final double STEEL_SELL = 10;//This is the base price of steel
-    public final double STEEL_COST = 6;//This is the base cost of steel
     public final double STEEL_CHANGE = 2.5;//This is how much the steel value can change
         //sabeza
     public final double SANEZA_SELL = 7.5;//This is the base price of saneza
-    public final double SANEZA_COST = 4.5;//This is the base cost of saneza
     public final double SANEZA_CHANGE = 1.75;//This is how much the saneza value can change
         //thorby
     public final double THORBY_SELL = 20;//This is the base price of thorby
-    public final double THORBY_COST = 30;//This is the base cost of thorby
     public final double THORBY_CHANGE = 15;//This is how much the thorby value can change
         //plarbin
     public final double PLARBIN_SELL = 30;//This is the base price of plarbin
-    public final double PLARBIN_COST = 15;//This is the base cost of plarbin
     public final double PLARBIN_CHANGE = 5.0;//This is how much the plarbin value can change
     //keeps track of how many boxes there are
     public final int BOX_NUM = 7;
@@ -52,6 +45,7 @@ public class BoxIt
     public final String EXIT = "exit";
     //gives random chance
     public final double FIFTY_FIFTY = .5;
+    public final double RANDOM_EVENT = 100;
     //this is myDate finals
     public final int SHOPING_TIME_SMALL = 7;
     public final int SHOPING_TIME_BIG = 28;
@@ -72,8 +66,30 @@ public class BoxIt
     public final int NOV_END = 334;
     public final int CRISTMAS = 359;
     public final int DEC_END = 365;
+    //good chances
+    public final int CARDBOARD_GOOD_CHANCE = 1;
+    public final int PLASTIC_GOOD_CHANCE = 2;
+    public final int STEEL_GOOD_CHANCE = 3;
+    public final int SANEZA_GOOD_CHANCE = 4;
+    public final int THORBY_GOOD_CHANCE = 5;
+    public final int CARBON_GOOD_CHANCE = 6;
+    //bad chances
+    public final int CARDBOARD_BAD_CHANCE = 7;
+    public final int PLASTIC_BAD_CHANCE = 8;
+    public final int STEEL_BAD_CHANCE = 9;
+    public final int SANEZA_BAD_CHANCE = 10;
+    public final int THORBY_BAD_CHANCE = 11;
+    public final int CARBON_BAD_CHANCE = 12;
+    //base costs
+    private double myPaperCost = .05;//This is the base cost of paper
+    private double myCardboardCost = 1;//This is the base cost of cardboard
+    private double myPlasticCost = 3;//This is the base cost of plastic
+    private double mySteelCost = 6;//This is the base cost of steel
+    private double mySanezaCost = 4.5;//This is the base cost of saneza
+    private double myThorbyCost = 30;//This is the base cost of thorby
+    private double myPlarbinCost = 15;//This is the base cost of plarbin
     //what you have in stock
-    public ArrayList <Box> myStock;
+    private ArrayList <Box> myStock;
     //this is the myDate
     private double myDate;
     private String myMonth;
@@ -89,8 +105,10 @@ public class BoxIt
     private int myMaxBuy;
     private double myResearchTypeCost;
     private int myTypeBuy;
-    //random prices
+    //randoms
     private ArrayList<Double> myRandom;
+    private int myCurrentEffect;
+    private int myEventCoolDown;
     /**
     * This constructs.
     * @pre none
@@ -112,6 +130,8 @@ public class BoxIt
         myResearchTypeCost = 15;
         myTypeBuy = 0;
         myRandom = new ArrayList<Double>();
+        myCurrentEffect = 0;
+        myEventCoolDown = 0;
     }//ends constructer
     
     /**
@@ -156,6 +176,8 @@ public class BoxIt
     */
     public void sell(int i)
     {
+        if(myEventCoolDown >= 0)
+        
         //this is if you ask to sell less than you have
         if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
         {
@@ -179,6 +201,70 @@ public class BoxIt
     }//ends sell
     
     /**
+    * This will be a random event.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post none
+    */
+    public String randomEvent()
+    {
+        int myCurrentEffect = (int)(Math.random() * RANDOM_EVENT);
+        if(myEventCoolDown > 0)
+        {
+            if(myCurrentEffect == CARDBOARD_GOOD_CHANCE)
+            {
+                return "A new way of growing trees has been found CARDBOARD IS HALF THE PRICE";
+            }//ends else if
+            else if(myCurrentEffect == PLASTIC_GOOD_CHANCE)
+            {
+                return "A huge deposit of oil has been found PLASTIC AND PLARBIN ARE HALF THE PRICE";
+            }//ends else if
+            else if(myCurrentEffect == STEEL_GOOD_CHANCE)
+            {
+                return "A new way of turning energy into iron has been found STEEL IS HALF THE PRICE";
+            }//ends else if
+            else if(myCurrentEffect == SANEZA_GOOD_CHANCE)
+            {
+                return "Sterilazation is now better around the world SANEZA IS HALF THE PRICE";
+            }//ends else if
+            else if(myCurrentEffect == THORBY_GOOD_CHANCE)
+            {
+                return "It is international thorby week THORBY IS HALF THE PRICE";
+            }//ends else if
+            else if (myCurrentEffect == CARBON_GOOD_CHANCE)
+            {
+                return "A new carbon baised entity has been found and the world celebrates CARBON IS HALF THE PRICE";
+            }//ends else if
+            else if(myCurrentEffect == CARDBOARD_BAD_CHANCE)
+            {
+                return "The world is notising a lack of trees CARDBOARD IS TWICE THE PRICE";
+            }//ends else if
+            else if(myCurrentEffect == PLASTIC_BAD_CHANCE)
+            {
+                return "Oil is running low PLASTIC AND PLARBIN ARE TWICE THE PRICE";
+            }//ends else if
+            else if(myCurrentEffect == STEEL_BAD_CHANCE)
+            {
+                return "The world is low on iron STEEL IS TWICE THE PRICE";
+            }//ends else if
+            else if(myCurrentEffect == SANEZA_BAD_CHANCE)
+            {
+                return "A new desiese has been found SANEZA IS TWICE THE PRICE";
+            }//ends else if
+            else if(myCurrentEffect == THORBY_BAD_CHANCE)
+            {
+                return "The public has realized that thorby sucks THORBY IS TWICE THE PRICE";
+            }//ends else if
+            else if(myCurrentEffect == CARBON_BAD_CHANCE)
+            {
+                return "An endling has died the world vows to have a smaller carbon foot print CARBON IS TWICE THE PRICE";
+            }//ends else if
+        }//ends if
+        return "";
+    }//ends randomEvent
+    
+    /**
     * This will add a myDay.
     * @pre none
     * @pram none
@@ -191,6 +277,11 @@ public class BoxIt
         if(myDate <= DAYS_IN_YEAR)
         {
             myDate+=0.5;
+            //this subtracts a day for myEventCoolDown
+            if(myDate == (int)myDate && myEventCoolDown > 0)
+            {
+                myEventCoolDown--;
+            }//ends if
         }//ends if
         else
         {
@@ -373,7 +464,7 @@ public class BoxIt
     */
     public void research()
     {
-        if(myMola >= (myResearchCost + PAPER_COST))
+        if(myMola >= (myResearchCost + myPaperCost))
         {
             myMaxBuy++;
             myMola -= myResearchCost;
@@ -392,7 +483,7 @@ public class BoxIt
     */
     public void researchType()
     {
-        if(myMola >= (myResearchTypeCost + PAPER_COST) && myTypeBuy < BOX_NUM)
+        if(myMola >= (myResearchTypeCost + myPaperCost) && myTypeBuy < BOX_NUM)
         {
             myTypeBuy++;
             myMola -= myResearchTypeCost;
@@ -412,13 +503,13 @@ public class BoxIt
     public void createBoxes()
     {
         //this constructs the boxes
-        myStock.add(new Box(0, "paper", PAPER_COST, PAPER_SELL, PAPER_CHANGE, PAPER_STARTING_AMOUNT));
-        myStock.add(new Box(1, "cardboard", CARDBOARD_COST, CARDBOARD_SELL, CARDBOARD_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(2, "plastic", PLASTIC_COST, PLASTIC_SELL, PLASTIC_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(3, "steel", STEEL_COST, STEEL_SELL, STEEL_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(4, "saneza", SANEZA_COST, SANEZA_SELL, SANEZA_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(5, "thorby", THORBY_COST, THORBY_SELL, THORBY_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(6, "plarbin", PLARBIN_COST, PLARBIN_SELL, PLARBIN_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(0, "paper", myPaperCost, PAPER_SELL, PAPER_CHANGE, PAPER_STARTING_AMOUNT));
+        myStock.add(new Box(1, "cardboard", myCardboardCost, CARDBOARD_SELL, CARDBOARD_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(2, "plastic", myPlasticCost, PLASTIC_SELL, PLASTIC_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(3, "steel", mySteelCost, STEEL_SELL, STEEL_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(4, "saneza", mySanezaCost, SANEZA_SELL, SANEZA_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(5, "thorby", myThorbyCost, THORBY_SELL, THORBY_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(6, "plarbin", myPlarbinCost, PLARBIN_SELL, PLARBIN_CHANGE, STARTING_AMOUNT));
         //this adds box_num null places to myRandom so it will have the spaces
         for(int i = 0; i < BOX_NUM; i++)
         {
@@ -520,7 +611,7 @@ public class BoxIt
     public double getTotalMola()
     {
         return myTotalMola;
-    }//ends getMola
+    }//ends getTotalMola
     
     /**
     * This sets myTotalMola.
@@ -532,6 +623,30 @@ public class BoxIt
     public void setTotalMola(double mola)
     {
         myTotalMola = mola;
+    }//ends getTotalMola
+    
+    /**
+    * This gets myCurrentEffect.
+    * @pre none
+    * @pram none
+    * @return myCurrentEffect
+    * @post none
+    */
+    public double getCurrentEffect()
+    {
+        return myCurrentEffect;
+    }//ends getCurrentEffect
+    
+    /**
+    * This sets myCurrentEffect.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myCurrentEffect
+    */
+    public void setCurrentEffect(int effect)
+    {
+        myCurrentEffect = effect;
     }//ends getMola
     
     /**
@@ -613,9 +728,55 @@ public class BoxIt
     * @return a part of myAmount
     * @post none
     */
-    public int getPaperAmount()
+    public String getBoxAmount()
     {
-        return myStock.get(0).getAmount();
+        return Integer.toString(myStock.get(0).getAmount()) + System.lineSeparator() +
+        Integer.toString(myStock.get(1).getAmount()) + System.lineSeparator() +
+        Integer.toString(myStock.get(2).getAmount()) + System.lineSeparator() +
+        Integer.toString(myStock.get(3).getAmount()) + System.lineSeparator() +
+        Integer.toString(myStock.get(4).getAmount()) + System.lineSeparator() +
+        Integer.toString(myStock.get(5).getAmount()) + System.lineSeparator() +
+        Integer.toString(myStock.get(6).getAmount()) + System.lineSeparator();
+    }//ends getPaperAmount
+    
+    /**
+    * This gets myStock 0 amount.
+    * @pre none
+    * @pram none
+    * @return a part of myAmount
+    * @post none
+    */
+    public String getBoxAmountOutput(int num)
+    {
+        if(num == 0)
+        {
+            return Integer.toString(myStock.get(0).getAmount());
+        }//ends if
+        else if(num == 1)
+        {
+            return Integer.toString(myStock.get(1).getAmount());
+        }//ends else if
+        else if(num == 2)
+        {
+            return Integer.toString(myStock.get(2).getAmount());
+        }//ends else if
+        else if(num == 3)
+        {
+            return Integer.toString(myStock.get(3).getAmount());
+        }//ends else if
+        else if(num == 4)
+        {
+            return Integer.toString(myStock.get(4).getAmount());
+        }//ends else if
+        else if(num == 5)
+        {
+            return Integer.toString(myStock.get(5).getAmount());
+        }//ends else if
+        else if(num == 6)
+        {
+            return Integer.toString(myStock.get(6).getAmount());
+        }//ends else if
+        return "NO BREAKING MY GAME";
     }//ends getPaperAmount
     
     /**
@@ -625,22 +786,10 @@ public class BoxIt
     * @return none
     * @post a part of myAmount
     */
-    public void setPaperAmount(int stock)
+    public void setBoxAmount(int num,int stock)
     {
-        myStock.get(0).setAmount(stock);
+        myStock.get(num).setAmount(stock);
     }//ends setPaperAmount
-    
-    /**
-    * This gets myStock 1 amount.
-    * @pre none
-    * @pram none
-    * @return a part of myAmount
-    * @post none
-    */
-    public int getCardboardAmount()
-    {
-        return myStock.get(1).getAmount();
-    }//ends getCardboardAmount
     
     /**
     * This sets myStock 1 amount.
@@ -655,18 +804,6 @@ public class BoxIt
     }//ends setCardboardAmount
     
     /**
-    * This gets myStock 2 amount.
-    * @pre none
-    * @pram none
-    * @return a part of myAmount
-    * @post none
-    */
-    public int getPlasticAmount()
-    {
-        return myStock.get(2).getAmount();
-    }//ends getPlasticAmount
-    
-    /**
     * This sets myStock 2 amount.
     * @pre none
     * @pram none
@@ -679,18 +816,6 @@ public class BoxIt
     }//ends setPlasticAmount
     
     /**
-    * This gets myStock 3 amount.
-    * @pre none
-    * @pram none
-    * @return a part of myAmount
-    * @post none
-    */
-    public int getSteelAmount()
-    {
-        return myStock.get(3).getAmount();
-    }//ends getSteelAmount
-    
-    /**
     * This sets myStock 3 amount.
     * @pre none
     * @pram none
@@ -701,18 +826,6 @@ public class BoxIt
     {
         myStock.get(3).setAmount(stock);
     }//ends setSteelAmount
-    
-    /**
-    * This gets myStock 4 amount.
-    * @pre none
-    * @pram none
-    * @return a part of myAmount
-    * @post none
-    */
-    public int getSanezaAmount()
-    {
-        return myStock.get(4).getAmount();
-    }//ends getSanezaAmount
     
     /**
     * This sets myStock 4 amount.

@@ -145,19 +145,19 @@ public class Load
         countDouble++;
         
         //the input for boxes
-        box.setPaperAmount(mySaveAmount.get(countAmount));
+        box.setBoxAmount(0, mySaveAmount.get(countAmount));
         countAmount++;
-        box.setCardboardAmount(mySaveAmount.get(countAmount));
+        box.setBoxAmount(1, mySaveAmount.get(countAmount));
         countAmount++;
-        box.setPlasticAmount(mySaveAmount.get(countAmount));
+        box.setBoxAmount(2, mySaveAmount.get(countAmount));
         countAmount++;
-        box.setSteelAmount(mySaveAmount.get(countAmount));
+        box.setBoxAmount(3, mySaveAmount.get(countAmount));
         countAmount++;
-        box.setSanezaAmount(mySaveAmount.get(countAmount));
+        box.setBoxAmount(4, mySaveAmount.get(countAmount));
         countAmount++;
-        box.setThorbyAmount(mySaveAmount.get(countAmount));
+        box.setBoxAmount(5, mySaveAmount.get(countAmount));
         countAmount++;
-        box.setPlarbinAmount(mySaveAmount.get(countAmount));
+        box.setBoxAmount(6, mySaveAmount.get(countAmount));
         countAmount++;
         
         box.setDay(mySaveString.get(countString));
