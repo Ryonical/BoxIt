@@ -40,13 +40,13 @@ public class Load
     {
         try
         {
-            fileInt = new File("saveInt.txt");
+            fileInt = new File("saves//saveInt.txt");
             inFileInt = new Scanner(fileInt);
-            fileDouble = new File("saveDouble.txt");
+            fileDouble = new File("saves//saveDouble.txt");
             inFileDouble = new Scanner(fileDouble);
-            fileAmount = new File("saveAmount.txt");
+            fileAmount = new File("saves//saveAmount.txt");
             inFileAmount = new Scanner(fileAmount);
-            fileString = new File("saveString.txt");
+            fileString = new File("saves//saveString.txt");
             inFileString = new Scanner(fileString);
         }catch(Exception e)
         {

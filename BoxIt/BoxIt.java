@@ -10,14 +10,15 @@ import java.math.*;
 public class BoxIt
 {
     //prices
-    public final int STARTING_AMOUNT = 0;
+    public final int STARTING_AMOUNT = 0;//this is how many boxes you have to start with except paper
         //paper
     public final double PAPER_SELL = .1;//This is the base price of paper
     public final double PAPER_CHANGE = 0.05;//This is how much the paper value can change
-    public final int PAPER_STARTING_AMOUNT = 5;
+    public final int PAPER_STARTING_AMOUNT = 5;//this is how many paper boxes you have
         //cardboard
     public final double CARDBOARD_SELL = 1.25;//This is the base price of cardboard
     public final double CARDBOARD_CHANGE = .2;//This is how much the cardboard value can change
+    public final double CARDBOARD_BASE_CHANCE = 1;//this is the base price of carbon
         //plastic
     public final double PLASTIC_SELL = 5;//This is the base price of plastic
     public final double PLASTIC_CHANGE = 0.5;//This is how much the plastic value can change
@@ -34,81 +35,79 @@ public class BoxIt
     public final double PLARBIN_SELL = 30;//This is the base price of plarbin
     public final double PLARBIN_CHANGE = 5.0;//This is how much the plarbin value can change
     //keeps track of how many boxes there are
-    public final int BOX_NUM = 7;
+    public final int BOX_NUM = 7;//this is how many box types there are
     //research finals
-    public final double RESEARCH_INCREASE = 1.5;
-    public final double RESEARCH_TYPE_INCREASE = 4.0;
-    //final answers
-    public final String YES = "y";
-    public final String BOX_BUILD = "build a box";
-    public final String SAVE = "save";
-    public final String EXIT = "exit";
+    public final double RESEARCH_INCREASE = 1.5;//this is how much the price to reserch is multiplied each time
+    public final double RESEARCH_TYPE_INCREASE = 4.0;//this is the multiplyer for getting a new box
     //gives random chance
-    public final double FIFTY_FIFTY = .5;
-    public final double RANDOM_EVENT = 100;
+    public final double FIFTY_FIFTY = .5;//this is the chance that a price will be up or down
+    public final double RANDOM_EVENT = 20;//this is the chance of something happening
     //this is myDate finals
-    public final int SHOPING_TIME_SMALL = 7;
-    public final int SHOPING_TIME_BIG = 28;
-    public final int DAYS_IN_YEAR = 365;
-    public final int JAN_END = 31;
-    public final int FEB_END = 59;
-    public final int MARCH_END = 90;
-    public final int APRIL_END = 120;
-    public final int MOTHERS_DAY = 128;
-    public final int MAY_END = 151;
-    public final int FATHERS_DAY = 170;
-    public final int JUNE_END = 181;
-    public final int JULY_END = 212;
-    public final int AUG_END = 243;
-    public final int SEP_END = 273;
-    public final int OCT_END = 304;
-    public final int THANKSGIVING = 328;
-    public final int NOV_END = 334;
-    public final int CRISTMAS = 359;
-    public final int DEC_END = 365;
+    public final int SHOPING_TIME_SMALL = 7;//this is how long a short holliday lasts
+    public final int SHOPING_TIME_BIG = 28;//this is how long a big holliday lasts
+    public final int DAYS_IN_YEAR = 365;//how many days there are in a year
+    public final int JAN_END = 31;//when january ends
+    public final int FEB_END = 59;//when febuary ends
+    public final int MARCH_END = 90;// when march ends
+    public final int APRIL_END = 120;//when april ends
+    public final int MOTHERS_DAY = 128;//when mothers day is
+    public final int MAY_END = 151;//when may ends
+    public final int FATHERS_DAY = 170;//when fathers day is
+    public final int JUNE_END = 181;//when june ends
+    public final int JULY_END = 212;//when july ends
+    public final int AUG_END = 243;//when august ends
+    public final int SEP_END = 273;//when september ends
+    public final int OCT_END = 304;//when october endsd
+    public final int THANKSGIVING = 328;//when thatksgiving is
+    public final int NOV_END = 334;//when november ends
+    public final int CHRISTMAS = 359;//when christmas is
+    public final int DEC_END = 365;//when the year ends
+    //random events
+    public final int WEEK = 3;
     //good chances
-    public final int CARDBOARD_GOOD_CHANCE = 1;
-    public final int PLASTIC_GOOD_CHANCE = 2;
-    public final int STEEL_GOOD_CHANCE = 3;
-    public final int SANEZA_GOOD_CHANCE = 4;
-    public final int THORBY_GOOD_CHANCE = 5;
-    public final int CARBON_GOOD_CHANCE = 6;
+    public final int CARDBOARD_GOOD_CHANCE = 1;//the number picked if cardboard gets a bonus
+    public final int PLASTIC_GOOD_CHANCE = 2;//the number picked if plastic gets a bonus
+    public final int STEEL_GOOD_CHANCE = 3;//the number picked if steel gets a bonus
+    public final int SANEZA_GOOD_CHANCE = 4;//the number picked if saneza gets a bonus
+    public final int THORBY_GOOD_CHANCE = 5;//the number picked if thorby gets a bonus
+    public final int CARBON_GOOD_CHANCE = 6;//the number picked if plarbon gets a bonus
     //bad chances
-    public final int CARDBOARD_BAD_CHANCE = 7;
-    public final int PLASTIC_BAD_CHANCE = 8;
-    public final int STEEL_BAD_CHANCE = 9;
-    public final int SANEZA_BAD_CHANCE = 10;
-    public final int THORBY_BAD_CHANCE = 11;
-    public final int CARBON_BAD_CHANCE = 12;
+    public final int CARDBOARD_BAD_CHANCE = 7;//the number picked if cardboard gets a disivantage
+    public final int PLASTIC_BAD_CHANCE = 8;//the number picked if plastic gets a disivantage
+    public final int STEEL_BAD_CHANCE = 9;//the number picked if steel gets a disivantage
+    public final int SANEZA_BAD_CHANCE = 10;//the number picked if saneza gets a disivantage
+    public final int THORBY_BAD_CHANCE = 11;//the number picked if thorby gets a disivantage
+    public final int CARBON_BAD_CHANCE = 12;//the number picked if plarbon gets a disivantage
     //base costs
-    private double myPaperCost = .05;//This is the base cost of paper
-    private double myCardboardCost = 1;//This is the base cost of cardboard
-    private double myPlasticCost = 3;//This is the base cost of plastic
-    private double mySteelCost = 6;//This is the base cost of steel
-    private double mySanezaCost = 4.5;//This is the base cost of saneza
-    private double myThorbyCost = 30;//This is the base cost of thorby
-    private double myPlarbinCost = 15;//This is the base cost of plarbin
+    private double myPaperCost;//This is the base cost of paper
+    private double myCardboardCost;//This is the base cost of cardboard
+    private double myPlasticCost;//This is the base cost of plastic
+    private double mySteelCost;//This is the base cost of steel
+    private double mySanezaCost;//This is the base cost of saneza
+    private double myThorbyCost;//This is the base cost of thorby
+    private double myPlarbinCost;//This is the base cost of plarbin
     //what you have in stock
-    private ArrayList <Box> myStock;
+    private ArrayList <Box> myStock;//this is what you have in stock
     //this is the myDate
-    private double myDate;
-    private String myMonth;
-    private String myDay;
-    private double myHolidayBonus;
+    private double myDate;//this holds the date
+    private String myMonth;//this holds the month
+    private String myDay;//this holds the day of the week
+    private double myHolidayBonus;//this is a multiplyer for holidays
     //money
     private double myMola;//This is how much mola you have
     private double myTotalMola;//this is how much mola you have ever had
     //is the int value of the box type
-    private int myType;
+    private int myType;//this is the type that is selected
     //this is research related
-    private double myResearchCost;
-    private int myMaxBuy;
-    private double myResearchTypeCost;
-    private int myTypeBuy;
+    private double myResearchCost;//this is the cost to reserch
+    private int myMaxBuy;//this is the max boxes you can buy at a time
+    private double myResearchTypeCost;//this is the cost to reserch the next teir
+    private int myTypeBuy;//this is the max teir you can buy
     //randoms
-    private ArrayList<Double> myRandom;
-    private int myCurrentEffect;
-    private int myEventCoolDown;
+    private ArrayList<Double> myRandom;//this is the list of random prices
+    private int myCurrentEffect;//this picks what will happen
+    private int myEventCoolDown;//this is the cooldown for the effect
+    private String myCurrentThing;
     /**
     * This constructs.
     * @pre none
@@ -118,12 +117,19 @@ public class BoxIt
     */
     public BoxIt()
     {
+        myPaperCost = .05;
+        myCardboardCost = 1;
+        myPlasticCost = 3;
+        mySteelCost = 6;
+        mySanezaCost = 4.5;
+        myThorbyCost = 20;
+        myPlarbinCost = 15;
         myStock = new ArrayList<Box>();
         myDate = 1;
         myMonth = "January";
         myDay = "Monday";
         myHolidayBonus = 1;
-        myMola = 0.0;
+        myMola = 10000.0;
         myType = 0;
         myResearchCost = 5.0;
         myMaxBuy = 10;
@@ -132,6 +138,7 @@ public class BoxIt
         myRandom = new ArrayList<Double>();
         myCurrentEffect = 0;
         myEventCoolDown = 0;
+        myCurrentThing = "";
     }//ends constructer
     
     /**
@@ -176,8 +183,6 @@ public class BoxIt
     */
     public void sell(int i)
     {
-        if(myEventCoolDown >= 0)
-        
         //this is if you ask to sell less than you have
         if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
         {
@@ -209,60 +214,195 @@ public class BoxIt
     */
     public String randomEvent()
     {
-        int myCurrentEffect = (int)(Math.random() * RANDOM_EVENT);
-        if(myEventCoolDown > 0)
+        if(myEventCoolDown <= 0)
         {
+            int myCurrentEffect = (int)(Math.random() * RANDOM_EVENT);
             if(myCurrentEffect == CARDBOARD_GOOD_CHANCE)
             {
-                return "A new way of growing trees has been found CARDBOARD IS HALF THE PRICE";
+                myCardboardCost /= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(1);
+                myCurrentThing = "A new way of growing trees has been found CARDBOARD IS HALF THE PRICE";
             }//ends else if
             else if(myCurrentEffect == PLASTIC_GOOD_CHANCE)
             {
-                return "A huge deposit of oil has been found PLASTIC AND PLARBIN ARE HALF THE PRICE";
+                myPlasticCost /= 2;
+                myPlarbinCost /= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(7);
+                myCurrentThing = "A huge deposit of oil has been found PLASTIC AND PLARBIN ARE HALF THE PRICE";
             }//ends else if
             else if(myCurrentEffect == STEEL_GOOD_CHANCE)
             {
-                return "A new way of turning energy into iron has been found STEEL IS HALF THE PRICE";
+                mySteelCost /= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(3);
+                myCurrentThing = "A new way of turning energy into iron has been found STEEL IS HALF THE PRICE";
             }//ends else if
             else if(myCurrentEffect == SANEZA_GOOD_CHANCE)
             {
-                return "Sterilazation is now better around the world SANEZA IS HALF THE PRICE";
+                mySanezaCost /= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(4);
+                myCurrentThing = "Sterilazation is now better around the world SANEZA IS HALF THE PRICE";
             }//ends else if
             else if(myCurrentEffect == THORBY_GOOD_CHANCE)
             {
-                return "It is international thorby week THORBY IS HALF THE PRICE";
+                myThorbyCost /= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(5);
+                myCurrentThing = "It is international thorby week THORBY IS HALF THE PRICE";
             }//ends else if
             else if (myCurrentEffect == CARBON_GOOD_CHANCE)
             {
-                return "A new carbon baised entity has been found and the world celebrates CARBON IS HALF THE PRICE";
+                myPlarbinCost /= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(6);
+                myCurrentThing = "A new carbon baised entity has been found and the world celebrates PLARBIN IS HALF THE PRICE";
             }//ends else if
             else if(myCurrentEffect == CARDBOARD_BAD_CHANCE)
             {
-                return "The world is notising a lack of trees CARDBOARD IS TWICE THE PRICE";
+                myCardboardCost *= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(1);
+                myCurrentThing = "The world is notising a lack of trees CARDBOARD IS TWICE THE PRICE";
             }//ends else if
             else if(myCurrentEffect == PLASTIC_BAD_CHANCE)
             {
-                return "Oil is running low PLASTIC AND PLARBIN ARE TWICE THE PRICE";
+                myPlasticCost *= 2;
+                myPlarbinCost *= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(7);
+                myCurrentThing = "Oil is running low PLASTIC AND PLARBIN ARE TWICE THE PRICE";
             }//ends else if
             else if(myCurrentEffect == STEEL_BAD_CHANCE)
             {
-                return "The world is low on iron STEEL IS TWICE THE PRICE";
+                mySteelCost *= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(3);
+                myCurrentThing = "The world is low on iron STEEL IS TWICE THE PRICE";
             }//ends else if
             else if(myCurrentEffect == SANEZA_BAD_CHANCE)
             {
-                return "A new desiese has been found SANEZA IS TWICE THE PRICE";
+                mySanezaCost *= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(4);
+                myCurrentThing = "A new disease has been found SANEZA IS TWICE THE PRICE";
             }//ends else if
             else if(myCurrentEffect == THORBY_BAD_CHANCE)
             {
-                return "The public has realized that thorby sucks THORBY IS TWICE THE PRICE";
+                myThorbyCost *= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(5);
+                myCurrentThing = "The public has realized that thorby sucks THORBY IS TWICE THE PRICE";
             }//ends else if
             else if(myCurrentEffect == CARBON_BAD_CHANCE)
             {
-                return "An endling has died the world vows to have a smaller carbon foot print CARBON IS TWICE THE PRICE";
+                myPlarbinCost *= 2;
+                myEventCoolDown = WEEK;
+                resetPrices(6);
+                myCurrentThing = "An endling has died the world vows to have a smaller carbon footprint PLARBIN IS TWICE THE PRICE";
             }//ends else if
+            else
+            {
+                resetPrices(8);
+                myCurrentThing = "Nothing is going on";
+            }//ends else
         }//ends if
-        return "";
+        return myCurrentThing;
     }//ends randomEvent
+    
+    /**
+    * This will reset the prices that arn't changed.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myCosts
+    */
+    public void resetPrices(int i)
+    {
+        if(i == 0)
+        {
+            myCardboardCost = 1;
+            myPlasticCost = 3;
+            mySteelCost = 6;
+            mySanezaCost = 4.5;
+            myThorbyCost = 20;
+            myPlarbinCost = 15;
+        }//ends if
+        else if(i == 1)
+        {
+            myPaperCost = .05;
+            myPlasticCost = 3;
+            mySteelCost = 6;
+            mySanezaCost = 4.5;
+            myThorbyCost = 20;
+            myPlarbinCost = 15;
+        }//ends else if
+        else if(i == 2)
+        {
+            myPaperCost = .05;
+            myCardboardCost = 1;
+            mySteelCost = 6;
+            mySanezaCost = 4.5;
+            myThorbyCost = 20;
+            myPlarbinCost = 15;
+        }//ends else if
+        else if(i == 3)
+        {
+            myPaperCost = .05;
+            myCardboardCost = 1;
+            myPlasticCost = 3;
+            mySanezaCost = 4.5;
+            myThorbyCost = 20;
+            myPlarbinCost = 15;
+        }//ends else if
+        else if(i == 4)
+        {
+            myPaperCost = .05;
+            myCardboardCost = 1;
+            myPlasticCost = 3;
+            mySteelCost = 6;
+            myThorbyCost = 20;
+            myPlarbinCost = 15;
+        }//ends else if
+        else if(i == 5)
+        {
+            myPaperCost = .05;
+            myCardboardCost = 1;
+            myPlasticCost = 3;
+            mySteelCost = 6;
+            mySanezaCost = 4.5;
+            myPlarbinCost = 15;
+        }//ends else if
+        else if(i == 6)
+        {
+            myPaperCost = .05;
+            myCardboardCost = 1;
+            myPlasticCost = 3;
+            mySteelCost = 6;
+            mySanezaCost = 4.5;
+            myThorbyCost = 20;
+        }//ends else if
+        else if(i == 7)
+        {
+            myPaperCost = .05;
+            myCardboardCost = 1;
+            mySteelCost = 6;
+            mySanezaCost = 4.5;
+            myThorbyCost = 20;
+        }//ends else if
+        else if(i == 8)
+        {
+            myPaperCost = .05;
+            myCardboardCost = 1;
+            myPlasticCost = 3;
+            mySteelCost = 6;
+            mySanezaCost = 4.5;
+            myThorbyCost = 20;
+            myPlarbinCost = 15;
+        }//ends else if
+    }//ends resetPrice
     
     /**
     * This will add a myDay.
@@ -391,7 +531,7 @@ public class BoxIt
         else if(myDate <= DEC_END)
         {
             //this is for a holiday
-            if(myDate <= CRISTMAS && myDate > (CRISTMAS - SHOPING_TIME_BIG))
+            if(myDate <= CHRISTMAS && myDate > (CHRISTMAS - SHOPING_TIME_BIG))
             {
                 myHolidayBonus = 6;
             }//ends if
@@ -722,22 +862,56 @@ public class BoxIt
     }//ends getPaperAmount
     
     /**
-    * This gets myStock 0 amount.
+    * This gets myCosts.
     * @pre none
     * @pram none
-    * @return a part of myAmount
+    * @return myDay
     * @post none
     */
-    public String getBoxAmount()
+    public String getCosts(int i)
     {
-        return Integer.toString(myStock.get(0).getAmount()) + System.lineSeparator() +
-        Integer.toString(myStock.get(1).getAmount()) + System.lineSeparator() +
-        Integer.toString(myStock.get(2).getAmount()) + System.lineSeparator() +
-        Integer.toString(myStock.get(3).getAmount()) + System.lineSeparator() +
-        Integer.toString(myStock.get(4).getAmount()) + System.lineSeparator() +
-        Integer.toString(myStock.get(5).getAmount()) + System.lineSeparator() +
-        Integer.toString(myStock.get(6).getAmount()) + System.lineSeparator();
+        if(i == 0)
+        {
+            return Double.toString(myPaperCost);
+        }//ends if
+        else if(i == 1)
+        {
+            return Double.toString(myCardboardCost);
+        }//ends else if
+        else if(i == 2)
+        {
+            return Double.toString(myPlasticCost);
+        }//ends else if
+        else if(i == 3)
+        {
+            return Double.toString(mySteelCost);
+        }//ends else if
+        else if(i == 4)
+        {
+            return Double.toString(mySanezaCost);
+        }//ends else if
+        else if(i == 5)
+        {
+            return Double.toString(myThorbyCost);
+        }//ends else if
+        else if(i == 6)
+        {
+            return Double.toString(myPlarbinCost);
+        }//ends else if
+        return "NO BREAKING MY GAME";
     }//ends getPaperAmount
+    //     
+    //     /**
+    //     * This sets myDay.
+    //     * @pre none
+    //     * @pram none
+    //     * @return none
+    //     * @post myDay
+    //     */
+    //     public void setDay(String day)
+    //     {
+    //         myDay = day;
+    //     }//ends getPaperAmount
     
     /**
     * This gets myStock 0 amount.
@@ -746,7 +920,7 @@ public class BoxIt
     * @return a part of myAmount
     * @post none
     */
-    public String getBoxAmountOutput(int num)
+    public String getBoxAmount(int num)
     {
         if(num == 0)
         {

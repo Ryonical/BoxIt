@@ -36,10 +36,10 @@ public class Save
     {
         try
         {
-            fileInt = new FileWriter("saveInt.txt");
-            fileDouble = new FileWriter("saveDouble.txt");
-            fileAmount = new FileWriter("saveAmount.txt");
-            fileString = new FileWriter("saveString.txt");
+            fileInt = new FileWriter("saves//saveInt.txt");
+            fileDouble = new FileWriter("saves//saveDouble.txt");
+            fileAmount = new FileWriter("saves//saveAmount.txt");
+            fileString = new FileWriter("saves//saveString.txt");
         }catch(Exception e)
         {
             System.out.println(e);
@@ -71,7 +71,13 @@ public class Save
         mySaveDouble.add(Double.toString(box.getResearchTypeCost()));
         mySaveDouble.add(Double.toString(box.getDate()));
         //box
-        mySaveAmount.add(box.getBoxAmount());
+        mySaveAmount.add(box.getBoxAmount(0));
+        mySaveAmount.add(box.getBoxAmount(1));
+        mySaveAmount.add(box.getBoxAmount(2));
+        mySaveAmount.add(box.getBoxAmount(3));
+        mySaveAmount.add(box.getBoxAmount(4));
+        mySaveAmount.add(box.getBoxAmount(5));
+        mySaveAmount.add(box.getBoxAmount(6));
         //string
         mySaveString.add(box.getDay());
         mySaveString.add(box.getMonth());

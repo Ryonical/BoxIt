@@ -23,7 +23,7 @@ public class GameScreen extends JFrame
     {
         super("Box It");
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        height = 310;
+        height = 325;
         width = 1300;
         setSize(width, height);
         setLocation(200, 300);

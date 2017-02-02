@@ -76,19 +76,19 @@ public class Buttons extends JFrame
     {
         box = box2;
         game = game2;
-        paperPic = new ImageIcon("SmallZoomedPaper.png");
-        cardPic = new ImageIcon("Cardboard.png");
-        lockedCardPic = new ImageIcon("LockedCardboard.png");
-        plasticPic = new ImageIcon("Plastic.png");
-        lockedPlasticPic = new ImageIcon("LockedPlastic.png");
-        steelPic = new ImageIcon("Steel.png");
-        lockedSteelPic = new ImageIcon("LockedSteel.png");
-        sanezaPic = new ImageIcon("Saneza.png");
-        lockedSanezaPic = new ImageIcon("LockedSaneza.png");
-        thorbyPic = new ImageIcon("Thorby.png");
-        lockedThorbyPic = new ImageIcon("LockedThorby.png");
-        plarbinPic = new ImageIcon("Plarbin.png");
-        lockedPlarbinPic = new ImageIcon("LockedPlarbin.png");
+        paperPic = new ImageIcon("pics//SmallZoomedPaper.png");
+        cardPic = new ImageIcon("pics//Cardboard.png");
+        lockedCardPic = new ImageIcon("pics//LockedCardboard.png");
+        plasticPic = new ImageIcon("pics//Plastic.png");
+        lockedPlasticPic = new ImageIcon("pics//LockedPlastic.png");
+        steelPic = new ImageIcon("pics//Steel.png");
+        lockedSteelPic = new ImageIcon("pics//LockedSteel.png");
+        sanezaPic = new ImageIcon("pics//Saneza.png");
+        lockedSanezaPic = new ImageIcon("pics//LockedSaneza.png");
+        thorbyPic = new ImageIcon("pics//Thorby.png");
+        lockedThorbyPic = new ImageIcon("pics//LockedThorby.png");
+        plarbinPic = new ImageIcon("pics//Plarbin.png");
+        lockedPlarbinPic = new ImageIcon("pics//LockedPlarbin.png");
         //starting buttons
         jbtTutorialYes = new JButton("Yes");
         jbtTutorialNo = new JButton("No");
@@ -615,16 +615,17 @@ public class Buttons extends JFrame
     public void outputx()
     {
         int i = 0;
-        String[] output = new String [11];
+        String[] output = new String [12];
+        output [i++] = box.randomEvent();
         output [i++] = "The date is " + box.getTheDay();
         output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
-        output [i++] = box.getRandom0() + " and you have " + box.getBoxAmountOutput(0);
-        output [i++] = box.getRandom1() + " and you have " + box.getBoxAmountOutput(1);
-        output [i++] = box.getRandom2() + " and you have " + box.getBoxAmountOutput(2);
-        output [i++] = box.getRandom3() + " and you have " + box.getBoxAmountOutput(3);
-        output [i++] = box.getRandom4() + " and you have " + box.getBoxAmountOutput(4);
-        output [i++] = box.getRandom5() + " and you have " + box.getBoxAmountOutput(5);
-        output [i++] = box.getRandom6() + " and you have " + box.getBoxAmountOutput(6);
+        output [i++] = box.getRandom0() + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0);
+        output [i++] = box.getRandom1() + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1);
+        output [i++] = box.getRandom2() + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2);
+        output [i++] = box.getRandom3() + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3);
+        output [i++] = box.getRandom4() + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4);
+        output [i++] = box.getRandom5() + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5);
+        output [i++] = box.getRandom6() + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6);
         output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
         " and your new type costs " + box.getResearchTypeCost();
         output [i++] = "You can buy " + Integer.toString(box.getMaxBuy()) + " things at a time.";
