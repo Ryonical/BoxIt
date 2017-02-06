@@ -37,11 +37,11 @@ public class BoxIt
     //keeps track of how many boxes there are
     public final int BOX_NUM = 7;//this is how many box types there are
     //research finals
-    public final double RESEARCH_INCREASE = 1.5;//this is how much the price to reserch is multiplied each time
+    public final double RESEARCH_INCREASE = 2;//this is how much the price to reserch is multiplied each time
     public final double RESEARCH_TYPE_INCREASE = 4.0;//this is the multiplyer for getting a new box
     //gives random chance
     public final double FIFTY_FIFTY = .5;//this is the chance that a price will be up or down
-    public final double RANDOM_EVENT = 20;//this is the chance of something happening
+    public final double RANDOM_EVENT = 100;//this is the chance of something happening
     //this is myDate finals
     public final int SHOPING_TIME_SMALL = 7;//this is how long a short holliday lasts
     public final int SHOPING_TIME_BIG = 28;//this is how long a big holliday lasts
@@ -63,7 +63,7 @@ public class BoxIt
     public final int CHRISTMAS = 359;//when christmas is
     public final int DEC_END = 365;//when the year ends
     //random events
-    public final int WEEK = 3;
+    public final int WEEK = 7;
     //good chances
     public final int CARDBOARD_GOOD_CHANCE = 1;//the number picked if cardboard gets a bonus
     public final int PLASTIC_GOOD_CHANCE = 2;//the number picked if plastic gets a bonus
@@ -129,7 +129,7 @@ public class BoxIt
         myMonth = "January";
         myDay = "Monday";
         myHolidayBonus = 1;
-        myMola = 10000.0;
+        myMola = 0.0;
         myType = 0;
         myResearchCost = 5.0;
         myMaxBuy = 10;
@@ -608,7 +608,7 @@ public class BoxIt
         {
             myMaxBuy++;
             myMola -= myResearchCost;
-            myResearchCost *= RESEARCH_INCREASE;
+            myResearchCost += RESEARCH_INCREASE;
             myResearchCost = Math.round(myResearchCost * 1000) / 1000;
             round();
         }//ends if
@@ -862,6 +862,54 @@ public class BoxIt
     }//ends getPaperAmount
     
     /**
+    * This gets myCoolDown.
+    * @pre none
+    * @pram none
+    * @return myCoolDown
+    * @post none
+    */
+    public int getCoolDown()
+    {
+        return myEventCoolDown;
+    }//ends getPaperAmount
+    
+    /**
+    * This sets myCoolDown.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myCoolDown
+    */
+    public void setCoolDown(int coolDown)
+    {
+        myEventCoolDown = coolDown;
+    }//ends getPaperAmount
+    
+    /**
+    * This gets myCurrentThing.
+    * @pre none
+    * @pram none
+    * @return myCurrentThing
+    * @post none
+    */
+    public String getEffect()
+    {
+        return myCurrentThing;
+    }//ends getPaperAmount
+    
+    /**
+    * This sets myCurrentThing.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myCurrentThing
+    */
+    public void setEffect(String effect)
+    {
+        myCurrentThing = effect;
+    }//ends getPaperAmount
+    
+    /**
     * This gets myCosts.
     * @pre none
     * @pram none
@@ -900,18 +948,45 @@ public class BoxIt
         }//ends else if
         return "NO BREAKING MY GAME";
     }//ends getPaperAmount
-    //     
-    //     /**
-    //     * This sets myDay.
-    //     * @pre none
-    //     * @pram none
-    //     * @return none
-    //     * @post myDay
-    //     */
-    //     public void setDay(String day)
-    //     {
-    //         myDay = day;
-    //     }//ends getPaperAmount
+    
+    /**
+    * This sets myCosts.
+    * @pre none
+    * @pram none
+    * @return myDay
+    * @post none
+    */
+    public void setCosts(int i, double amount)
+    {
+        if(i == 0)
+        {
+            myPaperCost = amount;
+        }//ends if
+        else if(i == 1)
+        {
+            myCardboardCost = amount;
+        }//ends else if
+        else if(i == 2)
+        {
+            myPlasticCost = amount;
+        }//ends else if
+        else if(i == 3)
+        {
+            mySteelCost = amount;
+        }//ends else if
+        else if(i == 4)
+        {
+            mySanezaCost = amount;
+        }//ends else if
+        else if(i == 5)
+        {
+             myThorbyCost = amount;
+        }//ends else if
+        else if(i == 6)
+        {
+            myPlarbinCost = amount;
+        }//ends else if
+    }//ends getPaperAmount
     
     /**
     * This gets myStock 0 amount.

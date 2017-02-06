@@ -24,7 +24,7 @@ public class Load
     //vars
     private ArrayList <Integer> mySaveInt;
     private ArrayList <Double> mySaveDouble;
-    private ArrayList <Integer> mySaveAmount;
+    private ArrayList <Integer> mySaveBox;
     private ArrayList <String> mySaveString;
 
     //classes
@@ -56,7 +56,7 @@ public class Load
         box = box2;
         mySaveInt = new ArrayList<Integer>();
         mySaveDouble = new ArrayList<Double>();
-        mySaveAmount = new ArrayList<Integer>();
+        mySaveBox = new ArrayList<Integer>();
         mySaveString = new ArrayList<String>();
     }//ends constructer
 
@@ -92,7 +92,7 @@ public class Load
             {
                 while(inFileAmount.hasNext())
                 {
-                    mySaveAmount.add(Integer.valueOf(inFileAmount.nextInt()).intValue());
+                    mySaveBox.add(Integer.valueOf(inFileAmount.nextInt()).intValue());
                 }//ends while
             }//ends if    
             //string
@@ -130,6 +130,8 @@ public class Load
         countInt++;
         box.setTypeBuy(mySaveInt.get(countInt));
         countInt++;
+        box.setCoolDown(mySaveInt.get(countInt));
+        countInt++;
         
         
         //the input for doubles
@@ -143,26 +145,42 @@ public class Load
         countDouble++;
         box.setDate(mySaveDouble.get(countDouble));
         countDouble++;
+        box.setCosts(0, mySaveDouble.get(countAmount));
+        countDouble++;
+        box.setCosts(1, mySaveDouble.get(countAmount));
+        countDouble++;
+        box.setCosts(2, mySaveDouble.get(countAmount));
+        countDouble++;
+        box.setCosts(3, mySaveDouble.get(countAmount));
+        countDouble++;
+        box.setCosts(4, mySaveDouble.get(countAmount));
+        countDouble++;
+        box.setCosts(5, mySaveDouble.get(countAmount));
+        countDouble++;
+        box.setCosts(6, mySaveDouble.get(countAmount));
+        countDouble++;
         
         //the input for boxes
-        box.setBoxAmount(0, mySaveAmount.get(countAmount));
+        box.setBoxAmount(0, mySaveBox.get(countAmount));
         countAmount++;
-        box.setBoxAmount(1, mySaveAmount.get(countAmount));
+        box.setBoxAmount(1, mySaveBox.get(countAmount));
         countAmount++;
-        box.setBoxAmount(2, mySaveAmount.get(countAmount));
+        box.setBoxAmount(2, mySaveBox.get(countAmount));
         countAmount++;
-        box.setBoxAmount(3, mySaveAmount.get(countAmount));
+        box.setBoxAmount(3, mySaveBox.get(countAmount));
         countAmount++;
-        box.setBoxAmount(4, mySaveAmount.get(countAmount));
+        box.setBoxAmount(4, mySaveBox.get(countAmount));
         countAmount++;
-        box.setBoxAmount(5, mySaveAmount.get(countAmount));
+        box.setBoxAmount(5, mySaveBox.get(countAmount));
         countAmount++;
-        box.setBoxAmount(6, mySaveAmount.get(countAmount));
+        box.setBoxAmount(6, mySaveBox.get(countAmount));
         countAmount++;
-        
+        //the input for strings
         box.setDay(mySaveString.get(countString));
         countAmount++;
         box.setMonth(mySaveString.get(countString));
+        countString++;
+        box.setEffect(mySaveString.get(countString));
         countString++;
     }//ends load
 }//ends Save

@@ -64,12 +64,20 @@ public class Save
         //ints
         mySaveInt.add(Integer.toString(box.getMaxBuy()));
         mySaveInt.add(Integer.toString(box.getTypeBuy()));
+        mySaveInt.add(Integer.toString(box.getCoolDown()));
         //doubles
         mySaveDouble.add(Double.toString(box.getMola()));
         mySaveDouble.add(Double.toString(box.getTotalMola()));
         mySaveDouble.add(Double.toString(box.getResearchCost()));
         mySaveDouble.add(Double.toString(box.getResearchTypeCost()));
         mySaveDouble.add(Double.toString(box.getDate()));
+        mySaveDouble.add(box.getCosts(0));
+        mySaveDouble.add(box.getCosts(1));
+        mySaveDouble.add(box.getCosts(2));
+        mySaveDouble.add(box.getCosts(3));
+        mySaveDouble.add(box.getCosts(4));
+        mySaveDouble.add(box.getCosts(5));
+        mySaveDouble.add(box.getCosts(6));
         //box
         mySaveAmount.add(box.getBoxAmount(0));
         mySaveAmount.add(box.getBoxAmount(1));
@@ -81,6 +89,7 @@ public class Save
         //string
         mySaveString.add(box.getDay());
         mySaveString.add(box.getMonth());
+        mySaveString.add(box.getEffect());
     }//ends getStats
     
     /**
