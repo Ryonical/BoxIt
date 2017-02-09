@@ -14,11 +14,11 @@ public class Load
     //to save
     private File fileInt = null;
     private File fileDouble = null;
-    private File fileAmount = null;
+    private File fileBox = null;
     private File fileString = null;
     private Scanner inFileInt = null;
     private Scanner inFileDouble = null;
-    private Scanner inFileAmount = null;
+    private Scanner inFileBox = null;
     private Scanner inFileString = null;
 
     //vars
@@ -44,8 +44,8 @@ public class Load
             inFileInt = new Scanner(fileInt);
             fileDouble = new File("saves//saveDouble.txt");
             inFileDouble = new Scanner(fileDouble);
-            fileAmount = new File("saves//saveAmount.txt");
-            inFileAmount = new Scanner(fileAmount);
+            fileBox = new File("saves//saveBox.txt");
+            inFileBox = new Scanner(fileBox);
             fileString = new File("saves//saveString.txt");
             inFileString = new Scanner(fileString);
         }catch(Exception e)
@@ -88,11 +88,11 @@ public class Load
                 }//ends while
             }//ends if
             //boxes
-            if(fileAmount != null)
+            if(fileBox != null)
             {
-                while(inFileAmount.hasNext())
+                while(inFileBox.hasNext())
                 {
-                    mySaveBox.add(Integer.valueOf(inFileAmount.nextInt()).intValue());
+                    mySaveBox.add(Integer.valueOf(inFileBox.nextInt()).intValue());
                 }//ends while
             }//ends if    
             //string

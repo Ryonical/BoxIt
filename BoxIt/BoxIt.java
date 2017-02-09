@@ -129,7 +129,7 @@ public class BoxIt
         myMonth = "January";
         myDay = "Monday";
         myHolidayBonus = 1;
-        myMola = 0.0;
+        myMola = 100000.0;
         myType = 0;
         myResearchCost = 5.0;
         myMaxBuy = 10;
