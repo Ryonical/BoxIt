@@ -26,6 +26,9 @@ public class Load
     private ArrayList <Double> mySaveDouble;
     private ArrayList <Integer> mySaveBox;
     private ArrayList <String> mySaveString;
+    
+    private String myEffect;
+    public final int STRIMG_NUM = 3;
 
     //classes
     BoxIt box;
@@ -58,6 +61,7 @@ public class Load
         mySaveDouble = new ArrayList<Double>();
         mySaveBox = new ArrayList<Integer>();
         mySaveString = new ArrayList<String>();
+        myEffect = "";
     }//ends constructer
 
     /**
@@ -69,6 +73,7 @@ public class Load
      */
     public void reader()
     {
+        int i = 0;
         try
         {
             //ints
@@ -100,8 +105,16 @@ public class Load
             {
                 while(inFileString.hasNext())
                 {
-                    mySaveString.add(inFileString.next());
+                    if(i < STRIMG_NUM)
+                    {
+                        mySaveString.add(inFileString.next());
+                    }//ends if
+                    else
+                    {
+                        myEffect = myEffect + " " +mySaveString.add(inFileString.next());
+                    }
                 }//ends while
+                mySaveString.add(myEffect);
             }//ends if    
         }//ends try
         catch(Exception e)
@@ -122,7 +135,7 @@ public class Load
         //so I can add vars later
         int countInt = 0;
         int countDouble = 0;
-        int countAmount = 0;
+        int countBox = 0;
         int countString = 0;
         
         //the input for ints
@@ -145,42 +158,42 @@ public class Load
         countDouble++;
         box.setDate(mySaveDouble.get(countDouble));
         countDouble++;
-        box.setCosts(0, mySaveDouble.get(countAmount));
+        box.setCosts(0, mySaveDouble.get(countDouble));
         countDouble++;
-        box.setCosts(1, mySaveDouble.get(countAmount));
+        box.setCosts(1, mySaveDouble.get(countDouble));
         countDouble++;
-        box.setCosts(2, mySaveDouble.get(countAmount));
+        box.setCosts(2, mySaveDouble.get(countDouble));
         countDouble++;
-        box.setCosts(3, mySaveDouble.get(countAmount));
+        box.setCosts(3, mySaveDouble.get(countDouble));
         countDouble++;
-        box.setCosts(4, mySaveDouble.get(countAmount));
+        box.setCosts(4, mySaveDouble.get(countDouble));
         countDouble++;
-        box.setCosts(5, mySaveDouble.get(countAmount));
+        box.setCosts(5, mySaveDouble.get(countDouble));
         countDouble++;
-        box.setCosts(6, mySaveDouble.get(countAmount));
+        box.setCosts(6, mySaveDouble.get(countDouble));
         countDouble++;
         
         //the input for boxes
-        box.setBoxAmount(0, mySaveBox.get(countAmount));
-        countAmount++;
-        box.setBoxAmount(1, mySaveBox.get(countAmount));
-        countAmount++;
-        box.setBoxAmount(2, mySaveBox.get(countAmount));
-        countAmount++;
-        box.setBoxAmount(3, mySaveBox.get(countAmount));
-        countAmount++;
-        box.setBoxAmount(4, mySaveBox.get(countAmount));
-        countAmount++;
-        box.setBoxAmount(5, mySaveBox.get(countAmount));
-        countAmount++;
-        box.setBoxAmount(6, mySaveBox.get(countAmount));
-        countAmount++;
+        box.setBoxAmount(0, mySaveBox.get(countBox));
+        countBox++;
+        box.setBoxAmount(1, mySaveBox.get(countBox));
+        countBox++;
+        box.setBoxAmount(2, mySaveBox.get(countBox));
+        countBox++;
+        box.setBoxAmount(3, mySaveBox.get(countBox));
+        countBox++;
+        box.setBoxAmount(4, mySaveBox.get(countBox));
+        countBox++;
+        box.setBoxAmount(5, mySaveBox.get(countBox));
+        countBox++;
+        box.setBoxAmount(6, mySaveBox.get(countBox));
+        countBox++;
         //the input for strings
         box.setDay(mySaveString.get(countString));
-        countAmount++;
+        countString++;
         box.setMonth(mySaveString.get(countString));
         countString++;
-        box.setEffect(mySaveString.get(countString));
+        box.setEffect(mySaveString.get(countString).replaceAll("_", " "));
         countString++;
     }//ends load
 }//ends Save

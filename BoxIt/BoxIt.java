@@ -12,26 +12,33 @@ public class BoxIt
     //prices
     public final int STARTING_AMOUNT = 0;//this is how many boxes you have to start with except paper
         //paper
-    public final double PAPER_SELL = .1;//This is the base price of paper
+    public final double PAPER_BASE_COST = 0.05;//This is the base price of paper
+    public final double PAPER_SELL = 0.1;//This is the base price of paper
     public final double PAPER_CHANGE = 0.05;//This is how much the paper value can change
     public final int PAPER_STARTING_AMOUNT = 5;//this is how many paper boxes you have
         //cardboard
+    public final double CARDBOARD_BASE_COST = 1;//This is the base price of paper
     public final double CARDBOARD_SELL = 1.25;//This is the base price of cardboard
-    public final double CARDBOARD_CHANGE = .2;//This is how much the cardboard value can change
+    public final double CARDBOARD_CHANGE = 0.2;//This is how much the cardboard value can change
     public final double CARDBOARD_BASE_CHANCE = 1;//this is the base price of carbon
         //plastic
+    public final double PLASTIC_BASE_COST = 3;//This is the base price of paper
     public final double PLASTIC_SELL = 5;//This is the base price of plastic
     public final double PLASTIC_CHANGE = 0.5;//This is how much the plastic value can change
         //steel
+    public final double STEEL_BASE_COST = 6;//This is the base price of paper
     public final double STEEL_SELL = 10;//This is the base price of steel
     public final double STEEL_CHANGE = 2.5;//This is how much the steel value can change
         //sabeza
-    public final double SANEZA_SELL = 7.5;//This is the base price of saneza
-    public final double SANEZA_CHANGE = 1.75;//This is how much the saneza value can change
+    public final double SANEZA_BASE_COST = 5;//This is the base price of paper
+    public final double SANEZA_SELL = 9;//This is the base price of saneza
+    public final double SANEZA_CHANGE = 4;//This is how much the saneza value can change
         //thorby
-    public final double THORBY_SELL = 20;//This is the base price of thorby
+    public final double THORBY_BASE_COST = 20;//This is the base price of paper
+    public final double THORBY_SELL = 25;//This is the base price of thorby
     public final double THORBY_CHANGE = 15;//This is how much the thorby value can change
         //plarbin
+    public final double PLARBIN_BASE_COST = 15;//This is the base price of paper
     public final double PLARBIN_SELL = 30;//This is the base price of plarbin
     public final double PLARBIN_CHANGE = 5.0;//This is how much the plarbin value can change
     //keeps track of how many boxes there are
@@ -78,14 +85,14 @@ public class BoxIt
     public final int SANEZA_BAD_CHANCE = 10;//the number picked if saneza gets a disivantage
     public final int THORBY_BAD_CHANCE = 11;//the number picked if thorby gets a disivantage
     public final int CARBON_BAD_CHANCE = 12;//the number picked if plarbon gets a disivantage
-    //base costs
-    private double myPaperCost;//This is the base cost of paper
-    private double myCardboardCost;//This is the base cost of cardboard
-    private double myPlasticCost;//This is the base cost of plastic
-    private double mySteelCost;//This is the base cost of steel
-    private double mySanezaCost;//This is the base cost of saneza
-    private double myThorbyCost;//This is the base cost of thorby
-    private double myPlarbinCost;//This is the base cost of plarbin
+    //costs
+    private double myPaperCost;//This is the cost of paper
+    private double myCardboardCost;//This is the cost of cardboard
+    private double myPlasticCost;//This is the cost of plastic
+    private double mySteelCost;//This is the cost of steel
+    private double mySanezaCost;//This is the cost of saneza
+    private double myThorbyCost;//This is the cost of thorby
+    private double myPlarbinCost;//This is the cost of plarbin
     //what you have in stock
     private ArrayList <Box> myStock;//this is what you have in stock
     //this is the myDate
@@ -117,19 +124,19 @@ public class BoxIt
     */
     public BoxIt()
     {
-        myPaperCost = .05;
-        myCardboardCost = 1;
-        myPlasticCost = 3;
-        mySteelCost = 6;
-        mySanezaCost = 4.5;
-        myThorbyCost = 20;
-        myPlarbinCost = 15;
+        myPaperCost = PAPER_BASE_COST;
+        myCardboardCost = CARDBOARD_BASE_COST;
+        myPlasticCost = PLASTIC_BASE_COST;
+        mySteelCost = STEEL_BASE_COST;
+        mySanezaCost = SANEZA_BASE_COST;
+        myThorbyCost = THORBY_BASE_COST;
+        myPlarbinCost = PLARBIN_BASE_COST;
         myStock = new ArrayList<Box>();
         myDate = 1;
         myMonth = "January";
         myDay = "Monday";
         myHolidayBonus = 1;
-        myMola = 100000.0;
+        myMola = 0.0;
         myType = 0;
         myResearchCost = 5.0;
         myMaxBuy = 10;
@@ -323,84 +330,84 @@ public class BoxIt
     {
         if(i == 0)
         {
-            myCardboardCost = 1;
-            myPlasticCost = 3;
-            mySteelCost = 6;
-            mySanezaCost = 4.5;
-            myThorbyCost = 20;
-            myPlarbinCost = 15;
+            myCardboardCost = CARDBOARD_BASE_COST;
+            myPlasticCost = PLASTIC_BASE_COST;
+            mySteelCost = STEEL_BASE_COST;
+            mySanezaCost = SANEZA_BASE_COST;
+            myThorbyCost = THORBY_BASE_COST;
+            myPlarbinCost = PLARBIN_BASE_COST;
         }//ends if
         else if(i == 1)
         {
-            myPaperCost = .05;
-            myPlasticCost = 3;
-            mySteelCost = 6;
-            mySanezaCost = 4.5;
-            myThorbyCost = 20;
-            myPlarbinCost = 15;
+            myPaperCost = PAPER_BASE_COST;
+            myPlasticCost = PLASTIC_BASE_COST;
+            mySteelCost = STEEL_BASE_COST;
+            mySanezaCost = SANEZA_BASE_COST;
+            myThorbyCost = THORBY_BASE_COST;
+            myPlarbinCost = PLARBIN_BASE_COST;
         }//ends else if
         else if(i == 2)
         {
-            myPaperCost = .05;
-            myCardboardCost = 1;
-            mySteelCost = 6;
-            mySanezaCost = 4.5;
-            myThorbyCost = 20;
-            myPlarbinCost = 15;
+            myPaperCost = PAPER_BASE_COST;
+            myCardboardCost = CARDBOARD_BASE_COST;
+            mySteelCost = STEEL_BASE_COST;
+            mySanezaCost = SANEZA_BASE_COST;
+            myThorbyCost = THORBY_BASE_COST;
+            myPlarbinCost = PLARBIN_BASE_COST;
         }//ends else if
         else if(i == 3)
         {
-            myPaperCost = .05;
-            myCardboardCost = 1;
-            myPlasticCost = 3;
-            mySanezaCost = 4.5;
-            myThorbyCost = 20;
-            myPlarbinCost = 15;
+            myPaperCost = PAPER_BASE_COST;
+            myCardboardCost = CARDBOARD_BASE_COST;
+            myPlasticCost = PLASTIC_BASE_COST;
+            mySanezaCost = SANEZA_BASE_COST;
+            myThorbyCost = THORBY_BASE_COST;
+            myPlarbinCost = PLARBIN_BASE_COST;
         }//ends else if
         else if(i == 4)
         {
-            myPaperCost = .05;
-            myCardboardCost = 1;
-            myPlasticCost = 3;
-            mySteelCost = 6;
-            myThorbyCost = 20;
-            myPlarbinCost = 15;
+            myPaperCost = PAPER_BASE_COST;
+            myCardboardCost = CARDBOARD_BASE_COST;
+            myPlasticCost = PLASTIC_BASE_COST;
+            mySteelCost = STEEL_BASE_COST;
+            myThorbyCost = THORBY_BASE_COST;
+            myPlarbinCost = PLARBIN_BASE_COST;
         }//ends else if
         else if(i == 5)
         {
-            myPaperCost = .05;
-            myCardboardCost = 1;
-            myPlasticCost = 3;
-            mySteelCost = 6;
-            mySanezaCost = 4.5;
-            myPlarbinCost = 15;
+            myPaperCost = PAPER_BASE_COST;
+            myCardboardCost = CARDBOARD_BASE_COST;
+            myPlasticCost = PLASTIC_BASE_COST;
+            mySteelCost = STEEL_BASE_COST;
+            mySanezaCost = SANEZA_BASE_COST;
+            myPlarbinCost = PLARBIN_BASE_COST;
         }//ends else if
         else if(i == 6)
         {
-            myPaperCost = .05;
-            myCardboardCost = 1;
-            myPlasticCost = 3;
-            mySteelCost = 6;
-            mySanezaCost = 4.5;
-            myThorbyCost = 20;
+            myPaperCost = PAPER_BASE_COST;
+            myCardboardCost = CARDBOARD_BASE_COST;
+            myPlasticCost = PLASTIC_BASE_COST;
+            mySteelCost = STEEL_BASE_COST;
+            mySanezaCost = SANEZA_BASE_COST;
+            myThorbyCost = THORBY_BASE_COST;
         }//ends else if
         else if(i == 7)
         {
-            myPaperCost = .05;
-            myCardboardCost = 1;
-            mySteelCost = 6;
-            mySanezaCost = 4.5;
-            myThorbyCost = 20;
+            myPaperCost = PAPER_BASE_COST;
+            myCardboardCost = CARDBOARD_BASE_COST;
+            mySteelCost = STEEL_BASE_COST;
+            mySanezaCost = SANEZA_BASE_COST;
+            myThorbyCost = THORBY_BASE_COST;
         }//ends else if
         else if(i == 8)
         {
-            myPaperCost = .05;
-            myCardboardCost = 1;
-            myPlasticCost = 3;
-            mySteelCost = 6;
-            mySanezaCost = 4.5;
-            myThorbyCost = 20;
-            myPlarbinCost = 15;
+            myPaperCost = PAPER_BASE_COST;
+            myCardboardCost = CARDBOARD_BASE_COST;
+            myPlasticCost = PLASTIC_BASE_COST;
+            mySteelCost = STEEL_BASE_COST;
+            mySanezaCost = SANEZA_BASE_COST;
+            myThorbyCost = THORBY_BASE_COST;
+            myPlarbinCost = PLARBIN_BASE_COST;
         }//ends else if
     }//ends resetPrice
     
@@ -479,6 +486,9 @@ public class BoxIt
             if(myDate <= MOTHERS_DAY && myDate > (MOTHERS_DAY - SHOPING_TIME_SMALL))
             {
                 myHolidayBonus = 2;
+                myCurrentThing = "Mothers Day everything gives 2 times the profit";
+                myEventCoolDown = SHOPING_TIME_SMALL;
+                resetPrices(8);
             }//ends if
             else
             {
@@ -492,6 +502,9 @@ public class BoxIt
             if(myDate <= FATHERS_DAY && myDate > (FATHERS_DAY - SHOPING_TIME_SMALL))
             {
                 myHolidayBonus = 1.5;
+                myCurrentThing = "Fathers Day everything gives 1.5 times the profit";
+                myEventCoolDown = SHOPING_TIME_SMALL;
+                resetPrices(8);
             }//ends if
             else
             {
@@ -521,6 +534,9 @@ public class BoxIt
             if(myDate <= THANKSGIVING && myDate > (THANKSGIVING - SHOPING_TIME_SMALL))
             {
                 myHolidayBonus = 2;
+                myCurrentThing = "Thanksgiving everything gives 2 times the profit";
+                myEventCoolDown = SHOPING_TIME_SMALL;
+                resetPrices(8);
             }//ends if
             else
             {
@@ -534,6 +550,9 @@ public class BoxIt
             if(myDate <= CHRISTMAS && myDate > (CHRISTMAS - SHOPING_TIME_BIG))
             {
                 myHolidayBonus = 6;
+                myCurrentThing = "Cristmas everything gives 6 times the profit";
+                myEventCoolDown = SHOPING_TIME_BIG;
+                resetPrices(8);
             }//ends if
             else
             {
@@ -643,13 +662,13 @@ public class BoxIt
     public void createBoxes()
     {
         //this constructs the boxes
-        myStock.add(new Box(0, "paper", myPaperCost, PAPER_SELL, PAPER_CHANGE, PAPER_STARTING_AMOUNT));
-        myStock.add(new Box(1, "cardboard", myCardboardCost, CARDBOARD_SELL, CARDBOARD_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(2, "plastic", myPlasticCost, PLASTIC_SELL, PLASTIC_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(3, "steel", mySteelCost, STEEL_SELL, STEEL_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(4, "saneza", mySanezaCost, SANEZA_SELL, SANEZA_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(5, "thorby", myThorbyCost, THORBY_SELL, THORBY_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(6, "plarbin", myPlarbinCost, PLARBIN_SELL, PLARBIN_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(0, "paper", PAPER_BASE_COST, PAPER_SELL, PAPER_CHANGE, PAPER_STARTING_AMOUNT));
+        myStock.add(new Box(1, "cardboard", CARDBOARD_BASE_COST, CARDBOARD_SELL, CARDBOARD_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(2, "plastic", PLASTIC_BASE_COST, PLASTIC_SELL, PLASTIC_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(3, "steel", STEEL_BASE_COST, STEEL_SELL, STEEL_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(4, "saneza", SANEZA_BASE_COST, SANEZA_SELL, SANEZA_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(5, "thorby", THORBY_BASE_COST, THORBY_SELL, THORBY_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(6, "plarbin", PLARBIN_BASE_COST, PLARBIN_SELL, PLARBIN_CHANGE, STARTING_AMOUNT));
         //this adds box_num null places to myRandom so it will have the spaces
         for(int i = 0; i < BOX_NUM; i++)
         {
@@ -799,7 +818,7 @@ public class BoxIt
     public double getDate()
     {
         return myDate;
-    }//ends getPaperAmount
+    }//ends getDate
     
     /**
     * This sets myDate.
@@ -823,7 +842,7 @@ public class BoxIt
     public String getMonth()
     {
         return myMonth;
-    }//ends getPaperAmount
+    }//ends getMonth
     
     /**
     * This sets myMonth.
@@ -835,7 +854,7 @@ public class BoxIt
     public void setMonth(String month)
     {
         myMonth = month;
-    }//ends getPaperAmount
+    }//ends setMonth
     
     /**
     * This gets myDay.
@@ -847,7 +866,7 @@ public class BoxIt
     public String getDay()
     {
         return myDay;
-    }//ends getPaperAmount
+    }//ends getDay
     
     /**
     * This sets myDay.
@@ -859,7 +878,7 @@ public class BoxIt
     public void setDay(String day)
     {
         myDay = day;
-    }//ends getPaperAmount
+    }//ends setDay
     
     /**
     * This gets myCoolDown.
@@ -871,7 +890,7 @@ public class BoxIt
     public int getCoolDown()
     {
         return myEventCoolDown;
-    }//ends getPaperAmount
+    }//ends getCoolDow
     
     /**
     * This sets myCoolDown.
@@ -883,7 +902,7 @@ public class BoxIt
     public void setCoolDown(int coolDown)
     {
         myEventCoolDown = coolDown;
-    }//ends getPaperAmount
+    }//ends setCoolDown
     
     /**
     * This gets myCurrentThing.
@@ -895,7 +914,7 @@ public class BoxIt
     public String getEffect()
     {
         return myCurrentThing;
-    }//ends getPaperAmount
+    }//ends getEfgect
     
     /**
     * This sets myCurrentThing.
@@ -907,7 +926,7 @@ public class BoxIt
     public void setEffect(String effect)
     {
         myCurrentThing = effect;
-    }//ends getPaperAmount
+    }//ends setEffect
     
     /**
     * This gets myCosts.
@@ -947,7 +966,7 @@ public class BoxIt
             return Double.toString(myPlarbinCost);
         }//ends else if
         return "NO BREAKING MY GAME";
-    }//ends getPaperAmount
+    }//ends getCosts
     
     /**
     * This sets myCosts.
@@ -986,7 +1005,7 @@ public class BoxIt
         {
             myPlarbinCost = amount;
         }//ends else if
-    }//ends getPaperAmount
+    }//ends setCosts
     
     /**
     * This gets myStock 0 amount.
@@ -1026,7 +1045,7 @@ public class BoxIt
             return Integer.toString(myStock.get(6).getAmount());
         }//ends else if
         return "NO BREAKING MY GAME";
-    }//ends getPaperAmount
+    }//ends getBoxAmount
     
     /**
     * This sets myStock 0 amount.
@@ -1038,103 +1057,7 @@ public class BoxIt
     public void setBoxAmount(int num,int stock)
     {
         myStock.get(num).setAmount(stock);
-    }//ends setPaperAmount
-    
-    /**
-    * This sets myStock 1 amount.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post a part of myAmount
-    */
-    public void setCardboardAmount(int stock)
-    {
-        myStock.get(1).setAmount(stock);
-    }//ends setCardboardAmount
-    
-    /**
-    * This sets myStock 2 amount.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post a part of myAmount
-    */
-    public void setPlasticAmount(int stock)
-    {
-        myStock.get(2).setAmount(stock);
-    }//ends setPlasticAmount
-    
-    /**
-    * This sets myStock 3 amount.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post a part of myAmount
-    */
-    public void setSteelAmount(int stock)
-    {
-        myStock.get(3).setAmount(stock);
-    }//ends setSteelAmount
-    
-    /**
-    * This sets myStock 4 amount.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post a part of myAmount
-    */
-    public void setSanezaAmount(int stock)
-    {
-        myStock.get(4).setAmount(stock);
-    }//ends setSanezaAmount
-    
-    /**
-    * This gets myStock 5 amount.
-    * @pre none
-    * @pram none
-    * @return a part of myAmount
-    * @post none
-    */
-    public int getThorbyAmount()
-    {
-        return myStock.get(5).getAmount();
-    }//ends getThorbyAmount
-    
-    /**
-    * This sets myStock 5 amount.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post a part of myAmount
-    */
-    public void setThorbyAmount(int stock)
-    {
-        myStock.get(5).setAmount(stock);
-    }//ends setThorbyAmount
-    
-    /**
-    * This gets myStock 6 amount.
-    * @pre none
-    * @pram none
-    * @return a part of myAmount
-    * @post none
-    */
-    public int getPlarbinAmount()
-    {
-        return myStock.get(6).getAmount();
-    }//ends getPlarbinAmount
-    
-    /**
-    * This sets myStock 6 amount.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post a part of myAmount
-    */
-    public void setPlarbinAmount(int stock)
-    {
-        myStock.get(6).setAmount(stock);
-    }//ends setPlarbinAmount
+    }//ends setBoxAmount
     
     /**
     * This sets myType.

@@ -14,13 +14,13 @@ public class Save
     //to save
     FileWriter fileInt;
     FileWriter fileDouble;
-    FileWriter fileAmount;
+    FileWriter fileBox;
     FileWriter fileString;
     
     //arraylist
     private ArrayList <String> mySaveInt;
     private ArrayList <String> mySaveDouble;
-    private ArrayList <String> mySaveAmount;
+    private ArrayList <String> mySaveBox;
     private ArrayList <String> mySaveString;
     
     //classes
@@ -38,7 +38,7 @@ public class Save
         {
             fileInt = new FileWriter("saves//saveInt.txt");
             fileDouble = new FileWriter("saves//saveDouble.txt");
-            fileAmount = new FileWriter("saves//saveAmount.txt");
+            fileBox = new FileWriter("saves//saveBox.txt");
             fileString = new FileWriter("saves//saveString.txt");
         }catch(Exception e)
         {
@@ -48,7 +48,7 @@ public class Save
         box = box2;
         mySaveInt = new ArrayList<String>();
         mySaveDouble = new ArrayList<String>();
-        mySaveAmount = new ArrayList<String>();
+        mySaveBox = new ArrayList<String>();
         mySaveString = new ArrayList<String>();
     }
     
@@ -79,17 +79,17 @@ public class Save
         mySaveDouble.add(box.getCosts(5));
         mySaveDouble.add(box.getCosts(6));
         //box
-        mySaveAmount.add(box.getBoxAmount(0));
-        mySaveAmount.add(box.getBoxAmount(1));
-        mySaveAmount.add(box.getBoxAmount(2));
-        mySaveAmount.add(box.getBoxAmount(3));
-        mySaveAmount.add(box.getBoxAmount(4));
-        mySaveAmount.add(box.getBoxAmount(5));
-        mySaveAmount.add(box.getBoxAmount(6));
+        mySaveBox.add(box.getBoxAmount(0));
+        mySaveBox.add(box.getBoxAmount(1));
+        mySaveBox.add(box.getBoxAmount(2));
+        mySaveBox.add(box.getBoxAmount(3));
+        mySaveBox.add(box.getBoxAmount(4));
+        mySaveBox.add(box.getBoxAmount(5));
+        mySaveBox.add(box.getBoxAmount(6));
         //string
         mySaveString.add(box.getDay());
         mySaveString.add(box.getMonth());
-        mySaveString.add(box.getEffect());
+        mySaveString.add(box.getEffect().replaceAll(" ", "_"));
     }//ends getStats
     
     /**
@@ -116,11 +116,11 @@ public class Save
             }//ends for
             fileDouble.close();
             //to save boxes
-            for(int i = 0; i < mySaveAmount.size(); i++)
+            for(int i = 0; i < mySaveBox.size(); i++)
             {
-                fileAmount.write((mySaveAmount.get(i) + System.lineSeparator()));
+                fileBox.write((mySaveBox.get(i) + System.lineSeparator()));
             }//ends for
-            fileAmount.close();
+            fileBox.close();
             //to save string
             for(int i = 0; i < mySaveString.size(); i++)
             {
