@@ -51,6 +51,7 @@ public class BoxIt
     public final double RANDOM_EVENT = 100;//this is the chance of something happening
     //this is myDate finals
     public final int SHOPING_TIME_SMALL = 7;//this is how long a short holliday lasts
+    public final int SHOPING_TIME_MED = 14;
     public final int SHOPING_TIME_BIG = 28;//this is how long a big holliday lasts
     public final int DAYS_IN_YEAR = 365;//how many days there are in a year
     public final int JAN_END = 31;//when january ends
@@ -64,6 +65,7 @@ public class BoxIt
     public final int JULY_END = 212;//when july ends
     public final int AUG_END = 243;//when august ends
     public final int SEP_END = 273;//when september ends
+    public final int HALLOWEEN = 304;
     public final int OCT_END = 304;//when october endsd
     public final int THANKSGIVING = 328;//when thatksgiving is
     public final int NOV_END = 334;//when november ends
@@ -136,7 +138,7 @@ public class BoxIt
         myMonth = "January";
         myDay = "Monday";
         myHolidayBonus = 1;
-        myMola = 0.0;
+        myMola = 10000000000.0;
         myType = 0;
         myResearchCost = 5.0;
         myMaxBuy = 10;
@@ -466,6 +468,8 @@ public class BoxIt
         //this rotates the month
         if(myDate <= JAN_END)
         {
+            myHolidayBonus = 1;
+            myCurrentThing = "Nothing is going on";
             myMonth = "January";
         }//ends if
         else if(myDate <= FEB_END)
@@ -493,6 +497,7 @@ public class BoxIt
             else
             {
                 myHolidayBonus = 1;
+                myCurrentThing = "Nothing is going on";
             }//ends else
             myMonth = "May";
         }//ends else if
@@ -509,6 +514,7 @@ public class BoxIt
             else
             {
                 myHolidayBonus = 1;
+                myCurrentThing = "Nothing is going on";
             }//ends else
             myMonth = "June";
         }//ends else if
@@ -526,10 +532,26 @@ public class BoxIt
         }//ends else if
         else if(myDate <= OCT_END)
         {
+            //this is for a holiday
+            if(myDate <= HALLOWEEN && myDate > (HALLOWEEN - SHOPING_TIME_SMALL))
+            {
+                myHolidayBonus = 3;
+                myCurrentThing = "Halloween";
+                myEventCoolDown = SHOPING_TIME_MED;
+                resetPrices(8);
+            }//ends if
+            else
+            {
+                myHolidayBonus = 1;
+                myCurrentThing = "Nothing is going on";
+            }//ends else
             myMonth = "October";
         }//ends else if
         else if(myDate <= NOV_END)
         {
+            //this ends Halloween
+            myHolidayBonus = 1;
+            myCurrentThing = "Nothing is going on";
             //this is for a holiday
             if(myDate <= THANKSGIVING && myDate > (THANKSGIVING - SHOPING_TIME_SMALL))
             {
@@ -541,6 +563,7 @@ public class BoxIt
             else
             {
                 myHolidayBonus = 1;
+                myCurrentThing = "Nothing is going on";
             }//ends else
             myMonth = "November";
         }//ends else if
@@ -733,7 +756,7 @@ public class BoxIt
         {
             return myDay + ", December, " + ((int)myDate - NOV_END);
         }//ends else if
-        return "ERROR";
+        return myDay + ", January, 1";
     }//ends getTheDay
     
     /**

@@ -23,8 +23,8 @@ public class GameScreen extends JFrame
     {
         super("Box It");
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        height = 325;
-        width = 1300;
+        height = 343;
+        width = 1150;
         setSize(width, height);
         setLocation(200, 300);
     }//ends contructer
@@ -54,7 +54,7 @@ public class GameScreen extends JFrame
         {
             JLabel thing;
             thing = new JLabel(current);
-            thing.setAlignmentX(RIGHT_ALIGNMENT);
+            thing.setAlignmentX(CENTER_ALIGNMENT);
             add(thing);
         }//ends forEach
     }//ends addText

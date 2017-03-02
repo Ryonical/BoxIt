@@ -236,7 +236,7 @@ public class Buttons extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                outputx();
+                outputPick();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtStart
@@ -250,7 +250,7 @@ public class Buttons extends JFrame
                 if(box.getTypeBuy() >= 0)
                 {
                     box.setType(0);
-                    outputx();
+                    outputBuy();
                     sellScreen();
                 }//ends if
                 else
@@ -268,7 +268,7 @@ public class Buttons extends JFrame
                 if(box.getTypeBuy() >= 1)
                 {
                     box.setType(1);
-                    outputx();
+                    outputBuy();
                     sellScreen();
                 }//ends if
                 else
@@ -286,7 +286,7 @@ public class Buttons extends JFrame
                 if(box.getTypeBuy() >= 2)
                 {
                     box.setType(2);
-                    outputx();
+                    outputBuy();
                     sellScreen();
                 }//ends if
                 else
@@ -304,7 +304,7 @@ public class Buttons extends JFrame
                 if(box.getTypeBuy() >= 3)
                 {
                     box.setType(3);
-                    outputx();
+                    outputBuy();
                     sellScreen();
                 }//ends if
                 else
@@ -322,7 +322,7 @@ public class Buttons extends JFrame
                 if(box.getTypeBuy() >= 4)
                 {
                     box.setType(4);
-                    outputx();
+                    outputBuy();
                     sellScreen();
                 }//ends if
                 else
@@ -340,7 +340,7 @@ public class Buttons extends JFrame
                 if(box.getTypeBuy() >= 5)
                 {
                     box.setType(5);
-                    outputx();
+                    outputBuy();
                     sellScreen();
                 }//ends if
                 else
@@ -358,7 +358,7 @@ public class Buttons extends JFrame
                 if(box.getTypeBuy() >= 6)
                 {
                     box.setType(6);
-                    outputx();
+                    outputBuy();
                     sellScreen();
                 }//ends if
                 else
@@ -374,7 +374,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.research();
-                outputx();
+                outputPick();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtResearch
@@ -385,7 +385,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.researchType();
-                outputx();
+                outputPick();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtResearchBox
@@ -396,7 +396,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.buy(1);
-                outputx();
+                outputPick();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtBuy1
@@ -406,7 +406,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.sell(1);
-                outputx();
+                outputPick();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtSell1
@@ -417,7 +417,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.buy(10);
-                outputx();
+                outputPick();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtBuy1
@@ -427,7 +427,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.sell(10);
-                outputx();
+                outputPick();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtSell10
@@ -438,7 +438,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.buy(999999999);
-                outputx();
+                outputPick();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtBuyMax
@@ -448,7 +448,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.sell(999999999);
-                outputx();
+                outputPick();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtSellMax
@@ -472,7 +472,7 @@ public class Buttons extends JFrame
                 Load load = new Load(box);
                 load.reader();
                 load.load();
-                outputx();
+                outputPick();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtLoad
@@ -612,7 +612,40 @@ public class Buttons extends JFrame
     * return none
     * post none
     */
-    public void outputx()
+    public void outputPick()
+    {
+        int i = 0;
+        String[] output = new String [13];
+        output [i++] = box.randomEvent();
+        output [i++] = "The date is " + box.getTheDay();
+        output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
+        output [i++] = box.getRandom0() + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0);
+        output [i++] = box.getRandom1() + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1);
+        output [i++] = box.getRandom2() + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2);
+        output [i++] = box.getRandom3() + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3);
+        output [i++] = box.getRandom4() + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4);
+        output [i++] = box.getRandom5() + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5);
+        output [i++] = box.getRandom6() + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6);
+        output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
+        " and your new type costs " + box.getResearchTypeCost();
+        output [i++] = "You can buy " + Integer.toString(box.getMaxBuy()) + " things at a time.";
+        output [i++] = "Paper                           Cardboard                         Plastic                            " +
+                       "Steel                            Saneza                          Thorby                            Plarbin" +
+                       "                                      " +
+                       "                                                   ";
+        
+       
+        game.refresh(output);
+    }//ends output
+    
+    /**
+    * This will output.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void outputBuy()
     {
         int i = 0;
         String[] output = new String [12];
