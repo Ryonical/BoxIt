@@ -8,7 +8,12 @@
 public class Box
 {
     private int myValue;
-    private int myAmount;
+    private int myAmountUnfolded;
+    private int myAmountFold1;
+    private int myAmountFold2;
+    private int myAmountFold3;
+    private int myAmountFold4;
+    private int myAmountFold5;
     private String myName;
     private double myCost;
     private double mySell;
@@ -24,12 +29,16 @@ public class Box
     double sell, double change, int amount)
     {
         myValue = value;
-        myAmount = 0;
+        myAmountUnfolded = amount;
+        myAmountFold1 = 0;
+        myAmountFold2 = 0;
+        myAmountFold3 = 0;
+        myAmountFold4 = 0;
+        myAmountFold5 = 0;
         myName = name;
         myCost = cost;
         mySell = sell;
         myChange = change;
-        myAmount = amount;
     }//ends constructer
     
     /**
@@ -45,28 +54,148 @@ public class Box
     }//ends getSell
     
     /**
-    * This will return myAmount.
+    * This will return myAmountUnfolded.
     * @pre none
     * @pram none
-    * @return myAmount
+    * @return myAmountUnfolded
     * @post none
     */
     public int getAmount()
     {
-        return myAmount;
-    }//ends setSell
+        return myAmountUnfolded;
+    }//ends getAmount
     
     /**
-    * This will set myAmount.
+    * This will set myAmountUnfolded.
     * @pre none
     * @pram none
-    * @return myAmount
-    * @post none
+    * @return none
+    * @post myAmountUnfolded
     */
     public void setAmount(int amount)
     {
-        myAmount = amount;
+        myAmountUnfolded = amount;
     }//ends setAmount
+    
+    /**
+    * This will return myAmountFold1.
+    * @pre none
+    * @pram none
+    * @return myAmountFold1
+    * @post none
+    */
+    public int getFold1()
+    {
+        return myAmountFold1;
+    }//ends GetAmountFold1
+    
+    /**
+    * This will set myAmountFold1.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myAmountFold1
+    */
+    public void setFold1(int amount)
+    {
+        myAmountFold1 = amount;
+    }//ends setAmountFold1
+    
+    /**
+    * This will return myAmountFold2.
+    * @pre none
+    * @pram none
+    * @return myAmountFold2
+    * @post none
+    */
+    public int getFold2()
+    {
+        return myAmountFold2;
+    }//ends GetAmountFold2
+    
+    /**
+    * This will set myAmountFold2.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myAmountFold2
+    */
+    public void setFold2(int amount)
+    {
+        myAmountFold2 = amount;
+    }//ends setAmountFold2
+    
+    /**
+    * This will return myAmountFold3.
+    * @pre none
+    * @pram none
+    * @return myAmountFold3
+    * @post none
+    */
+    public int getFold3()
+    {
+        return myAmountFold3;
+    }//ends GetAmountFold3
+    
+    /**
+    * This will set myAmountFold3.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myAmountFold3
+    */
+    public void setFold3(int amount)
+    {
+        myAmountFold3 = amount;
+    }//ends setAmountFold3
+    
+    /**
+    * This will return myAmountFold4.
+    * @pre none
+    * @pram none
+    * @return myAmountFold4
+    * @post none
+    */
+    public int getFold4()
+    {
+        return myAmountFold4;
+    }//ends GetAmountFold4
+    
+    /**
+    * This will set myAmountFold4.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myAmountFold4
+    */
+    public void setFold4(int amount)
+    {
+        myAmountFold4 = amount;
+    }//ends setAmountFold4
+    
+    /**
+    * This will return myAmountFold5.
+    * @pre none
+    * @pram none
+    * @return myAmountFold5
+    * @post none
+    */
+    public int getFold5()
+    {
+        return myAmountFold5;
+    }//ends GetAmountFold5
+    
+    /**
+    * This will set myAmountFold5.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post myAmountFold5
+    */
+    public void setFold5(int amount)
+    {
+        myAmountFold5 = amount;
+    }//ends setAmountFold5
     
     /**
     * This gets the value.
@@ -114,7 +243,8 @@ public class Box
     @Override
     public String toString()
     {
-        return myName + System.lineSeparator() + myAmount + System.lineSeparator() + myValue + System.lineSeparator() + myCost +
+        return myName + System.lineSeparator() + myAmountUnfolded + myAmountFold1 + myAmountFold2 + myAmountFold3 + 
+        myAmountFold4 + myAmountFold5 +System.lineSeparator() + myValue + System.lineSeparator() + myCost +
         System.lineSeparator() + mySell + System.lineSeparator() +myChange;
     }//ends toString
 }//ends box

@@ -41,6 +41,16 @@ public class BoxIt
     public final double PLARBIN_BASE_COST = 15;//This is the base price of paper
     public final double PLARBIN_SELL = 30;//This is the base price of plarbin
     public final double PLARBIN_CHANGE = 5.0;//This is how much the plarbin value can change
+    //this is the price of the folds
+    public final double FOLD_TWO_COST = .5;
+    public final double FOLD_THREE_COST = 1;
+    public final double FOLD_FOUR_COST = 3;
+    public final double FOLD_FIVE_COST = 7;
+    //this is the multiplyer of the folds
+    public final double FOLD_TWO_BONUS = 1.25;
+    public final double FOLD_THREE_BONUS = 1.5;
+    public final double FOLD_FOUR_BONUS = 1.75;
+    public final double FOLD_FIVE_BONUS = 2;
     //keeps track of how many boxes there are
     public final int BOX_NUM = 7;//this is how many box types there are
     //research finals
@@ -153,7 +163,7 @@ public class BoxIt
     /**
     * This buys.
     * @pre none
-    * @pram none
+    * @pram i
     * @return none
     * @post none
     */
@@ -182,6 +192,257 @@ public class BoxIt
         randomizePrices();
         addDay();
     }//ends buy
+    
+    /**
+    * This fold the box that you choose.
+    * @pre none
+    * @pram pick, quantity
+    * @return none
+    * @post none
+    */
+    public void fold(int pick, int quantity)
+    {
+        //this is the free fold
+        if(pick == 1)
+        {
+            //this checks to see if you have enough
+            if(myStock.get(myType).getAmount() > quantity)
+            {
+                //this will limit the amount you can buy
+                if(quantity > myMaxBuy)
+                {
+                    quantity = myMaxBuy;
+                }//ends if
+               
+                myStock.get(myType).setFold1(myStock.get(myType).getFold1() + quantity);
+                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+               
+            }//ends if
+            else
+            {
+                //this limits the amount you can buy
+                quantity = myStock.get(myType).getAmount();
+                if(quantity > myMaxBuy)
+                {
+                    quantity = myMaxBuy;
+                }//ends if
+                myStock.get(myType).setFold1(myStock.get(myType).getAmount());
+                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+            }//ends if
+        }//ends if
+        //this is the cheapest fold
+        else if(pick == 2)
+        {
+            //this checks to see if you have enough
+            if(myStock.get(myType).getAmount() > quantity)
+            {
+                //this limits the amount you can buy based off of the max you can buy
+                if(quantity > myMaxBuy )
+                {//
+                    quantity = myMaxBuy;
+                }//ends if
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
+                {
+                    myStock.get(myType).setFold2(myStock.get(myType).getFold2() + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_TWO_COST);
+                }//ends if
+                else
+                {
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        myStock.get(myType).setFold2(myStock.get(myType).getFold2() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_TWO_COST;
+                    }//ends for
+                }//ends else
+            }//ends if
+            else
+            {
+                quantity = myStock.get(myType).getAmount();
+                if(quantity > myMaxBuy)
+                {
+                    quantity = myMaxBuy;
+                }//emds if
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
+                {
+                    myStock.get(myType).setFold2(myStock.get(myType).getFold2() + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_TWO_COST);
+                }//ends if
+                else
+                {
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        myStock.get(myType).setFold2(myStock.get(myType).getFold2() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_TWO_COST;
+                    }//ends for
+                }//ends else
+            }//ends if
+        }//ends else if
+        //this is the moderatly expencive fold
+        else if(pick == 3)
+        {
+            //this checks to see if you have enough
+            if(myStock.get(myType).getAmount() > quantity)
+            {
+                //this limits the amount you can buy based off of the max you can buy
+                if(quantity > myMaxBuy )
+                {//
+                    quantity = myMaxBuy;
+                }//ends if
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
+                {
+                    myStock.get(myType).setFold3(myStock.get(myType).getFold3() + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_THREE_COST);
+                }//ends if
+                else
+                {
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        myStock.get(myType).setFold3(myStock.get(myType).getFold3() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_THREE_COST;
+                    }//ends for
+                }//ends else
+            }//ends if
+            else
+            {
+                quantity = myStock.get(myType).getAmount();
+                if(quantity > myMaxBuy)
+                {
+                    quantity = myMaxBuy;
+                }//emds if
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
+                {
+                    myStock.get(myType).setFold3(myStock.get(myType).getFold3() + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_THREE_COST);
+                }//ends if
+                else
+                {
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        myStock.get(myType).setFold3(myStock.get(myType).getFold3() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_THREE_COST;
+                    }//ends for
+                }//ends else
+            }//ends if
+        }//ends else if
+        //this is the expencive fold
+        else if(pick == 4)
+        {
+            //this checks to see if you have enough
+            if(myStock.get(myType).getAmount() > quantity)
+            {
+                //this limits the amount you can buy based off of the max you can buy
+                if(quantity > myMaxBuy )
+                {//
+                    quantity = myMaxBuy;
+                }//ends if
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
+                {
+                    myStock.get(myType).setFold4(myStock.get(myType).getFold4() + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_FOUR_COST);
+                }//ends if
+                else
+                {
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        myStock.get(myType).setFold4(myStock.get(myType).getFold4() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_FOUR_COST;
+                    }//ends for
+                }//ends else
+            }//ends if
+            else
+            {
+                quantity = myStock.get(myType).getAmount();
+                if(quantity > myMaxBuy)
+                {
+                    quantity = myMaxBuy;
+                }//emds if
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
+                {
+                    myStock.get(myType).setFold4(myStock.get(myType).getFold4() + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_FOUR_COST);
+                }//ends if
+                else
+                {
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        myStock.get(myType).setFold4(myStock.get(myType).getFold4() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_FOUR_COST;
+                    }//ends for
+                }//ends else
+            }//ends if
+        }//ends else if
+        //this is the very end game fold
+        else if(pick == 5)
+        {
+            //this checks to see if you have enough
+            if(myStock.get(myType).getAmount() > quantity)
+            {
+                //this limits the amount you can buy based off of the max you can buy
+                if(quantity > myMaxBuy )
+                {//
+                    quantity = myMaxBuy;
+                }//ends if
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
+                {
+                    myStock.get(myType).setFold5(myStock.get(myType).getFold5() + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_FIVE_COST);
+                }//ends if
+                else
+                {
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        myStock.get(myType).setFold5(myStock.get(myType).getFold5() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_FIVE_COST;
+                    }//ends for
+                }//ends else
+            }//ends if
+            else
+            {
+                quantity = myStock.get(myType).getAmount();
+                if(quantity > myMaxBuy)
+                {
+                    quantity = myMaxBuy;
+                }//emds if
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
+                {
+                    myStock.get(myType).setFold5(myStock.get(myType).getFold5() + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_FIVE_COST);
+                }//ends if
+                else
+                {
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        myStock.get(myType).setFold5(myStock.get(myType).getFold5() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_FIVE_COST;
+                    }//ends for
+                }//ends else
+            }//ends if
+        }//ends else if
+    }//ends fold
     
     /**
     * This will sell the boxes.
