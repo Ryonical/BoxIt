@@ -14,7 +14,7 @@ import java.io.*;
  */
 public class Buttons extends JFrame
 {
-    public final int BUTTON_NUM = 29;
+    public final int BUTTON_NUM = 34;
     ImageIcon paperPic;
     ImageIcon cardPic;
     ImageIcon lockedCardPic;
@@ -57,6 +57,11 @@ public class Buttons extends JFrame
     private JButton jbtSell10;
     private JButton jbtBuyMax;
     private JButton jbtSellMax;
+    private JButton jbtFold1;
+    private JButton jbtFold2;
+    private JButton jbtFold3;
+    private JButton jbtFold4;
+    private JButton jbtFold5;
     private JButton jbtSave;
     private JButton jbtLoad;
     
@@ -118,6 +123,11 @@ public class Buttons extends JFrame
         jbtSell10 = new JButton("Sell 10");
         jbtBuyMax = new JButton("Buy Max");
         jbtSellMax = new JButton("Sell Max");
+        jbtFold1 = new JButton("Fold 1");
+        jbtFold2 = new JButton("Fold 2");
+        jbtFold3 = new JButton("Fold 3");
+        jbtFold4 = new JButton("Fold 4");
+        jbtFold5 = new JButton("Fold 5");
         jbtSave = new JButton("Save");
         jbtLoad = new JButton("Load");
     }
@@ -168,6 +178,11 @@ public class Buttons extends JFrame
         jpButtons.add(jbtSell10);
         jpButtons.add(jbtBuyMax);
         jpButtons.add(jbtSellMax);
+        jpButtons.add(jbtFold1);
+        jpButtons.add(jbtFold2);
+        jpButtons.add(jbtFold3);
+        jpButtons.add(jbtFold4);
+        jpButtons.add(jbtFold5);
         jpButtons.add(jbtSave);
         jpButtons.add(jbtLoad);
         
@@ -420,7 +435,7 @@ public class Buttons extends JFrame
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
-        });//ends jbtBuy1
+        });//ends jbtBuy10
         //sells 1
         jbtSell10.addActionListener(new ActionListener()
         {
@@ -452,6 +467,61 @@ public class Buttons extends JFrame
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtSellMax
+        
+        //will use fold 1
+        jbtFold1.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                box.fold(1);
+                outputPick();
+                pickScreen();
+            }//ends actionPerformed
+        });//ends jbtFold1
+        
+        //will use fold 2
+        jbtFold2.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                box.fold(2);
+                outputPick();
+                pickScreen();
+            }//ends actionPerformed
+        });//ends jbtFold2
+        
+        //will use fold 3
+        jbtFold3.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                box.fold(3);
+                outputPick();
+                pickScreen();
+            }//ends actionPerformed
+        });//ends jbtFold3
+        
+        //will use fold 4
+        jbtFold4.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                box.fold(4);
+                outputPick();
+                pickScreen();
+            }//ends actionPerformed
+        });//ends jbtFold4
+        
+        //will use fold 5
+        jbtFold5.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                box.fold(5);
+                outputPick();
+                pickScreen();
+            }//ends actionPerformed
+        });//ends jbtFold5
         
         //saves
         jbtSave.addActionListener(new ActionListener()
@@ -511,10 +581,15 @@ public class Buttons extends JFrame
         buttons[i++] = jbtResearch;
         buttons[i++] = jbtResearchBox;
         buttons[i++] = jbtBuy1;
-        buttons[i++] = jbtSell1;
         buttons[i++] = jbtBuy10;
-        buttons[i++] = jbtSell10;
         buttons[i++] = jbtBuyMax;
+        buttons[i++] = jbtFold1;
+        buttons[i++] = jbtFold2;
+        buttons[i++] = jbtFold3;
+        buttons[i++] = jbtFold4;
+        buttons[i++] = jbtFold5;
+        buttons[i++] = jbtSell1;
+        buttons[i++] = jbtSell10;
         buttons[i++] = jbtSellMax;
         buttons[i++] = jbtSave;
         buttons[i++] = jbtLoad;
@@ -600,8 +675,8 @@ public class Buttons extends JFrame
     {
         int i = 0;
         String[] output = new String [3];
-        output [i++] = "OK ARE YOU READY TO MAKE SOME MOLA";
-        output [i++] = "IF YOU ARE PRESS THE START BUTTON";
+        output [i++] = "OK ARE YOU READY TO MAKE SOME MOLA?";
+        output [i++] = "IF YOU ARE PRESS THE START BUTTON!";
         game.refresh(output);
     }//ends outputStarting
     
@@ -848,10 +923,15 @@ public class Buttons extends JFrame
     public void sellScreenTrue()
     {   
         jbtBuy1.setVisible(true);
-        jbtSell1.setVisible(true);
         jbtBuy10.setVisible(true);
-        jbtSell10.setVisible(true);
         jbtBuyMax.setVisible(true);
+        jbtFold1.setVisible(true);
+        jbtFold2.setVisible(true);
+        jbtFold3.setVisible(true);
+        jbtFold4.setVisible(true);
+        jbtFold5.setVisible(true);
+        jbtSell1.setVisible(true);
+        jbtSell10.setVisible(true);
         jbtSellMax.setVisible(true);
     }//ends sellScreentTrue
     
@@ -865,10 +945,15 @@ public class Buttons extends JFrame
     public void sellScreenFalse()
     {   
         jbtBuy1.setVisible(false);
-        jbtSell1.setVisible(false);
         jbtBuy10.setVisible(false);
-        jbtSell10.setVisible(false);
         jbtBuyMax.setVisible(false);
+        jbtFold1.setVisible(false);
+        jbtFold2.setVisible(false);
+        jbtFold3.setVisible(false);
+        jbtFold4.setVisible(false);
+        jbtFold5.setVisible(false);
+        jbtSell1.setVisible(false);
+        jbtSell10.setVisible(false);
         jbtSellMax.setVisible(false);
     }//ends sellScreenFalse
     
