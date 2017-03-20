@@ -14,6 +14,10 @@ public class Box
     private int myAmountFold3;
     private int myAmountFold4;
     private int myAmountFold5;
+    private double myMult2;
+    private double myMult3;
+    private double myMult4;
+    private double myMult5;
     private String myName;
     private double myCost;
     private double mySell;
@@ -26,7 +30,8 @@ public class Box
     * @post all
     */
     public Box(int value, String name, double cost, 
-    double sell, double change, int amount)
+    double sell, double change, int amount, double mult2,
+    double mult3, double mult4, double mult5)
     {
         myValue = value;
         myAmountUnfolded = amount;
@@ -35,6 +40,10 @@ public class Box
         myAmountFold3 = 0;
         myAmountFold4 = 0;
         myAmountFold5 = 0;
+        myMult2 = mult2;
+        myMult3 = mult3;
+        myMult4 = mult4;
+        myMult5 = mult5;
         myName = name;
         myCost = cost;
         mySell = sell;
@@ -48,9 +57,29 @@ public class Box
     * @return mySell
     * @post none
     */
-    public double getSell()
+    public double getSell(int i)
     {
-        return mySell;
+        if(i == 1)
+        {
+            return mySell;
+        }//ends if
+        else if(i == 2)
+        {
+            return mySell * myMult2;
+        }//ends else if
+        else if(i == 3)
+        {
+            return mySell * myMult3;
+        }//ends else if
+        else if(i == 4)
+        {
+            return mySell * myMult4;
+        }//ends else if
+        else if(i == 5)
+        {
+            return mySell * myMult5;
+        }//ends else if
+        return -1;
     }//ends getSell
     
     /**

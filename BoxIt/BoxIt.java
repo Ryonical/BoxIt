@@ -42,10 +42,10 @@ public class BoxIt
     public final double PLARBIN_SELL = 30;//This is the base price of plarbin
     public final double PLARBIN_CHANGE = 5.0;//This is how much the plarbin value can change
     //this is the price of the folds
-    public final double FOLD_TWO_COST = .5;
-    public final double FOLD_THREE_COST = 1;
-    public final double FOLD_FOUR_COST = 3;
-    public final double FOLD_FIVE_COST = 7;
+    public final double FOLD_TWO_COST = .5;//the cost for the second cost
+    public final double FOLD_THREE_COST = 1;//the cost for the third cost
+    public final double FOLD_FOUR_COST = 3;//the cost for the fourth cost
+    public final double FOLD_FIVE_COST = 7;//the cost for the fifth cost
     //this is the multiplyer of the folds
     public final double FOLD_TWO_BONUS = 1.25;
     public final double FOLD_THREE_BONUS = 1.5;
@@ -82,7 +82,7 @@ public class BoxIt
     public final int CHRISTMAS = 359;//when christmas is
     public final int DEC_END = 365;//when the year ends
     //random events
-    public final int WEEK = 7;
+    public final int WEEK = 7;//this is the amount of days in a week
     //good chances
     public final int CARDBOARD_GOOD_CHANCE = 1;//the number picked if cardboard gets a bonus
     public final int PLASTIC_GOOD_CHANCE = 2;//the number picked if plastic gets a bonus
@@ -126,7 +126,7 @@ public class BoxIt
     private ArrayList<Double> myRandom;//this is the list of random prices
     private int myCurrentEffect;//this picks what will happen
     private int myEventCoolDown;//this is the cooldown for the effect
-    private String myCurrentThing;
+    private String myCurrentThing;//this is the current effect
     /**
     * This constructs.
     * @pre none
@@ -148,7 +148,7 @@ public class BoxIt
         myMonth = "January";
         myDay = "Monday";
         myHolidayBonus = 1;
-        myMola = 10000000000.0;
+        myMola = 0.0;
         myType = 0;
         myResearchCost = 5.0;
         myMaxBuy = 10;
@@ -211,7 +211,7 @@ public class BoxIt
         //this is the free fold
         if(pick == 1)
         {
-            myStock.get(myType).setFold1(myStock.get(myType).getAmount());
+            myStock.get(myType).setFold1(myStock.get(myType).getFold1() + quantity);
             myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
         }//ends if
         //this is the cheapest fold
@@ -226,11 +226,15 @@ public class BoxIt
             }//ends if
             else
             {
+                //this buys one at a time
                 for(int i = 0; i < quantity;i++)
                 {
-                    myStock.get(myType).setFold2(myStock.get(myType).getFold2() + 1);
-                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
-                    myMola -= FOLD_TWO_COST;
+                    if(myMola >= FOLD_TWO_COST)
+                    {
+                        myStock.get(myType).setFold2(myStock.get(myType).getFold2() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_TWO_COST;
+                    }//ends if
                 }//ends for
             }//ends if
         }//ends else if
@@ -246,11 +250,15 @@ public class BoxIt
             }//ends if
             else
             {
+                //this buys one at a time
                 for(int i = 0; i < quantity;i++)
                 {
-                    myStock.get(myType).setFold3(myStock.get(myType).getFold3() + 1);
-                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
-                    myMola -= FOLD_THREE_COST;
+                    if(myMola >= FOLD_TWO_COST)
+                    {
+                        myStock.get(myType).setFold3(myStock.get(myType).getFold3() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_THREE_COST;
+                    }//ends if
                 }//ends for
             }//ends if
         }//ends else if
@@ -266,11 +274,15 @@ public class BoxIt
             }//ends if
             else
             {
+                //this buys one at a time
                 for(int i = 0; i < quantity;i++)
                 {
-                    myStock.get(myType).setFold4(myStock.get(myType).getFold4() + 1);
-                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
-                    myMola -= FOLD_FOUR_COST;
+                    if(myMola >= FOLD_TWO_COST)
+                    {
+                        myStock.get(myType).setFold4(myStock.get(myType).getFold4() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_FOUR_COST;
+                    }//ends if
                 }//ends for
             }//ends if
         }//ends else if
@@ -286,14 +298,21 @@ public class BoxIt
             }//ends if
             else
             {
+                //this buys one at a time
                 for(int i = 0; i < quantity;i++)
                 {
-                    myStock.get(myType).setFold5(myStock.get(myType).getFold5() + 1);
-                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
-                    myMola -= FOLD_FIVE_COST;
-                }//ends for
+                    if(myMola >= FOLD_TWO_COST)
+                    {
+                        myStock.get(myType).setFold5(myStock.get(myType).getFold5() + 1);
+                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                        myMola -= FOLD_FIVE_COST;
+                    }//ends if
+                }//ends forr
             }//ends if
         }//ends else if
+        round();
+        randomizePrices();
+        addDay();
     }//ends fold
     
     /**
@@ -308,17 +327,53 @@ public class BoxIt
         //this is if you ask to sell less than you have
         if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
         {
-            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
-            myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
+            //this is to subtract the items
+            myStock.get(myType).setFold1(myStock.get(myType).getFold1() - i);
+            myStock.get(myType).setFold2(myStock.get(myType).getFold2() - i);
+            myStock.get(myType).setFold3(myStock.get(myType).getFold3() - i);
+            myStock.get(myType).setFold4(myStock.get(myType).getFold4() - i);
+            myStock.get(myType).setFold5(myStock.get(myType).getFold5() - i);
+            //this is to add the mola
+            myMola += (myStock.get(myType).getSell(1) + myRandom.get(myType)) * i;
+            myMola += (myStock.get(myType).getSell(2) + myRandom.get(myType)) * i;
+            myMola += (myStock.get(myType).getSell(3) + myRandom.get(myType)) * i;
+            myMola += (myStock.get(myType).getSell(4) + myRandom.get(myType)) * i;
+            myMola += (myStock.get(myType).getSell(5) + myRandom.get(myType)) * i;
+            //this is to add to the total mola counter
+            myTotalMola += (myStock.get(myType).getSell(1) + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell(2) + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell(3) + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell(4) + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell(5) + myRandom.get(myType)) * i;
         }//ends if
         //this is if you want to sell more than you have
         else if (myType != BOX_NUM + 1)
         {
-            i = myStock.get(myType).getAmount();
-            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - i);
-            myMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell() + myRandom.get(myType)) * i;
+            //this is to sell the first fold1
+            i = myStock.get(myType).getFold1();
+            myStock.get(myType).setFold1(myStock.get(myType).getFold1() - i);
+            myMola += (myStock.get(myType).getSell(1) + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell(1) + myRandom.get(myType)) * i;
+            //this is to sell the first fold2
+            i = myStock.get(myType).getFold2();
+            myStock.get(myType).setFold2(myStock.get(myType).getFold2() - i);
+            myMola += (myStock.get(myType).getSell(2) + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell(2) + myRandom.get(myType)) * i;
+            //this is to sell the first fold3
+            i = myStock.get(myType).getFold3();
+            myStock.get(myType).setFold3(myStock.get(myType).getFold3() - i);
+            myMola += (myStock.get(myType).getSell(3) + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell(3) + myRandom.get(myType)) * i;
+            //this is to sell the first fold4
+            i = myStock.get(myType).getFold4();
+            myStock.get(myType).setFold4(myStock.get(myType).getFold4() - i);
+            myMola += (myStock.get(myType).getSell(4) + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell(4) + myRandom.get(myType)) * i;
+            //this is to sell the first fold5
+            i = myStock.get(myType).getFold5();
+            myStock.get(myType).setFold5(myStock.get(myType).getFold5() - i);
+            myMola += (myStock.get(myType).getSell(5) + myRandom.get(myType)) * i;
+            myTotalMola += (myStock.get(myType).getSell(5) + myRandom.get(myType)) * i;
         }//ends else if
         //this readys for the next day
         round();
@@ -798,13 +853,20 @@ public class BoxIt
     public void createBoxes()
     {
         //this constructs the boxes
-        myStock.add(new Box(0, "paper", PAPER_BASE_COST, PAPER_SELL, PAPER_CHANGE, PAPER_STARTING_AMOUNT));
-        myStock.add(new Box(1, "cardboard", CARDBOARD_BASE_COST, CARDBOARD_SELL, CARDBOARD_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(2, "plastic", PLASTIC_BASE_COST, PLASTIC_SELL, PLASTIC_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(3, "steel", STEEL_BASE_COST, STEEL_SELL, STEEL_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(4, "saneza", SANEZA_BASE_COST, SANEZA_SELL, SANEZA_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(5, "thorby", THORBY_BASE_COST, THORBY_SELL, THORBY_CHANGE, STARTING_AMOUNT));
-        myStock.add(new Box(6, "plarbin", PLARBIN_BASE_COST, PLARBIN_SELL, PLARBIN_CHANGE, STARTING_AMOUNT));
+        myStock.add(new Box(0, "paper", PAPER_BASE_COST, PAPER_SELL, PAPER_CHANGE, PAPER_STARTING_AMOUNT,
+        FOLD_TWO_BONUS, FOLD_THREE_BONUS, FOLD_FOUR_BONUS, FOLD_FIVE_BONUS));
+        myStock.add(new Box(1, "cardboard", CARDBOARD_BASE_COST, CARDBOARD_SELL, CARDBOARD_CHANGE, STARTING_AMOUNT,
+        FOLD_TWO_BONUS, FOLD_THREE_BONUS, FOLD_FOUR_BONUS, FOLD_FIVE_BONUS));
+        myStock.add(new Box(2, "plastic", PLASTIC_BASE_COST, PLASTIC_SELL, PLASTIC_CHANGE, STARTING_AMOUNT,
+        FOLD_TWO_BONUS, FOLD_THREE_BONUS, FOLD_FOUR_BONUS, FOLD_FIVE_BONUS));
+        myStock.add(new Box(3, "steel", STEEL_BASE_COST, STEEL_SELL, STEEL_CHANGE, STARTING_AMOUNT,
+        FOLD_TWO_BONUS, FOLD_THREE_BONUS, FOLD_FOUR_BONUS, FOLD_FIVE_BONUS));
+        myStock.add(new Box(4, "saneza", SANEZA_BASE_COST, SANEZA_SELL, SANEZA_CHANGE, STARTING_AMOUNT,
+        FOLD_TWO_BONUS, FOLD_THREE_BONUS, FOLD_FOUR_BONUS, FOLD_FIVE_BONUS));
+        myStock.add(new Box(5, "thorby", THORBY_BASE_COST, THORBY_SELL, THORBY_CHANGE, STARTING_AMOUNT,
+        FOLD_TWO_BONUS, FOLD_THREE_BONUS, FOLD_FOUR_BONUS, FOLD_FIVE_BONUS));
+        myStock.add(new Box(6, "plarbin", PLARBIN_BASE_COST, PLARBIN_SELL, PLARBIN_CHANGE, STARTING_AMOUNT,
+        FOLD_TWO_BONUS, FOLD_THREE_BONUS, FOLD_FOUR_BONUS, FOLD_FIVE_BONUS));
         //this adds box_num null places to myRandom so it will have the spaces
         for(int i = 0; i < BOX_NUM; i++)
         {
@@ -871,6 +933,70 @@ public class BoxIt
         }//ends else if
         return myDay + ", January, 1";
     }//ends getTheDay
+    
+    /**
+    * This gets the folds amounts.
+    * @pre none
+    * @pram fold, type
+    * @return the requested fold
+    * @post none
+    */
+    public int getFold(int fold, int type)
+    {
+        if(fold == 1)
+        {
+            return myStock.get(type).getFold1();
+        }//ends if
+        else if(fold == 2)
+        {
+            return myStock.get(type).getFold2();
+        }//ends if
+        else if(fold == 3)
+        {
+            return myStock.get(type).getFold3();
+        }//ends if
+        else if(fold == 4)
+        {
+            return myStock.get(type).getFold4();
+        }//ends if
+        else if(fold == 5)
+        {
+            return myStock.get(type).getFold5();
+        }//ends if
+        //if error
+        return -1;
+    }//ends getFold
+    
+    /**
+    * This sets the folds amounts.
+    * @pre none
+    * @pram fold, type
+    * @return none
+    * @post none
+    */
+    public void setFold(int fold, int type, int amount)
+    {
+        if(fold == 1)
+        {
+            myStock.get(type).setFold1(amount);
+        }//ends if
+        else if(fold == 2)
+        {
+             myStock.get(type).setFold2(amount);
+        }//ends if
+        else if(fold == 3)
+        {
+             myStock.get(type).setFold3(amount);
+        }//ends if
+        else if(fold == 4)
+        {
+             myStock.get(type).setFold4(amount);
+        }//ends if
+        else if(fold == 5)
+        {
+             myStock.get(type).setFold5(amount);
+        }//ends if
+    }//ends getFold
     
     /**
     * This gets myMola.
@@ -1219,7 +1345,7 @@ public class BoxIt
     */
     public String getRandom0()
     {
-        return myStock.get(0).getName() + " sells for $"  + (Math.round((myStock.get(0).getSell() + myRandom.get(0)) * 100)/ 100.0);
+        return myStock.get(0).getName() + " sells for $"  + (Math.round((myStock.get(0).getSell(1) + myRandom.get(0)) * 100)/ 100.0);
     }//ends getRandom0
     
     /**
@@ -1231,7 +1357,7 @@ public class BoxIt
     */
     public String getRandom1()
     {
-        return myStock.get(1).getName() + " sells for $"  + (Math.round((myStock.get(1).getSell() + myRandom.get(1)) * 100)/ 100.0);
+        return myStock.get(1).getName() + " sells for $"  + (Math.round((myStock.get(1).getSell(1) + myRandom.get(1)) * 100)/ 100.0);
     }//ends getRandom1
     
     /**
@@ -1243,7 +1369,7 @@ public class BoxIt
     */
     public String getRandom2()
     {
-        return myStock.get(2).getName() + " sells for $"  + (Math.round((myStock.get(2).getSell() + myRandom.get(2)) * 100)/ 100.0);
+        return myStock.get(2).getName() + " sells for $"  + (Math.round((myStock.get(2).getSell(1) + myRandom.get(2)) * 100)/ 100.0);
     }//ends getRandom2
     
     /**
@@ -1255,7 +1381,7 @@ public class BoxIt
     */
     public String getRandom3()
     {
-        return myStock.get(3).getName() + " sells for $"  + (Math.round((myStock.get(3).getSell() + myRandom.get(3)) * 100)/ 100.0);
+        return myStock.get(3).getName() + " sells for $"  + (Math.round((myStock.get(3).getSell(1) + myRandom.get(3)) * 100)/ 100.0);
     }//ends getRandom3
     
     /**
@@ -1267,7 +1393,7 @@ public class BoxIt
     */
     public String getRandom4()
     {
-        return myStock.get(4).getName() + " sells for $"  + (Math.round((myStock.get(4).getSell() + myRandom.get(4)) * 100)/ 100.0);
+        return myStock.get(4).getName() + " sells for $"  + (Math.round((myStock.get(4).getSell(1) + myRandom.get(4)) * 100)/ 100.0);
     }//ends getRandom4
     
     /**
@@ -1279,7 +1405,7 @@ public class BoxIt
     */
     public String getRandom5()
     {
-        return myStock.get(5).getName() + " sells for $"  + (Math.round((myStock.get(5).getSell() + myRandom.get(5)) * 100)/ 100.0);
+        return myStock.get(5).getName() + " sells for $"  + (Math.round((myStock.get(5).getSell(1) + myRandom.get(5)) * 100)/ 100.0);
     }//ends getRandom5
     
     /**
@@ -1291,7 +1417,7 @@ public class BoxIt
     */
     public String getRandom6()
     {
-        return myStock.get(6).getName() + " sells for $"  + (Math.round((myStock.get(6).getSell() + myRandom.get(6)) * 100)/ 100.0);
+        return myStock.get(6).getName() + " sells for $"  + (Math.round((myStock.get(6).getSell(1) + myRandom.get(6)) * 100)/ 100.0);
     }//ends getRandom6
     
     /**

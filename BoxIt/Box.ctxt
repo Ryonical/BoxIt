@@ -1,9 +1,9 @@
 #BlueJ class context
-comment0.params=value\ name\ cost\ sell\ change\ amount
-comment0.target=Box(int,\ java.lang.String,\ double,\ double,\ double,\ int)
+comment0.params=value\ name\ cost\ sell\ change\ amount\ mult2\ mult3\ mult4\ mult5
+comment0.target=Box(int,\ java.lang.String,\ double,\ double,\ double,\ int,\ double,\ double,\ double,\ double)
 comment0.text=\r\n\ This\ construct.\r\n\ @pre\ none\r\n\ @pram\ none\r\n\ @return\ none\r\n\ @post\ all\r\n
-comment1.params=
-comment1.target=double\ getSell()
+comment1.params=i
+comment1.target=double\ getSell(int)
 comment1.text=\r\n\ This\ will\ return\ mySell.\r\n\ @pre\ none\r\n\ @pram\ none\r\n\ @return\ mySell\r\n\ @post\ none\r\n
 comment10.params=
 comment10.target=int\ getFold4()

@@ -11,6 +11,8 @@ import java.util.*;
  */
 public class Save
 {
+    public final int BOX_NUM = 7;
+    public final int FOLD_COUNT = 5;
     //to save
     FileWriter fileInt;
     FileWriter fileDouble;
@@ -71,21 +73,53 @@ public class Save
         mySaveDouble.add(Double.toString(box.getResearchCost()));
         mySaveDouble.add(Double.toString(box.getResearchTypeCost()));
         mySaveDouble.add(Double.toString(box.getDate()));
-        mySaveDouble.add(box.getCosts(0));
-        mySaveDouble.add(box.getCosts(1));
-        mySaveDouble.add(box.getCosts(2));
-        mySaveDouble.add(box.getCosts(3));
-        mySaveDouble.add(box.getCosts(4));
-        mySaveDouble.add(box.getCosts(5));
-        mySaveDouble.add(box.getCosts(6));
+        for(int i = 0; i < BOX_NUM; i++)
+        {
+            mySaveDouble.add(box.getCosts(i));
+        }//ends for
         //box
+            //saves for paper
         mySaveBox.add(box.getBoxAmount(0));
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            mySaveBox.add(Integer.toString(box.getFold(i, 0)));
+        }//ends for
+            //saves for cardboard
         mySaveBox.add(box.getBoxAmount(1));
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            mySaveBox.add(Integer.toString(box.getFold(i, 1)));
+        }//ends for
+            //saves for plastic
         mySaveBox.add(box.getBoxAmount(2));
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            mySaveBox.add(Integer.toString(box.getFold(i, 2)));
+        }//ends for
+            //saves for steel
         mySaveBox.add(box.getBoxAmount(3));
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            mySaveBox.add(Integer.toString(box.getFold(i, 3)));
+        }//ends for
+            //saves for saneza
         mySaveBox.add(box.getBoxAmount(4));
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            mySaveBox.add(Integer.toString(box.getFold(i, 4)));
+        }//ends for
+            //saves for thorby
         mySaveBox.add(box.getBoxAmount(5));
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            mySaveBox.add(Integer.toString(box.getFold(i, 5)));
+        }//ends for
+            //saves for plarbin
         mySaveBox.add(box.getBoxAmount(6));
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            mySaveBox.add(Integer.toString(box.getFold(i, 6)));
+        }//ends for
         //string
         mySaveString.add(box.getDay());
         mySaveString.add(box.getMonth());

@@ -694,13 +694,20 @@ public class Buttons extends JFrame
         output [i++] = box.randomEvent();
         output [i++] = "The date is " + box.getTheDay();
         output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
-        output [i++] = box.getRandom0() + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0);
-        output [i++] = box.getRandom1() + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1);
-        output [i++] = box.getRandom2() + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2);
-        output [i++] = box.getRandom3() + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3);
-        output [i++] = box.getRandom4() + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4);
-        output [i++] = box.getRandom5() + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5);
-        output [i++] = box.getRandom6() + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6);
+        output [i++] = box.getRandom0() + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0) +
+        " unfolded " + (box.getFold(1, 0) + box.getFold(2, 0) + box.getFold(3, 0) + box.getFold(4, 0)+ box.getFold(5, 0)) + " folded";
+        output [i++] = box.getRandom1() + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1) +
+        " unfolded " + (box.getFold(1, 1) + box.getFold(2, 1) + box.getFold(3, 1) + box.getFold(4, 1)+ box.getFold(5, 1)) + " folded";
+        output [i++] = box.getRandom2() + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2) +
+        " unfolded " + (box.getFold(1, 2) + box.getFold(2, 2) + box.getFold(3, 2) + box.getFold(4, 2)+ box.getFold(5, 2)) + " folded";
+        output [i++] = box.getRandom3() + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3) +
+        " unfolded " + (box.getFold(1, 3) + box.getFold(2, 3) + box.getFold(3, 3) + box.getFold(4, 3)+ box.getFold(5, 3)) + " folded";
+        output [i++] = box.getRandom4() + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4) +
+        " unfolded " + (box.getFold(1, 4) + box.getFold(2, 4) + box.getFold(3, 4) + box.getFold(4, 4)+ box.getFold(5, 4)) + " folded";
+        output [i++] = box.getRandom5() + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5) +
+        " unfolded " + (box.getFold(1, 5) + box.getFold(2, 5) + box.getFold(3, 5) + box.getFold(4, 5)+ box.getFold(5, 5)) + " folded";
+        output [i++] = box.getRandom6() + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6) +
+        " unfolded " + (box.getFold(1, 6) + box.getFold(2, 6) + box.getFold(3, 6) + box.getFold(4, 6)+ box.getFold(5, 0)) + " folded";
         output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
         " and your new type costs " + box.getResearchTypeCost();
         output [i++] = "You can buy " + Integer.toString(box.getMaxBuy()) + " things at a time.";
@@ -727,13 +734,20 @@ public class Buttons extends JFrame
         output [i++] = box.randomEvent();
         output [i++] = "The date is " + box.getTheDay();
         output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
-        output [i++] = box.getRandom0() + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0);
-        output [i++] = box.getRandom1() + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1);
-        output [i++] = box.getRandom2() + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2);
-        output [i++] = box.getRandom3() + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3);
-        output [i++] = box.getRandom4() + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4);
-        output [i++] = box.getRandom5() + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5);
-        output [i++] = box.getRandom6() + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6);
+        output [i++] = box.getRandom0() + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0) +
+        " unfolded " + (box.getFold(1, 0) + box.getFold(2, 0) + box.getFold(3, 0) + box.getFold(4, 0)+ box.getFold(5, 0)) + " folded";
+        output [i++] = box.getRandom1() + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1) +
+        " unfolded " + (box.getFold(1, 1) + box.getFold(2, 1) + box.getFold(3, 1) + box.getFold(4, 1)+ box.getFold(5, 1)) + " folded";
+        output [i++] = box.getRandom2() + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2) +
+        " unfolded " + (box.getFold(1, 2) + box.getFold(2, 2) + box.getFold(3, 2) + box.getFold(4, 2)+ box.getFold(5, 2)) + " folded";
+        output [i++] = box.getRandom3() + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3) +
+        " unfolded " + (box.getFold(1, 3) + box.getFold(2, 3) + box.getFold(3, 3) + box.getFold(4, 3)+ box.getFold(5, 3)) + " folded";
+        output [i++] = box.getRandom4() + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4) +
+        " unfolded " + (box.getFold(1, 4) + box.getFold(2, 4) + box.getFold(3, 4) + box.getFold(4, 4)+ box.getFold(5, 4)) + " folded";
+        output [i++] = box.getRandom5() + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5) +
+        " unfolded " + (box.getFold(1, 5) + box.getFold(2, 5) + box.getFold(3, 5) + box.getFold(4, 5)+ box.getFold(5, 5)) + " folded";
+        output [i++] = box.getRandom6() + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6) +
+        " unfolded " + (box.getFold(1, 6) + box.getFold(2, 6) + box.getFold(3, 6) + box.getFold(4, 6)+ box.getFold(5, 0)) + " folded";
         output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
         " and your new type costs " + box.getResearchTypeCost();
         output [i++] = "You can buy " + Integer.toString(box.getMaxBuy()) + " things at a time.";

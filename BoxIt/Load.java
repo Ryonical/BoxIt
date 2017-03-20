@@ -11,6 +11,7 @@ import java.util.*;
  */
 public class Load
 {
+    public final int FOLD_COUNT = 5;
     //to save
     private File fileInt = null;
     private File fileDouble = null;
@@ -174,20 +175,62 @@ public class Load
         countDouble++;
         
         //the input for boxes
+            //paper
         box.setBoxAmount(0, mySaveBox.get(countBox));
         countBox++;
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            box.setFold(i, 0, mySaveBox.get(countBox));
+            countBox++;
+        }//ends for
+            //cardboard
         box.setBoxAmount(1, mySaveBox.get(countBox));
         countBox++;
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            box.setFold(i, 1, mySaveBox.get(countBox));
+            countBox++;
+        }//ends for
+            //plactic
         box.setBoxAmount(2, mySaveBox.get(countBox));
         countBox++;
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            box.setFold(i, 2, mySaveBox.get(countBox));
+            countBox++;
+        }//ends for
+            //steel
         box.setBoxAmount(3, mySaveBox.get(countBox));
         countBox++;
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            box.setFold(i, 3, mySaveBox.get(countBox));
+            countBox++;
+        }//ends for
+            //saneza
         box.setBoxAmount(4, mySaveBox.get(countBox));
         countBox++;
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            box.setFold(i, 4, mySaveBox.get(countBox));
+            countBox++;
+        }//ends for
+            //thorby
         box.setBoxAmount(5, mySaveBox.get(countBox));
         countBox++;
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            box.setFold(i, 5, mySaveBox.get(countBox));
+            countBox++;
+        }//ends for
+            //plarbin
         box.setBoxAmount(6, mySaveBox.get(countBox));
         countBox++;
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            box.setFold(i, 6, mySaveBox.get(countBox));
+            countBox++;
+        }//ends for
         //the input for strings
         box.setDay(mySaveString.get(countString));
         countString++;
