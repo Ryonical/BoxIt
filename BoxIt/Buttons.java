@@ -14,7 +14,7 @@ import java.io.*;
  */
 public class Buttons extends JFrame
 {
-    public final int BUTTON_NUM = 34;
+    public final int BUTTON_NUM = 35;
     ImageIcon paperPic;
     ImageIcon cardPic;
     ImageIcon lockedCardPic;
@@ -33,6 +33,7 @@ public class Buttons extends JFrame
     private JButton jbtTutorialNo;
     private JButton jbtTutorialPaper;
     private JButton jbtTutorialBuy;
+    private JButton jbtTutorialFold;
     private JButton jbtTutorialSell;
     private JButton jbtStart;
     //buttons for playing 
@@ -99,6 +100,7 @@ public class Buttons extends JFrame
         jbtTutorialNo = new JButton("No");
         jbtTutorialPaper = new JButton(paperPic);
         jbtTutorialBuy = new JButton("Buy 1");
+        jbtTutorialFold = new JButton("Fold 1");
         jbtTutorialSell = new JButton("Sell 1");
         jbtStart = new JButton("Start");
         //game buttons
@@ -154,6 +156,7 @@ public class Buttons extends JFrame
         jpButtons.add(jbtTutorialNo);
         jpButtons.add(jbtTutorialPaper);
         jpButtons.add(jbtTutorialBuy);
+        jpButtons.add(jbtTutorialFold);
         jpButtons.add(jbtTutorialSell);
         jpButtons.add(jbtStart);
         //main buttons
@@ -228,6 +231,16 @@ public class Buttons extends JFrame
         
         //picks tutorial buy
         jbtTutorialBuy.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                outputTutorialFold();
+                pickFoldTutorial();
+            }//ends actionPerformed
+        });//ends jbtTutorialBuy
+        
+        //picks tutorial buy
+        jbtTutorialFold.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
@@ -563,6 +576,7 @@ public class Buttons extends JFrame
         buttons[i++] = jbtTutorialNo;
         buttons[i++] = jbtTutorialPaper;
         buttons[i++] = jbtTutorialBuy;
+        buttons[i++] = jbtTutorialFold;
         buttons[i++] = jbtTutorialSell;
         buttons[i++] = jbtStart;
         buttons[i++] = jbtPaper;
@@ -643,7 +657,24 @@ public class Buttons extends JFrame
         String[] output = new String [3];
         output [i++] = "Good now you have selected paper";
         output [i++] = "The next thing you need to do is";
-        output [i++] = "Buy some paper so you cas sell the boxed version of it";
+        output [i++] = "Buy some paper so you can fold it";
+        game.refresh(output);
+    }//ends outputBuy
+    
+    /**
+    * This will output the buying words.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void outputTutorialFold()
+    {
+        int i = 0;
+        String[] output = new String [3];
+        output [i++] = "Good now you have bought paper";
+        output [i++] = "The next thing you need to do is";
+        output [i++] = "Fold some paper so you can sell the boxed version of it";
         game.refresh(output);
     }//ends outputBuy
     
@@ -831,6 +862,30 @@ public class Buttons extends JFrame
     }//ends buyFalse
     
     /**
+    * This will show tutorial fold.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void foldTrue()
+    {   
+        jbtTutorialFold.setVisible(true);
+    }//ends foldTrue
+    
+    /**
+    * This will not show tutorial fold.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void foldFalse()
+    {   
+        jbtTutorialFold.setVisible(false);
+    }//ends foldFalse
+    
+    /**
     * This will show tutorial sell.
     * pre none
     * pram none
@@ -983,6 +1038,7 @@ public class Buttons extends JFrame
         startScreenTrue();
         paperFalse();
         buyFalse();
+        foldFalse();
         sellFalse();
         startFalse();
         pickScreenFalse();
@@ -1003,6 +1059,7 @@ public class Buttons extends JFrame
         startScreenFalse();
         paperTrue();
         buyFalse();
+        foldFalse();
         sellFalse();
         startFalse();
         pickScreenFalse();
@@ -1023,6 +1080,28 @@ public class Buttons extends JFrame
         startScreenFalse();
         paperFalse();
         buyTrue();
+        foldFalse();
+        sellFalse();
+        startFalse();
+        pickScreenFalse();
+        sellScreenFalse();
+        jbtSave.setVisible(false);
+        jbtLoad.setVisible(false);
+    }//ends pickBuyTutorial
+    
+    /**
+    * This will show the folding part of the tutorial.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void pickFoldTutorial()
+    {   
+        startScreenFalse();
+        paperFalse();
+        buyFalse();
+        foldTrue();
         sellFalse();
         startFalse();
         pickScreenFalse();
@@ -1043,6 +1122,7 @@ public class Buttons extends JFrame
         startScreenFalse();
         paperFalse();
         buyFalse();
+        foldFalse();
         sellTrue();
         startFalse();
         pickScreenFalse();
@@ -1063,6 +1143,7 @@ public class Buttons extends JFrame
         startScreenFalse();
         paperFalse();
         buyFalse();
+        foldFalse();
         sellFalse();
         startTrue();
         pickScreenFalse();
@@ -1083,6 +1164,7 @@ public class Buttons extends JFrame
         startScreenFalse();
         paperFalse();
         buyFalse();
+        foldFalse();
         sellFalse();
         startFalse();
         pickScreenTrue();
@@ -1103,6 +1185,7 @@ public class Buttons extends JFrame
         startScreenFalse();
         paperFalse();
         buyFalse();
+        foldFalse();
         sellFalse();
         startFalse();
         pickScreenFalse();

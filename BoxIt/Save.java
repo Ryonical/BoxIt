@@ -79,52 +79,41 @@ public class Save
         }//ends for
         //box
             //saves for paper
-        mySaveBox.add(box.getBoxAmount(0));
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            mySaveBox.add(Integer.toString(box.getFold(i, 0)));
-        }//ends for
+        minimize(0);
             //saves for cardboard
-        mySaveBox.add(box.getBoxAmount(1));
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            mySaveBox.add(Integer.toString(box.getFold(i, 1)));
-        }//ends for
+        minimize(1);
             //saves for plastic
-        mySaveBox.add(box.getBoxAmount(2));
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            mySaveBox.add(Integer.toString(box.getFold(i, 2)));
-        }//ends for
+        minimize(2);
             //saves for steel
-        mySaveBox.add(box.getBoxAmount(3));
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            mySaveBox.add(Integer.toString(box.getFold(i, 3)));
-        }//ends for
+        minimize(3);
             //saves for saneza
-        mySaveBox.add(box.getBoxAmount(4));
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            mySaveBox.add(Integer.toString(box.getFold(i, 4)));
-        }//ends for
+        minimize(4);
             //saves for thorby
-        mySaveBox.add(box.getBoxAmount(5));
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            mySaveBox.add(Integer.toString(box.getFold(i, 5)));
-        }//ends for
+        minimize(5);
             //saves for plarbin
-        mySaveBox.add(box.getBoxAmount(6));
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            mySaveBox.add(Integer.toString(box.getFold(i, 6)));
-        }//ends for
+        minimize(6);
         //string
         mySaveString.add(box.getDay());
         mySaveString.add(box.getMonth());
         mySaveString.add(box.getEffect().replaceAll(" ", "_"));
     }//ends getStats
+    
+    
+    /**
+    * This will simplify the saving prosess.
+    * pre none
+    * pram j
+    * return none
+    * post none
+    */
+    public void minimize(int j)
+    {   
+        mySaveBox.add(box.getBoxAmount(j));
+        for(int i = 1; i <= FOLD_COUNT; i++)
+        {
+            mySaveBox.add(Integer.toString(box.getFold(i, j)));
+        }//ends for
+    }
     
     /**
     * This will save everything that needs to be saved.

@@ -53,6 +53,8 @@ public class BoxIt
     public final double FOLD_FIVE_BONUS = 2;
     //keeps track of how many boxes there are
     public final int BOX_NUM = 7;//this is how many box types there are
+    //keeps track of how many folds there are
+    public final int FOLD_NUM = 5;
     //research finals
     public final double RESEARCH_INCREASE = 2;//this is how much the price to reserch is multiplied each time
     public final double RESEARCH_TYPE_INCREASE = 4.0;//this is the multiplyer for getting a new box
@@ -211,7 +213,7 @@ public class BoxIt
         //this is the free fold
         if(pick == 1)
         {
-            myStock.get(myType).setFold1(myStock.get(myType).getFold1() + quantity);
+            myStock.get(myType).setFold(1, myStock.get(myType).getFold(1) + quantity);
             myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
         }//ends if
         //this is the cheapest fold
@@ -220,7 +222,7 @@ public class BoxIt
             //this limits the amount you can buy based off mola
             if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
             {
-                myStock.get(myType).setFold2(myStock.get(myType).getFold2() + quantity);
+                myStock.get(myType).setFold(2, myStock.get(myType).getFold(2) + quantity);
                 myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
                 myMola -= (myMaxBuy * FOLD_TWO_COST);
             }//ends if
@@ -231,7 +233,7 @@ public class BoxIt
                 {
                     if(myMola >= FOLD_TWO_COST)
                     {
-                        myStock.get(myType).setFold2(myStock.get(myType).getFold2() + 1);
+                        myStock.get(myType).setFold(2, myStock.get(myType).getFold(2) + 1);
                         myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
                         myMola -= FOLD_TWO_COST;
                     }//ends if
@@ -244,7 +246,7 @@ public class BoxIt
             //this limits the amount you can buy based off mola
             if((myMola * quantity) >= (quantity * FOLD_THREE_COST))
             {
-                myStock.get(myType).setFold3(myStock.get(myType).getFold3() + quantity);
+                myStock.get(myType).setFold(3, myStock.get(myType).getFold(3) + quantity);
                 myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
                 myMola -= (myMaxBuy * FOLD_THREE_COST);
             }//ends if
@@ -255,7 +257,7 @@ public class BoxIt
                 {
                     if(myMola >= FOLD_TWO_COST)
                     {
-                        myStock.get(myType).setFold3(myStock.get(myType).getFold3() + 1);
+                        myStock.get(myType).setFold(3, myStock.get(myType).getFold(3) + 1);
                         myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
                         myMola -= FOLD_THREE_COST;
                     }//ends if
@@ -268,7 +270,7 @@ public class BoxIt
             //this limits the amount you can buy based off mola
             if((myMola * quantity) >= (quantity * FOLD_FOUR_COST))
             {
-                myStock.get(myType).setFold4(myStock.get(myType).getFold4() + quantity);
+                myStock.get(myType).setFold(4,myStock.get(myType).getFold(4) + quantity);
                 myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
                 myMola -= (myMaxBuy * FOLD_FOUR_COST);
             }//ends if
@@ -279,7 +281,7 @@ public class BoxIt
                 {
                     if(myMola >= FOLD_TWO_COST)
                     {
-                        myStock.get(myType).setFold4(myStock.get(myType).getFold4() + 1);
+                        myStock.get(myType).setFold(4, myStock.get(myType).getFold(4) + 1);
                         myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
                         myMola -= FOLD_FOUR_COST;
                     }//ends if
@@ -292,7 +294,7 @@ public class BoxIt
             //this limits the amount you can buy based off mola
             if((myMola * quantity) >= (quantity * FOLD_FIVE_COST))
             {
-                myStock.get(myType).setFold5(myStock.get(myType).getFold5() + quantity);
+                myStock.get(myType).setFold(5, myStock.get(myType).getFold(5) + quantity);
                 myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
                 myMola -= (myMaxBuy * FOLD_FIVE_COST);
             }//ends if
@@ -303,7 +305,7 @@ public class BoxIt
                 {
                     if(myMola >= FOLD_TWO_COST)
                     {
-                        myStock.get(myType).setFold5(myStock.get(myType).getFold5() + 1);
+                        myStock.get(myType).setFold(5,myStock.get(myType).getFold(5) + 1);
                         myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
                         myMola -= FOLD_FIVE_COST;
                     }//ends if
@@ -328,52 +330,32 @@ public class BoxIt
         if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
         {
             //this is to subtract the items
-            myStock.get(myType).setFold1(myStock.get(myType).getFold1() - i);
-            myStock.get(myType).setFold2(myStock.get(myType).getFold2() - i);
-            myStock.get(myType).setFold3(myStock.get(myType).getFold3() - i);
-            myStock.get(myType).setFold4(myStock.get(myType).getFold4() - i);
-            myStock.get(myType).setFold5(myStock.get(myType).getFold5() - i);
+            for(int j = 1; j <= FOLD_NUM; j++)
+            {
+                myStock.get(myType).setFold(j, myStock.get(myType).getFold(j) - i);
+            }//ends for
             //this is to add the mola
-            myMola += (myStock.get(myType).getSell(1) + myRandom.get(myType)) * i;
-            myMola += (myStock.get(myType).getSell(2) + myRandom.get(myType)) * i;
-            myMola += (myStock.get(myType).getSell(3) + myRandom.get(myType)) * i;
-            myMola += (myStock.get(myType).getSell(4) + myRandom.get(myType)) * i;
-            myMola += (myStock.get(myType).getSell(5) + myRandom.get(myType)) * i;
+            for(int k = 0; k < FOLD_NUM; k++)
+            {
+                 myMola += (myStock.get(myType).getSell(k) + myRandom.get(myType)) * i;
+            }//ends for
             //this is to add to the total mola counter
-            myTotalMola += (myStock.get(myType).getSell(1) + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell(2) + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell(3) + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell(4) + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell(5) + myRandom.get(myType)) * i;
+            for(int k = 0; k < FOLD_NUM; k++)
+            {
+                 myTotalMola += (myStock.get(myType).getSell(k) + myRandom.get(myType)) * i;
+            }//ends for
         }//ends if
         //this is if you want to sell more than you have
         else if (myType != BOX_NUM + 1)
         {
-            //this is to sell the first fold1
-            i = myStock.get(myType).getFold1();
-            myStock.get(myType).setFold1(myStock.get(myType).getFold1() - i);
-            myMola += (myStock.get(myType).getSell(1) + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell(1) + myRandom.get(myType)) * i;
-            //this is to sell the first fold2
-            i = myStock.get(myType).getFold2();
-            myStock.get(myType).setFold2(myStock.get(myType).getFold2() - i);
-            myMola += (myStock.get(myType).getSell(2) + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell(2) + myRandom.get(myType)) * i;
-            //this is to sell the first fold3
-            i = myStock.get(myType).getFold3();
-            myStock.get(myType).setFold3(myStock.get(myType).getFold3() - i);
-            myMola += (myStock.get(myType).getSell(3) + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell(3) + myRandom.get(myType)) * i;
-            //this is to sell the first fold4
-            i = myStock.get(myType).getFold4();
-            myStock.get(myType).setFold4(myStock.get(myType).getFold4() - i);
-            myMola += (myStock.get(myType).getSell(4) + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell(4) + myRandom.get(myType)) * i;
-            //this is to sell the first fold5
-            i = myStock.get(myType).getFold5();
-            myStock.get(myType).setFold5(myStock.get(myType).getFold5() - i);
-            myMola += (myStock.get(myType).getSell(5) + myRandom.get(myType)) * i;
-            myTotalMola += (myStock.get(myType).getSell(5) + myRandom.get(myType)) * i;
+            //this is to sell the fold
+            for(int j = 0; j <= FOLD_NUM; j++)
+            {
+                i = myStock.get(myType).getFold(j);
+                myStock.get(myType).setFold(j ,myStock.get(myType).getFold(j) - i);
+                myMola += (myStock.get(myType).getSell(j) + myRandom.get(myType)) * i;
+                myTotalMola += (myStock.get(myType).getSell(j) + myRandom.get(myType)) * i;
+            }//ends for
         }//ends else if
         //this readys for the next day
         round();
@@ -943,28 +925,7 @@ public class BoxIt
     */
     public int getFold(int fold, int type)
     {
-        if(fold == 1)
-        {
-            return myStock.get(type).getFold1();
-        }//ends if
-        else if(fold == 2)
-        {
-            return myStock.get(type).getFold2();
-        }//ends if
-        else if(fold == 3)
-        {
-            return myStock.get(type).getFold3();
-        }//ends if
-        else if(fold == 4)
-        {
-            return myStock.get(type).getFold4();
-        }//ends if
-        else if(fold == 5)
-        {
-            return myStock.get(type).getFold5();
-        }//ends if
-        //if error
-        return -1;
+        return myStock.get(type).getFold(fold);
     }//ends getFold
     
     /**
@@ -974,28 +935,9 @@ public class BoxIt
     * @return none
     * @post none
     */
-    public void setFold(int fold, int type, int amount)
+    public void setFold(int type, int fold, int amount)
     {
-        if(fold == 1)
-        {
-            myStock.get(type).setFold1(amount);
-        }//ends if
-        else if(fold == 2)
-        {
-             myStock.get(type).setFold2(amount);
-        }//ends if
-        else if(fold == 3)
-        {
-             myStock.get(type).setFold3(amount);
-        }//ends if
-        else if(fold == 4)
-        {
-             myStock.get(type).setFold4(amount);
-        }//ends if
-        else if(fold == 5)
-        {
-             myStock.get(type).setFold5(amount);
-        }//ends if
+        myStock.get(type).setFold(fold, amount);
     }//ends getFold
     
     /**

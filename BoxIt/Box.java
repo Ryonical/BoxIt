@@ -7,13 +7,10 @@
  */
 public class Box
 {
+    public final int FOLD_COUNT = 5;
     private int myValue;
     private int myAmountUnfolded;
-    private int myAmountFold1;
-    private int myAmountFold2;
-    private int myAmountFold3;
-    private int myAmountFold4;
-    private int myAmountFold5;
+    private int myAmount[];
     private double myMult2;
     private double myMult3;
     private double myMult4;
@@ -35,11 +32,12 @@ public class Box
     {
         myValue = value;
         myAmountUnfolded = amount;
-        myAmountFold1 = 0;
-        myAmountFold2 = 0;
-        myAmountFold3 = 0;
-        myAmountFold4 = 0;
-        myAmountFold5 = 0;
+        //to set all of myAmount to Zero
+        myAmount = new int[FOLD_COUNT];
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            myAmount[i] = 0;
+        }//ends for
         myMult2 = mult2;
         myMult3 = mult3;
         myMult4 = mult4;
@@ -107,124 +105,28 @@ public class Box
     }//ends setAmount
     
     /**
-    * This will return myAmountFold1.
+    * This will return myAmountFold.
     * @pre none
     * @pram none
-    * @return myAmountFold1
+    * @return myAmountFold
     * @post none
     */
-    public int getFold1()
+    public int getFold(int pick)
     {
-        return myAmountFold1;
-    }//ends GetAmountFold1
+        return myAmount[pick-1];
+    }//ends GetAmountFold
     
     /**
-    * This will set myAmountFold1.
+    * This will set myAmountFold.
     * @pre none
     * @pram none
     * @return none
-    * @post myAmountFold1
+    * @post myAmountFold
     */
-    public void setFold1(int amount)
+    public void setFold(int pick,int amount)
     {
-        myAmountFold1 = amount;
-    }//ends setAmountFold1
-    
-    /**
-    * This will return myAmountFold2.
-    * @pre none
-    * @pram none
-    * @return myAmountFold2
-    * @post none
-    */
-    public int getFold2()
-    {
-        return myAmountFold2;
-    }//ends GetAmountFold2
-    
-    /**
-    * This will set myAmountFold2.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post myAmountFold2
-    */
-    public void setFold2(int amount)
-    {
-        myAmountFold2 = amount;
-    }//ends setAmountFold2
-    
-    /**
-    * This will return myAmountFold3.
-    * @pre none
-    * @pram none
-    * @return myAmountFold3
-    * @post none
-    */
-    public int getFold3()
-    {
-        return myAmountFold3;
-    }//ends GetAmountFold3
-    
-    /**
-    * This will set myAmountFold3.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post myAmountFold3
-    */
-    public void setFold3(int amount)
-    {
-        myAmountFold3 = amount;
-    }//ends setAmountFold3
-    
-    /**
-    * This will return myAmountFold4.
-    * @pre none
-    * @pram none
-    * @return myAmountFold4
-    * @post none
-    */
-    public int getFold4()
-    {
-        return myAmountFold4;
-    }//ends GetAmountFold4
-    
-    /**
-    * This will set myAmountFold4.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post myAmountFold4
-    */
-    public void setFold4(int amount)
-    {
-        myAmountFold4 = amount;
-    }//ends setAmountFold4
-    
-    /**
-    * This will return myAmountFold5.
-    * @pre none
-    * @pram none
-    * @return myAmountFold5
-    * @post none
-    */
-    public int getFold5()
-    {
-        return myAmountFold5;
-    }//ends GetAmountFold5
-    
-    /**
-    * This will set myAmountFold5.
-    * @pre none
-    * @pram none
-    * @return none
-    * @post myAmountFold5
-    */
-    public void setFold5(int amount)
-    {
-        myAmountFold5 = amount;
-    }//ends setAmountFold5
+        myAmount[pick-1] = amount;
+    }//ends setAmountFold
     
     /**
     * This gets the value.
@@ -272,8 +174,8 @@ public class Box
     @Override
     public String toString()
     {
-        return myName + System.lineSeparator() + myAmountUnfolded + myAmountFold1 + myAmountFold2 + myAmountFold3 + 
-        myAmountFold4 + myAmountFold5 +System.lineSeparator() + myValue + System.lineSeparator() + myCost +
+        return myName + System.lineSeparator() + myAmountUnfolded + myAmount[0] + myAmount[1] + myAmount[2] + 
+        myAmount[3] + myAmount[4] +System.lineSeparator() + myValue + System.lineSeparator() + myCost +
         System.lineSeparator() + mySell + System.lineSeparator() +myChange;
     }//ends toString
 }//ends box

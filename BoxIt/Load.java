@@ -21,6 +21,11 @@ public class Load
     private Scanner inFileDouble = null;
     private Scanner inFileBox = null;
     private Scanner inFileString = null;
+    //so I can add vars 
+    private int countInt;
+    private int countDouble;
+    private int countBox;
+    private int countString;
 
     //vars
     private ArrayList <Integer> mySaveInt;
@@ -42,6 +47,10 @@ public class Load
      */
     public Load(BoxIt box2)
     {
+        countInt = 0;
+        countDouble = 0;
+        countBox = 0;
+        countString = 0;
         try
         {
             fileInt = new File("saves//saveInt.txt");
@@ -133,11 +142,6 @@ public class Load
      */
     public void load()
     {
-        //so I can add vars later
-        int countInt = 0;
-        int countDouble = 0;
-        int countBox = 0;
-        int countString = 0;
         
         //the input for ints
         box.setMaxBuy(mySaveInt.get(countInt));
@@ -176,61 +180,19 @@ public class Load
         
         //the input for boxes
             //paper
-        box.setBoxAmount(0, mySaveBox.get(countBox));
-        countBox++;
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            box.setFold(i, 0, mySaveBox.get(countBox));
-            countBox++;
-        }//ends for
+        minimize(0);
             //cardboard
-        box.setBoxAmount(1, mySaveBox.get(countBox));
-        countBox++;
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            box.setFold(i, 1, mySaveBox.get(countBox));
-            countBox++;
-        }//ends for
+        minimize(1);
             //plactic
-        box.setBoxAmount(2, mySaveBox.get(countBox));
-        countBox++;
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            box.setFold(i, 2, mySaveBox.get(countBox));
-            countBox++;
-        }//ends for
+        minimize(2);
             //steel
-        box.setBoxAmount(3, mySaveBox.get(countBox));
-        countBox++;
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            box.setFold(i, 3, mySaveBox.get(countBox));
-            countBox++;
-        }//ends for
+        minimize(3);
             //saneza
-        box.setBoxAmount(4, mySaveBox.get(countBox));
-        countBox++;
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            box.setFold(i, 4, mySaveBox.get(countBox));
-            countBox++;
-        }//ends for
+        minimize(4);
             //thorby
-        box.setBoxAmount(5, mySaveBox.get(countBox));
-        countBox++;
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            box.setFold(i, 5, mySaveBox.get(countBox));
-            countBox++;
-        }//ends for
+        minimize(5);
             //plarbin
-        box.setBoxAmount(6, mySaveBox.get(countBox));
-        countBox++;
-        for(int i = 0; i < FOLD_COUNT; i++)
-        {
-            box.setFold(i, 6, mySaveBox.get(countBox));
-            countBox++;
-        }//ends for
+        minimize(6);
         //the input for strings
         box.setDay(mySaveString.get(countString));
         countString++;
@@ -239,4 +201,22 @@ public class Load
         box.setEffect(mySaveString.get(countString).replaceAll("_", " "));
         countString++;
     }//ends load
+    
+    /**
+     * This will simplify the loading prosess.
+     * pre none
+     * pram j
+     * return none
+     * post none
+     */
+    public void minimize(int type)
+    {
+        box.setBoxAmount(type, mySaveBox.get(countBox));
+        countBox++;
+        for(int fold = 1; fold <= FOLD_COUNT; fold++)
+        {
+            box.setFold(type, fold, mySaveBox.get(countBox));
+            countBox++;
+        }//ends for
+    }//ends fimimize
 }//ends Save
