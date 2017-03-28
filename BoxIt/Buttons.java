@@ -66,11 +66,16 @@ public class Buttons extends JFrame
     private JButton jbtSave;
     private JButton jbtLoad;
     
-    //The real BoxIt
+    //BoxIt
     BoxIt box;
+    BoxIt aIBox;
+    
+    //for AI
+    AI ai;
     
     //for output
     GameScreen game;
+    GameScreen aIGame;
     /**
     * This will be the buttons.
     * pre none
@@ -78,10 +83,13 @@ public class Buttons extends JFrame
     * return none
     * post all
     */
-    public Buttons(BoxIt box2, GameScreen game2)
+    public Buttons(BoxIt box2, GameScreen game2, BoxIt aIBox2, GameScreen aIGame2)
     {
         box = box2;
         game = game2;
+        aIBox = aIBox2;
+        aIGame = aIGame2;
+        ai = new AI(aIBox);
         paperPic = new ImageIcon("pics//SmallZoomedPaper.png");
         cardPic = new ImageIcon("pics//Cardboard.png");
         lockedCardPic = new ImageIcon("pics//LockedCardboard.png");
@@ -146,7 +154,7 @@ public class Buttons extends JFrame
     {
         
         
-        Buttons frame = new Buttons(box, game);
+        Buttons frame = new Buttons(box, game, aIBox, aIGame);
         
         //adds buttons
         JPanel jpButtons = new JPanel();
@@ -193,6 +201,7 @@ public class Buttons extends JFrame
         box.createBoxes();
         box.randomizePrices();
         game.addButtons(getButtons());
+        aIGame.addButtons(getButtons());
         startScreen();
         outputStartTutorial();
         
@@ -749,7 +758,7 @@ public class Buttons extends JFrame
         
        
         game.refresh(output);
-    }//ends output
+    }//ends outputPick
     
     /**
     * This will output.
@@ -785,7 +794,83 @@ public class Buttons extends JFrame
         
        
         game.refresh(output);
-    }//ends output
+    }//ends outputBuy
+    
+    /**
+    * This will output for the AI.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void outputPick2()
+    {
+        int i = 0;
+        String[] output = new String [13];
+        output [i++] = box.randomEvent();
+        output [i++] = "The date is " + box.getTheDay();
+        output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
+        output [i++] = box.getRandom0() + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0) +
+        " unfolded " + (box.getFold(1, 0) + box.getFold(2, 0) + box.getFold(3, 0) + box.getFold(4, 0)+ box.getFold(5, 0)) + " folded";
+        output [i++] = box.getRandom1() + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1) +
+        " unfolded " + (box.getFold(1, 1) + box.getFold(2, 1) + box.getFold(3, 1) + box.getFold(4, 1)+ box.getFold(5, 1)) + " folded";
+        output [i++] = box.getRandom2() + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2) +
+        " unfolded " + (box.getFold(1, 2) + box.getFold(2, 2) + box.getFold(3, 2) + box.getFold(4, 2)+ box.getFold(5, 2)) + " folded";
+        output [i++] = box.getRandom3() + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3) +
+        " unfolded " + (box.getFold(1, 3) + box.getFold(2, 3) + box.getFold(3, 3) + box.getFold(4, 3)+ box.getFold(5, 3)) + " folded";
+        output [i++] = box.getRandom4() + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4) +
+        " unfolded " + (box.getFold(1, 4) + box.getFold(2, 4) + box.getFold(3, 4) + box.getFold(4, 4)+ box.getFold(5, 4)) + " folded";
+        output [i++] = box.getRandom5() + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5) +
+        " unfolded " + (box.getFold(1, 5) + box.getFold(2, 5) + box.getFold(3, 5) + box.getFold(4, 5)+ box.getFold(5, 5)) + " folded";
+        output [i++] = box.getRandom6() + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6) +
+        " unfolded " + (box.getFold(1, 6) + box.getFold(2, 6) + box.getFold(3, 6) + box.getFold(4, 6)+ box.getFold(5, 0)) + " folded";
+        output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
+        " and your new type costs " + box.getResearchTypeCost();
+        output [i++] = "You can buy " + Integer.toString(box.getMaxBuy()) + " things at a time.";
+        output [i++] = "Paper                           Cardboard                         Plastic                            " +
+                       "Steel                            Saneza                          Thorby                            Plarbin" +
+                       "                                      " +
+                       "                                                   ";
+        
+       
+        aIGame.refresh(output);
+    }//ends outputPick2
+    
+    /**
+    * This will output for the AI.
+    * pre none
+    * pram none
+    * return none
+    * post none
+    */
+    public void outputBuy2()
+    {
+        int i = 0;
+        String[] output = new String [12];
+        output [i++] = box.randomEvent();
+        output [i++] = "The date is " + box.getTheDay();
+        output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
+        output [i++] = box.getRandom0() + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0) +
+        " unfolded " + (box.getFold(1, 0) + box.getFold(2, 0) + box.getFold(3, 0) + box.getFold(4, 0)+ box.getFold(5, 0)) + " folded";
+        output [i++] = box.getRandom1() + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1) +
+        " unfolded " + (box.getFold(1, 1) + box.getFold(2, 1) + box.getFold(3, 1) + box.getFold(4, 1)+ box.getFold(5, 1)) + " folded";
+        output [i++] = box.getRandom2() + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2) +
+        " unfolded " + (box.getFold(1, 2) + box.getFold(2, 2) + box.getFold(3, 2) + box.getFold(4, 2)+ box.getFold(5, 2)) + " folded";
+        output [i++] = box.getRandom3() + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3) +
+        " unfolded " + (box.getFold(1, 3) + box.getFold(2, 3) + box.getFold(3, 3) + box.getFold(4, 3)+ box.getFold(5, 3)) + " folded";
+        output [i++] = box.getRandom4() + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4) +
+        " unfolded " + (box.getFold(1, 4) + box.getFold(2, 4) + box.getFold(3, 4) + box.getFold(4, 4)+ box.getFold(5, 4)) + " folded";
+        output [i++] = box.getRandom5() + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5) +
+        " unfolded " + (box.getFold(1, 5) + box.getFold(2, 5) + box.getFold(3, 5) + box.getFold(4, 5)+ box.getFold(5, 5)) + " folded";
+        output [i++] = box.getRandom6() + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6) +
+        " unfolded " + (box.getFold(1, 6) + box.getFold(2, 6) + box.getFold(3, 6) + box.getFold(4, 6)+ box.getFold(5, 0)) + " folded";
+        output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
+        " and your new type costs " + box.getResearchTypeCost();
+        output [i++] = "You can buy " + Integer.toString(box.getMaxBuy()) + " things at a time.";
+        
+       
+        aIGame.refresh(output);
+    }//ends outputBuy2
     
     /**
     * This will show the first 2 buttons screen.

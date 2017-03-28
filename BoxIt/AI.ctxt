@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=
-comment0.target=AI()
+comment0.params=boxy
+comment0.target=AI(BoxIt)
 comment0.text=\r\n\ This\ constructs.\r\n\ @pre\ none\r\n\ @pram\ none\r\n\ @return\ none\r\n\ @post\ all\r\n
 comment1.params=
 comment1.target=void\ makeMove()

@@ -941,6 +941,18 @@ public class BoxIt
     }//ends getFold
     
     /**
+    * This gets myRandom.
+    * @pre none
+    * @pram none
+    * @return myRandom
+    * @post none
+    */
+    public ArrayList<Double> getRandom()
+    {
+        return myRandom;
+    }//ends getRandom
+    
+    /**
     * This gets myMola.
     * @pre none
     * @pram none
@@ -1420,7 +1432,7 @@ public class BoxIt
     public int getTypeBuy()
     {
         return myTypeBuy;
-    }//ends myTypeBuy
+    }//ends getTypeBuy
     
     /**
     * This sets myTypeBuy.
@@ -1432,7 +1444,7 @@ public class BoxIt
     public void setTypeBuy(int buy)
     {
         myTypeBuy = buy;
-    }//ends myTypeBuy
+    }//ends setTypeBuy
     
     /**
     * This gets myMaxBuy.
@@ -1444,7 +1456,7 @@ public class BoxIt
     public int getMaxBuy()
     {
         return myMaxBuy;
-    }//ends myMaxBuy
+    }//ends getMaxBuy
     
     /**
     * This sets myMaxBuy.
@@ -1456,5 +1468,17 @@ public class BoxIt
     public void setMaxBuy(int buy)
     {
         myMaxBuy = buy;
-    }//ends myMaxBuy
+    }//ends setMaxBuy
+    
+    /**
+    * This gets myStock.
+    * @pre none
+    * @pram none
+    * @return myStock
+    * @post none
+    */
+    public ArrayList<Box> getStock()
+    {
+        return myStock;
+    }//ends getMaxBuy
 }//ends BoxIt

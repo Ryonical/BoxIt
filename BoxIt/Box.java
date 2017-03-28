@@ -111,6 +111,32 @@ public class Box
     * @return myAmountFold
     * @post none
     */
+    public int getTotalFolded()
+    {
+        return myAmount[0] + myAmount[1] + myAmount[2] + myAmount[3] + myAmount[4];
+    }//ends GetAmountFold
+    
+    /**
+    * This will return myAmountFold.
+    * @pre none
+    * @pram none
+    * @return myAmountFold
+    * @post none
+    */
+    public double getTotalSell()
+    {
+        return (myAmount[0] * mySell) + (myAmount[1] * mySell * myMult2) + 
+        (myAmount[2] * mySell * myMult3) + (myAmount[3] * mySell * myMult4) + 
+        (myAmount[4] * mySell * myMult5);
+    }//ends GetAmountFold
+    
+    /**
+    * This will return myAmountFold.
+    * @pre none
+    * @pram none
+    * @return myAmountFold
+    * @post none
+    */
     public int getFold(int pick)
     {
         return myAmount[pick-1];
