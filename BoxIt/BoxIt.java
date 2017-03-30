@@ -335,21 +335,21 @@ public class BoxIt
                 myStock.get(myType).setFold(j, myStock.get(myType).getFold(j) - i);
             }//ends for
             //this is to add the mola
-            for(int k = 0; k < FOLD_NUM; k++)
+            for(int j = 1; j <= FOLD_NUM; j++)
             {
-                 myMola += (myStock.get(myType).getSell(k) + myRandom.get(myType)) * i;
+                 myMola += (myStock.get(myType).getSell(j) + myRandom.get(myType)) * i;
             }//ends for
             //this is to add to the total mola counter
-            for(int k = 0; k < FOLD_NUM; k++)
+            for(int j = 1; j <= FOLD_NUM; j++)
             {
-                 myTotalMola += (myStock.get(myType).getSell(k) + myRandom.get(myType)) * i;
+                 myTotalMola += (myStock.get(myType).getSell(j) + myRandom.get(myType)) * i;
             }//ends for
         }//ends if
         //this is if you want to sell more than you have
         else if (myType != BOX_NUM + 1)
         {
             //this is to sell the fold
-            for(int j = 0; j <= FOLD_NUM; j++)
+            for(int j = 1; j <= FOLD_NUM; j++)
             {
                 i = myStock.get(myType).getFold(j);
                 myStock.get(myType).setFold(j ,myStock.get(myType).getFold(j) - i);
@@ -920,7 +920,7 @@ public class BoxIt
     * This gets the folds amounts.
     * @pre none
     * @pram fold, type
-    * @return the requested fold
+    * @return the requested fold amount
     * @post none
     */
     public int getFold(int fold, int type)
@@ -939,6 +939,18 @@ public class BoxIt
     {
         myStock.get(type).setFold(fold, amount);
     }//ends getFold
+    
+    /**
+    * This gets the total fold amounts.
+    * @pre none
+    * @pram type
+    * @return the requested fold
+    * @post none
+    */
+    public int getTotalFold(int type)
+    {
+        return myStock.get(type).getTotalFolded();
+    }//ends getTotalFold
     
     /**
     * This gets myRandom.

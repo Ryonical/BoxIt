@@ -95,7 +95,6 @@ public class AI
         FOLD[4] = FOLD_FIVE_COST;
         
         myStock = box.getStock();
-        myRandom = box.getRandom();
         myMola = 0;
         myMaxBuy = 10;
         myResearchCost = 5;
@@ -118,6 +117,7 @@ public class AI
     */
     public void makeMove()
     {
+        myRandom = box.getRandom();
         canGo = true;
         myStock = box.getStock();
         myCurrentEffect = box.getEffect();
