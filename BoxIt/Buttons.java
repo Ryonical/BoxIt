@@ -415,6 +415,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.research();
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -426,6 +427,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.researchType();
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -437,6 +439,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.buy(1);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -447,6 +450,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.sell(1);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -458,6 +462,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.buy(10);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -468,6 +473,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.sell(10);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -479,6 +485,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.buy(999999999);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -489,6 +496,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.sell(999999999);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -500,6 +508,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.fold(1);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -511,6 +520,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.fold(2);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -522,6 +532,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.fold(3);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -533,6 +544,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.fold(4);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -544,6 +556,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 box.fold(5);
+                ai.makeMove();
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
@@ -559,15 +572,15 @@ public class Buttons extends JFrame
             }//ends actionPerformed
         });//ends jbtAICheck
         
-        //will use jbtAICheck
-        jbtAICheck.addActionListener(new ActionListener()
+        //will use jbtAIBack
+        jbtAIBack.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
                 outputPick();
                 pickScreen();
             }//ends actionPerformed
-        });//ends jbtAICheck
+        });//ends jbtAIBack
         
         //saves
         jbtSave.addActionListener(new ActionListener()
@@ -1295,7 +1308,7 @@ public class Buttons extends JFrame
         pickScreenFalse();
         sellScreenFalse();
         aIScreenTrue();
-        jbtSave.setVisible(true);
+        jbtSave.setVisible(false);
         jbtLoad.setVisible(false);
     }//ends pickScreen
     

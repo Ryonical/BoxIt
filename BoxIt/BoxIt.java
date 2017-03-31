@@ -15,7 +15,7 @@ public class BoxIt
     public final double PAPER_BASE_COST = 0.05;//This is the base price of paper
     public final double PAPER_SELL = 0.1;//This is the base price of paper
     public final double PAPER_CHANGE = 0.05;//This is how much the paper value can change
-    public final int PAPER_STARTING_AMOUNT = 5;//this is how many paper boxes you have
+    public final int PAPER_STARTING_AMOUNT = 10;//this is how many paper boxes you have
         //cardboard
     public final double CARDBOARD_BASE_COST = 1;//This is the base price of paper
     public final double CARDBOARD_SELL = 1.25;//This is the base price of cardboard
@@ -915,6 +915,46 @@ public class BoxIt
         }//ends else if
         return myDay + ", January, 1";
     }//ends getTheDay
+    
+    /**
+    * This gets the price of each box.
+    * @pre none
+    * @pram none
+    * @return the requested price amount
+    * @post none
+    */
+    public double getPrice(int i)
+    {
+        if(i == 0)
+        {
+            return myPaperCost;
+        }//ends if
+        else if(i == 1)
+        {
+            return myCardboardCost;
+        }//ends else if
+        else if(i == 2)
+        {
+            return myPlasticCost;
+        }//ends else if
+        else if(i == 3)
+        {
+            return mySteelCost;
+        }//ends else if
+        else if(i == 4)
+        {
+            return mySanezaCost;
+        }//ends else if
+        else if(i == 5)
+        {
+            return myThorbyCost;
+        }//ends else if
+        else if(i == 6)
+        {
+            return myPlarbinCost;
+        }//ends else if
+        return -1;
+    }//ends getPrice
     
     /**
     * This gets the folds amounts.
