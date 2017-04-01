@@ -188,31 +188,34 @@ public class AI
         //this is to fold
         for(int i = BOX_NUM - 1; i >= 0 && canGo; i--)
         {
-            for(int j = 0; j < FOLD_NUM; j++)
+            if(myStock.get(i).getAmount() >= myMaxBuy)
             {
-                //this checks to see the ratio of folding prices and finds the best I think
-                if(myFoldMoneyMake < (myStock.get(i).getSell(i) * FOLD_MULT[j]) / (myStock.get(i).getCost() + FOLD_COST[j]))
+                for(int j = 0; j < FOLD_NUM; j++)
                 {
-                    myFoldMoneyMake = (myStock.get(i).getSell(i) * FOLD_MULT[j]) / (myStock.get(i).getCost() + FOLD_COST[j]);
-                    myFoldMoneyPick = j;
-                }
-            }//ends if
-            //this folds the one that has been picked
-            if(canGo && myFoldMoneyPick != -1 && myTypeBuy >= i)
-            {
-                if(myMola >= myMaxBuy * FOLD_COST[myFoldMoneyPick])
-                {
-                    box.setType(i);
-                    box.fold(myFoldMoneyPick);
-                    canGo = false;
+                    //this checks to see the ratio of folding prices and finds the best I think
+                    if(myFoldMoneyMake < (myStock.get(i).getSell(i) * FOLD_MULT[j]) / (myStock.get(i).getCost() + FOLD_COST[j]))
+                    {
+                        myFoldMoneyMake = (myStock.get(i).getSell(i) * FOLD_MULT[j]) / (myStock.get(i).getCost() + FOLD_COST[j]);
+                        myFoldMoneyPick = j;
+                    }
                 }//ends if
-                else
+                //this folds the one that has been picked
+                if(canGo && myFoldMoneyPick != -1 && myTypeBuy >= i)
+                {
+                    if(myMola >= myMaxBuy * FOLD_COST[myFoldMoneyPick])
+                    {
+                        box.setType(i);
+                        box.fold(myFoldMoneyPick);
+                        canGo = false;
+                    }//ends if
+                }//ends if
+                else if(canGo)
                 {
                     box.setType(i);
                     box.fold(1);
                     canGo = false;
                 }//ends else
-            }//ends if
+            }
         }//ends for
         
         //this is to buy

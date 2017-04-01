@@ -204,117 +204,121 @@ public class BoxIt
     */
     public void fold(int pick)
     {
-        int quantity = myStock.get(myType).getAmount();
-        //this limits the amount you can buy based off of myMaxBuy/the amount of reserch you have done
-        if(quantity > myMaxBuy)
+        if(pick > 0)
         {
-            quantity = myMaxBuy;
+            int quantity = myStock.get(myType).getAmount();
+            //this limits the amount you can buy based off of myMaxBuy/the amount of reserch you have done
+            if(quantity > myMaxBuy)
+            {
+                quantity = myMaxBuy;
+            }//ends if
+            //this is the free fold
+            if(pick == 1)
+            {
+                myStock.get(myType).setFold(1, myStock.get(myType).getFold(1) + quantity);
+                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+            }//ends if
+            //this is the cheapest fold
+            else if(pick == 2)
+            {
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
+                {
+                    myStock.get(myType).setFold(2, myStock.get(myType).getFold(2) + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_TWO_COST);
+                }//ends if
+                else
+                {
+                    //this buys one at a time
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        if(myMola >= FOLD_TWO_COST)
+                        {
+                            myStock.get(myType).setFold(2, myStock.get(myType).getFold(2) + 1);
+                            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                            myMola -= FOLD_TWO_COST;
+                        }//ends if
+                    }//ends for
+                }//ends if
+            }//ends else if
+            //this is the moderatly expencive fold
+            else if(pick == 3)
+            {
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_THREE_COST))
+                {
+                    myStock.get(myType).setFold(3, myStock.get(myType).getFold(3) + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_THREE_COST);
+                }//ends if
+                else
+                {
+                    //this buys one at a time
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        if(myMola >= FOLD_TWO_COST)
+                        {
+                            myStock.get(myType).setFold(3, myStock.get(myType).getFold(3) + 1);
+                            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                            myMola -= FOLD_THREE_COST;
+                        }//ends if
+                    }//ends for
+                }//ends if
+            }//ends else if
+            //this is the expencive fold
+            else if(pick == 4)
+            {
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_FOUR_COST))
+                {
+                    myStock.get(myType).setFold(4,myStock.get(myType).getFold(4) + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_FOUR_COST);
+                }//ends if
+                else
+                {
+                    //this buys one at a time
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        if(myMola >= FOLD_TWO_COST)
+                        {
+                            myStock.get(myType).setFold(4, myStock.get(myType).getFold(4) + 1);
+                            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                            myMola -= FOLD_FOUR_COST;
+                        }//ends if
+                    }//ends for
+                }//ends if
+            }//ends else if
+            //this is the very end game fold
+            else if(pick == 5)
+            {
+                //this limits the amount you can buy based off mola
+                if((myMola * quantity) >= (quantity * FOLD_FIVE_COST))
+                {
+                    myStock.get(myType).setFold(5, myStock.get(myType).getFold(5) + quantity);
+                    myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
+                    myMola -= (myMaxBuy * FOLD_FIVE_COST);
+                }//ends if
+                else
+                {
+                    //this buys one at a time
+                    for(int i = 0; i < quantity;i++)
+                    {
+                        if(myMola >= FOLD_TWO_COST)
+                        {
+                            myStock.get(myType).setFold(5,myStock.get(myType).getFold(5) + 1);
+                            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
+                            myMola -= FOLD_FIVE_COST;
+                        }//ends if
+                    }//ends forr
+                }//ends if
+            }//ends else if
+            round();
+            randomizePrices();
+            addDay();
         }//ends if
-        //this is the free fold
-        if(pick == 1)
-        {
-            myStock.get(myType).setFold(1, myStock.get(myType).getFold(1) + quantity);
-            myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
-        }//ends if
-        //this is the cheapest fold
-        else if(pick == 2)
-        {
-            //this limits the amount you can buy based off mola
-            if((myMola * quantity) >= (quantity * FOLD_TWO_COST))
-            {
-                myStock.get(myType).setFold(2, myStock.get(myType).getFold(2) + quantity);
-                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
-                myMola -= (myMaxBuy * FOLD_TWO_COST);
-            }//ends if
-            else
-            {
-                //this buys one at a time
-                for(int i = 0; i < quantity;i++)
-                {
-                    if(myMola >= FOLD_TWO_COST)
-                    {
-                        myStock.get(myType).setFold(2, myStock.get(myType).getFold(2) + 1);
-                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
-                        myMola -= FOLD_TWO_COST;
-                    }//ends if
-                }//ends for
-            }//ends if
-        }//ends else if
-        //this is the moderatly expencive fold
-        else if(pick == 3)
-        {
-            //this limits the amount you can buy based off mola
-            if((myMola * quantity) >= (quantity * FOLD_THREE_COST))
-            {
-                myStock.get(myType).setFold(3, myStock.get(myType).getFold(3) + quantity);
-                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
-                myMola -= (myMaxBuy * FOLD_THREE_COST);
-            }//ends if
-            else
-            {
-                //this buys one at a time
-                for(int i = 0; i < quantity;i++)
-                {
-                    if(myMola >= FOLD_TWO_COST)
-                    {
-                        myStock.get(myType).setFold(3, myStock.get(myType).getFold(3) + 1);
-                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
-                        myMola -= FOLD_THREE_COST;
-                    }//ends if
-                }//ends for
-            }//ends if
-        }//ends else if
-        //this is the expencive fold
-        else if(pick == 4)
-        {
-            //this limits the amount you can buy based off mola
-            if((myMola * quantity) >= (quantity * FOLD_FOUR_COST))
-            {
-                myStock.get(myType).setFold(4,myStock.get(myType).getFold(4) + quantity);
-                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
-                myMola -= (myMaxBuy * FOLD_FOUR_COST);
-            }//ends if
-            else
-            {
-                //this buys one at a time
-                for(int i = 0; i < quantity;i++)
-                {
-                    if(myMola >= FOLD_TWO_COST)
-                    {
-                        myStock.get(myType).setFold(4, myStock.get(myType).getFold(4) + 1);
-                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
-                        myMola -= FOLD_FOUR_COST;
-                    }//ends if
-                }//ends for
-            }//ends if
-        }//ends else if
-        //this is the very end game fold
-        else if(pick == 5)
-        {
-            //this limits the amount you can buy based off mola
-            if((myMola * quantity) >= (quantity * FOLD_FIVE_COST))
-            {
-                myStock.get(myType).setFold(5, myStock.get(myType).getFold(5) + quantity);
-                myStock.get(myType).setAmount(myStock.get(myType).getAmount() - quantity);
-                myMola -= (myMaxBuy * FOLD_FIVE_COST);
-            }//ends if
-            else
-            {
-                //this buys one at a time
-                for(int i = 0; i < quantity;i++)
-                {
-                    if(myMola >= FOLD_TWO_COST)
-                    {
-                        myStock.get(myType).setFold(5,myStock.get(myType).getFold(5) + 1);
-                        myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
-                        myMola -= FOLD_FIVE_COST;
-                    }//ends if
-                }//ends forr
-            }//ends if
-        }//ends else if
-        round();
-        randomizePrices();
-        addDay();
+        
     }//ends fold
     
     /**
@@ -619,20 +623,23 @@ public class BoxIt
         if(myDate <= JAN_END)
         {
             myHolidayBonus = 1;
-            myCurrentThing = "Nothing is going on";
+            myCurrentThing = randomEvent();
             myMonth = "January";
         }//ends if
         else if(myDate <= FEB_END)
         {
             myMonth = "Febuary";
+            myCurrentThing = randomEvent();
         }//ends else if
         else if(myDate <= MARCH_END)
         {
             myMonth = "March";
+            myCurrentThing = randomEvent();
         }//ends else if
         else if(myDate <= APRIL_END)
         {
             myMonth = "April";
+            myCurrentThing = randomEvent();
         }//ends else if
         else if(myDate <= MAY_END)
         {
@@ -647,7 +654,7 @@ public class BoxIt
             else
             {
                 myHolidayBonus = 1;
-                myCurrentThing = "Nothing is going on";
+                myCurrentThing = randomEvent();
             }//ends else
             myMonth = "May";
         }//ends else if
@@ -664,21 +671,24 @@ public class BoxIt
             else
             {
                 myHolidayBonus = 1;
-                myCurrentThing = "Nothing is going on";
+                myCurrentThing = randomEvent();
             }//ends else
             myMonth = "June";
         }//ends else if
         else if(myDate <= JULY_END)
         {
             myMonth = "July";
+            myCurrentThing = randomEvent();
         }//ends else if
         else if(myDate <= AUG_END)
         {
             myMonth = "August";
+            myCurrentThing = randomEvent();
         }//ends else if
         else if(myDate <= SEP_END)
         {
             myMonth = "September";
+            myCurrentThing = randomEvent();
         }//ends else if
         else if(myDate <= OCT_END)
         {
@@ -693,7 +703,7 @@ public class BoxIt
             else
             {
                 myHolidayBonus = 1;
-                myCurrentThing = "Nothing is going on";
+                myCurrentThing = randomEvent();
             }//ends else
             myMonth = "October";
         }//ends else if
@@ -701,7 +711,7 @@ public class BoxIt
         {
             //this ends Halloween
             myHolidayBonus = 1;
-            myCurrentThing = "Nothing is going on";
+            myCurrentThing = randomEvent();
             //this is for a holiday
             if(myDate <= THANKSGIVING && myDate > (THANKSGIVING - SHOPING_TIME_SMALL))
             {
@@ -713,7 +723,7 @@ public class BoxIt
             else
             {
                 myHolidayBonus = 1;
-                myCurrentThing = "Nothing is going on";
+                myCurrentThing = randomEvent();
             }//ends else
             myMonth = "November";
         }//ends else if
@@ -730,6 +740,7 @@ public class BoxIt
             else
             {
                 myHolidayBonus = 1;
+                myCurrentThing = randomEvent();
             }//ends else
             myMonth = "December";
         }//ends else if
