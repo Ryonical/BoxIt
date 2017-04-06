@@ -150,7 +150,7 @@ public class BoxIt
         myMonth = "January";
         myDay = "Monday";
         myHolidayBonus = 1;
-        myMola = 0.0;
+        myMola = 50.0;
         myType = 0;
         myResearchCost = 5.0;
         myMaxBuy = 10;
@@ -257,7 +257,7 @@ public class BoxIt
                     //this buys one at a time
                     for(int i = 0; i < quantity;i++)
                     {
-                        if(myMola >= FOLD_TWO_COST)
+                        if(myMola >= FOLD_THREE_COST)
                         {
                             myStock.get(myType).setFold(3, myStock.get(myType).getFold(3) + 1);
                             myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
@@ -281,7 +281,7 @@ public class BoxIt
                     //this buys one at a time
                     for(int i = 0; i < quantity;i++)
                     {
-                        if(myMola >= FOLD_TWO_COST)
+                        if(myMola >= FOLD_FOUR_COST)
                         {
                             myStock.get(myType).setFold(4, myStock.get(myType).getFold(4) + 1);
                             myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
@@ -305,7 +305,7 @@ public class BoxIt
                     //this buys one at a time
                     for(int i = 0; i < quantity;i++)
                     {
-                        if(myMola >= FOLD_TWO_COST)
+                        if(myMola >= FOLD_FIVE_COST)
                         {
                             myStock.get(myType).setFold(5,myStock.get(myType).getFold(5) + 1);
                             myStock.get(myType).setAmount(myStock.get(myType).getAmount() - 1);
@@ -314,6 +314,22 @@ public class BoxIt
                     }//ends forr
                 }//ends if
             }//ends else if
+            //this is a bandaid to make negitive numbers 0
+            
+            for(int i = 0; i < BOX_NUM; i++)
+            {
+                if(myStock.get(i).getAmount() < 0)
+                {
+                    myStock.get(i).setAmount(0);
+                }//ends if
+                for(int j = 1; j <= FOLD_NUM; j++)
+                {
+                    if(myStock.get(i).getFold(j) < 0)
+                    {
+                        myStock.get(i).setFold(j, 0);
+                    }//ends if
+                }//ends for
+            }//ends for
             round();
             randomizePrices();
             addDay();
@@ -330,37 +346,11 @@ public class BoxIt
     */
     public void sell(int i)
     {
-        //this is if you ask to sell less than you have
-        if(i <= myStock.get(myType).getAmount() && myType != BOX_NUM + 1)
-        {
-            //this is to subtract the items
-            for(int j = 1; j <= FOLD_NUM; j++)
-            {
-                myStock.get(myType).setFold(j, myStock.get(myType).getFold(j) - i);
-            }//ends for
-            //this is to add the mola
-            for(int j = 1; j <= FOLD_NUM; j++)
-            {
-                 myMola += (myStock.get(myType).getSell(j) + myRandom.get(myType)) * i;
-            }//ends for
-            //this is to add to the total mola counter
-            for(int j = 1; j <= FOLD_NUM; j++)
-            {
-                 myTotalMola += (myStock.get(myType).getSell(j) + myRandom.get(myType)) * i;
-            }//ends for
-        }//ends if
-        //this is if you want to sell more than you have
-        else if (myType != BOX_NUM + 1)
-        {
-            //this is to sell the fold
-            for(int j = 1; j <= FOLD_NUM; j++)
-            {
-                i = myStock.get(myType).getFold(j);
-                myStock.get(myType).setFold(j ,myStock.get(myType).getFold(j) - i);
-                myMola += (myStock.get(myType).getSell(j) + myRandom.get(myType)) * i;
-                myTotalMola += (myStock.get(myType).getSell(j) + myRandom.get(myType)) * i;
-            }//ends for
-        }//ends else if
+        double temp = 0;
+        temp = myStock.get(myType).getTotalSell();
+        myMola += temp;
+        myTotalMola += temp;
+        myStock.get(myType).clearStock();
         //this readys for the next day
         round();
         roundTotal();
@@ -826,7 +816,7 @@ public class BoxIt
     */
     public void researchType()
     {
-        if(myMola >= (myResearchTypeCost + myPaperCost) && myTypeBuy < BOX_NUM)
+        if(myMola >= (myResearchTypeCost + myPaperCost) && myTypeBuy < BOX_NUM - 1)
         {
             myTypeBuy++;
             myMola -= myResearchTypeCost;

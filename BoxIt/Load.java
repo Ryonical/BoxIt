@@ -35,8 +35,6 @@ public class Load
     
     private String myEffect;
     public final int STRIMG_NUM = 3;
-
-    //classes
     BoxIt box;
     /**
      * This will construct.
@@ -65,7 +63,6 @@ public class Load
         {
             System.out.println(e);
         }
-
         box = box2;
         mySaveInt = new ArrayList<Integer>();
         mySaveDouble = new ArrayList<Double>();
@@ -81,8 +78,47 @@ public class Load
      * return none
      * post none
      */
-    public void reader()
+    public void reader(BoxIt box2, int pick)
     {
+        mySaveInt.clear();
+        mySaveDouble.clear();
+        mySaveBox.clear();
+        mySaveString.clear();
+        box = box2;
+        if(pick == 1)
+        {
+           try
+            {
+                fileInt = new File("saves//saveInt.txt");
+                inFileInt = new Scanner(fileInt);
+                fileDouble = new File("saves//saveDouble.txt");
+                inFileDouble = new Scanner(fileDouble);
+                fileBox = new File("saves//saveBox.txt");
+                inFileBox = new Scanner(fileBox);
+                fileString = new File("saves//saveString.txt");
+                inFileString = new Scanner(fileString);
+            }catch(Exception e)
+            {
+                System.out.println(e);
+            } //ends catch
+        }//ends if
+        else
+        {
+            try
+            {
+                fileInt = new File("saves//saveIntAI.txt");
+                inFileInt = new Scanner(fileInt);
+                fileDouble = new File("saves//saveDoubleAI.txt");
+                inFileDouble = new Scanner(fileDouble);
+                fileBox = new File("saves//saveBoxAI.txt");
+                inFileBox = new Scanner(fileBox);
+                fileString = new File("saves//saveStringAI.txt");
+                inFileString = new Scanner(fileString);
+            }catch(Exception e)
+            {
+                System.out.println(e);
+            } //ends catch
+        }//ends else
         int i = 0;
         try
         {

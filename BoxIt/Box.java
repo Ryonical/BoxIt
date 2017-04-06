@@ -49,6 +49,21 @@ public class Box
     }//ends constructer
     
     /**
+    * This will clear the stock.
+    * @pre none
+    * @pram none
+    * @return none
+    * @post none
+    */
+    public void clearStock()
+    {
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            myAmount[i] = 0;
+        }//ends for
+    }//ends clearStock
+    
+    /**
     * This will return mySell.
     * @pre none
     * @pram none

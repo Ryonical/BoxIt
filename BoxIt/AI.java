@@ -16,6 +16,7 @@ public class AI
     public final int CARDBOARD_CURSE = 8;
     
     public final int RESEARCH_CHECK = 2;
+    public final double RESEARCH_BOX_CHECK = 1.5;
     public final int BOX_NUM = 7;
     public final int FOLD_NUM = 5;
     public final int EFFECT_NUM = 15;
@@ -142,7 +143,7 @@ public class AI
         myMoneyPick = -1;
         myMola = box.getMola();
         
-        //this finds the moste efficeant thing to not buy
+        //this finds the most efficeant thing to buy
         for(int i = 0; i < EFFECT_NUM / 2 && canGo; i++)
         {
             if(myCurrentEffect == myEffectArray[i] && myResearchTypeCost >= i && myMola >= myStock.get(i).getCost() * myMaxBuy)
@@ -153,21 +154,14 @@ public class AI
             }//ends if
         }//ends for
         
-        //this is to research
-        if(myMola >= myResearchTypeCost * RESEARCH_CHECK && canGo)
+        //this is to research box
+        if(myMola >= myResearchTypeCost * RESEARCH_BOX_CHECK && canGo)
         {
             box.researchType();
             myResearchTypeCost = box.getResearchTypeCost();
             myTypeBuy = box.getTypeBuy();
             canGo = false;
         }//ends if
-        else if(myMola >= myResearchCost * RESEARCH_CHECK && canGo)
-        {
-            box.research();
-            myResearchCost = box.getResearchCost();
-            myMaxBuy = box.getMaxBuy();
-            canGo = false;
-        }//ends else if
         
         //this is to sell
         for(int i = 0; i < BOX_NUM && canGo; i ++)
@@ -205,7 +199,13 @@ public class AI
                     if(myMola >= myMaxBuy * FOLD_COST[myFoldMoneyPick])
                     {
                         box.setType(i);
-                        box.fold(myFoldMoneyPick);
+                        box.fold(myFoldMoneyPick + 1);
+                        canGo = false;
+                    }//ends if
+                    else
+                    {
+                        box.setType(i);
+                        box.fold(1);
                         canGo = false;
                     }//ends if
                 }//ends if
@@ -235,6 +235,14 @@ public class AI
             }//ends if
         }//ends for
         
+        //this is to basic research
+        if(myMola >= myResearchCost * RESEARCH_CHECK && canGo)
+        {
+            box.research();
+            myResearchCost = box.getResearchCost();
+            myMaxBuy = box.getMaxBuy();
+            canGo = false;
+        }//ends if
         //these are the last things to go mostly to be used in the biggineing
         //buys
         if(canGo && myMola >= myStock.get(0).getCost())
@@ -247,7 +255,7 @@ public class AI
         else if(canGo && myStock.get(0).getAmount() > 0)
         {
             box.setType(0);
-            box.fold(0);
+            box.fold(1);
             canGo = false;
         }//ends else if
         //sells

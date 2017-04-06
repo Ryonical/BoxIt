@@ -578,6 +578,7 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 outputPick();
+                ai.makeMove();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtAIBack
@@ -588,7 +589,9 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 Save save = new Save(box);
-                save.getStats();
+                save.getStats(box, 1);
+                save.save();
+                save.getStats(aIBox, 2);
                 save.save();
             }//ends actionPerformed
         });//ends jbtSave
@@ -599,7 +602,9 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 Load load = new Load(box);
-                load.reader();
+                load.reader(box, 1);
+                load.load();
+                load.reader(aIBox, 2);
                 load.load();
                 outputPick();
                 pickScreen();
@@ -790,10 +795,10 @@ public class Buttons extends JFrame
         output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
         " and your new type costs " + box.getResearchTypeCost();
         output [i++] = "You can buy " + Integer.toString(box.getMaxBuy()) + " things at a time.";
-        output [i++] = "Paper                           Cardboard                         Plastic                            " +
+        output [i++] = "Paper                          Cardboard                          Plastic                            " +
                        "Steel                            Saneza                          Thorby                            Plarbin" +
                        "                                      " +
-                       "                                                   ";
+                       "                                                                                           ";
         
        
         game.refresh(output);
@@ -849,23 +854,23 @@ public class Buttons extends JFrame
         output [i++] = aIBox.randomEvent();
         output [i++] = "The date is " + aIBox.getTheDay();
         output [i++] = "They have $" + Double.toString(aIBox.getMola()) + " Mola";
-        output [i++] = aIBox.getRandom0() + " it costs " + aIBox.getCosts(0) + " and you have " + aIBox.getBoxAmount(0) +
+        output [i++] = aIBox.getRandom0() + " it costs " + aIBox.getCosts(0) + " and they have " + aIBox.getBoxAmount(0) +
         " unfolded " + aIBox.getTotalFold(0) + " folded";
-        output [i++] = aIBox.getRandom1() + " it costs " + aIBox.getCosts(1) + " and you have " + aIBox.getBoxAmount(1) +
+        output [i++] = aIBox.getRandom1() + " it costs " + aIBox.getCosts(1) + " and they have " + aIBox.getBoxAmount(1) +
         " unfolded " + aIBox.getTotalFold(1) + " folded";
-        output [i++] = aIBox.getRandom2() + " it costs " + aIBox.getCosts(2) + " and you have " + aIBox.getBoxAmount(2) +
+        output [i++] = aIBox.getRandom2() + " it costs " + aIBox.getCosts(2) + " and they have " + aIBox.getBoxAmount(2) +
         " unfolded " + aIBox.getTotalFold(2) + " folded";
-        output [i++] = aIBox.getRandom3() + " it costs " + aIBox.getCosts(3) + " and you have " + aIBox.getBoxAmount(3) +
+        output [i++] = aIBox.getRandom3() + " it costs " + aIBox.getCosts(3) + " and they have " + aIBox.getBoxAmount(3) +
         " unfolded " + aIBox.getTotalFold(3) + " folded";
-        output [i++] = aIBox.getRandom4() + " it costs " + aIBox.getCosts(4) + " and you have " + aIBox.getBoxAmount(4) +
+        output [i++] = aIBox.getRandom4() + " it costs " + aIBox.getCosts(4) + " and they have " + aIBox.getBoxAmount(4) +
         " unfolded " + aIBox.getTotalFold(4) + " folded";
-        output [i++] = aIBox.getRandom5() + " it costs " + aIBox.getCosts(5) + " and you have " + aIBox.getBoxAmount(5) +
+        output [i++] = aIBox.getRandom5() + " it costs " + aIBox.getCosts(5) + " and they have " + aIBox.getBoxAmount(5) +
         " unfolded " + aIBox.getTotalFold(5) + " folded";
-        output [i++] = aIBox.getRandom6() + " it costs " + aIBox.getCosts(6) + " and you have " + aIBox.getBoxAmount(6) +
+        output [i++] = aIBox.getRandom6() + " it costs " + aIBox.getCosts(6) + " and they have " + aIBox.getBoxAmount(6) +
         " unfolded " + aIBox.getTotalFold(6) + " folded";
-        output [i++] = "Your research cost is " + Double.toString(aIBox.getResearchCost()) +
-        " and your new type costs " + aIBox.getResearchTypeCost();
-        output [i++] = "You can buy " + Integer.toString(aIBox.getMaxBuy()) + " things at a time.";
+        output [i++] = "There research cost is " + Double.toString(aIBox.getResearchCost()) +
+        " and there new type costs " + aIBox.getResearchTypeCost();
+        output [i++] = "They can buy " + Integer.toString(aIBox.getMaxBuy()) + " things at a time.";
         
        
         game.refresh(output);

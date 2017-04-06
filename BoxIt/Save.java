@@ -45,7 +45,7 @@ public class Save
         }catch(Exception e)
         {
             System.out.println(e);
-        }
+        }//ends catch
         
         box = box2;
         mySaveInt = new ArrayList<String>();
@@ -61,8 +61,39 @@ public class Save
     * return none
     * post none
     */
-    public void getStats()
+    public void getStats(BoxIt box2, int pick)
     {
+        mySaveInt.clear();
+        mySaveDouble.clear();
+        mySaveBox.clear();
+        mySaveString.clear();
+        box = box2;
+        if(pick == 1)
+        {
+            try
+            {
+                fileInt = new FileWriter("saves//saveInt.txt");
+                fileDouble = new FileWriter("saves//saveDouble.txt");
+                fileBox = new FileWriter("saves//saveBox.txt");
+                fileString = new FileWriter("saves//saveString.txt");
+            }catch(Exception e)
+            {
+                System.out.println(e);
+            }//ends catch
+        }//ends if
+        else
+        {
+            try
+            {
+                fileInt = new FileWriter("saves//saveIntAI.txt");
+                fileDouble = new FileWriter("saves//saveDoubleAI.txt");
+                fileBox = new FileWriter("saves//saveBoxAI.txt");
+                fileString = new FileWriter("saves//saveStringAI.txt");
+            }catch(Exception e)
+            {
+                System.out.println(e);
+            }//ends catch
+        }//ends else
         //ints
         mySaveInt.add(Integer.toString(box.getMaxBuy()));
         mySaveInt.add(Integer.toString(box.getTypeBuy()));
