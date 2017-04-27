@@ -142,13 +142,14 @@ public class AI
         myMoneyMake = 0.0;
         myMoneyPick = -1;
         myMola = box.getMola();
+        myMaxBuy = box.getMaxBuy();
         
         //this finds the most efficeant thing to buy
         for(int i = 0; i < EFFECT_NUM / 2 && canGo; i++)
         {
             if(myCurrentEffect == myEffectArray[i] && myResearchTypeCost >= i && myMola >= myStock.get(i).getCost() * myMaxBuy)
             {
-                box.setType(i);
+                box.setType(i+1);
                 box.buy(myMaxBuy);
                 canGo = false;
             }//ends if
@@ -166,10 +167,14 @@ public class AI
         //this is to sell
         for(int i = 0; i < BOX_NUM && canGo; i ++)
         {
-            if(myMoneyMake < myStock.get(i).getTotalSell() && myStock.get(i).getSell(1) + myRandom.get(i) >= WHEN_TO_SELL[i])
+            //this is to make sure you are selling something
+            if(myStock.get(i).getTotalFolded() > 1)
             {
-                myMoneyMake = myStock.get(i).getTotalSell();
-                myMoneyPick = i;
+               if(myMoneyMake < myStock.get(i).getTotalSell() && myStock.get(i).getSell(1) + myRandom.get(i) >= WHEN_TO_SELL[i])
+                {
+                    myMoneyMake = myStock.get(i).getTotalSell();
+                    myMoneyPick = i;
+                }//ends if 
             }//ends if
         }//ends for
         if(myMoneyPick != -1 && canGo)
@@ -218,6 +223,15 @@ public class AI
             }
         }//ends for
         
+        //this is to basic research
+        if(myMola >= myResearchCost * RESEARCH_CHECK && canGo)
+        {
+            box.research();
+            myResearchCost = box.getResearchCost();
+            myMaxBuy = box.getMaxBuy();
+            canGo = false;
+        }//ends if
+        
         //this is to buy
         for(int i = BOX_NUM - 1; i >= 0 && canGo; i--)
         {
@@ -235,14 +249,6 @@ public class AI
             }//ends if
         }//ends for
         
-        //this is to basic research
-        if(myMola >= myResearchCost * RESEARCH_CHECK && canGo)
-        {
-            box.research();
-            myResearchCost = box.getResearchCost();
-            myMaxBuy = box.getMaxBuy();
-            canGo = false;
-        }//ends if
         //these are the last things to go mostly to be used in the biggineing
         //buys
         if(canGo && myMola >= myStock.get(0).getCost())

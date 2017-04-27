@@ -84,6 +84,10 @@ public class Load
         mySaveDouble.clear();
         mySaveBox.clear();
         mySaveString.clear();
+        countInt = 0;
+        countDouble = 0;
+        countBox = 0;
+        countString = 0;
         box = box2;
         if(pick == 1)
         {

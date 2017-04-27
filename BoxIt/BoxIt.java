@@ -150,7 +150,7 @@ public class BoxIt
         myMonth = "January";
         myDay = "Monday";
         myHolidayBonus = 1;
-        myMola = 50.0;
+        myMola = 0.0;
         myType = 0;
         myResearchCost = 5.0;
         myMaxBuy = 10;
@@ -347,7 +347,7 @@ public class BoxIt
     public void sell(int i)
     {
         double temp = 0;
-        temp = myStock.get(myType).getTotalSell();
+        temp = myStock.get(myType).getTotalSell() + (myRandom.get(myType) * myStock.get(myType).getTotalFolded());
         myMola += temp;
         myTotalMola += temp;
         myStock.get(myType).clearStock();
