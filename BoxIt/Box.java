@@ -26,7 +26,7 @@ public class Box
     //amount it can change by
     private double myChange;
     /**
-    * This construct.
+    * This is the constructor.
     * @pre none
     * @pram none
     * @return none
@@ -58,9 +58,9 @@ public class Box
     /**
     * This will remove the stock up to the amount given.
     * @pre none
-    * @pram none
+    * @pram the amount to be sold.
     * @return none
-    * @post none
+    * @post myAmount
     */
     public void sellStock(int amount)
     {
@@ -93,7 +93,7 @@ public class Box
     /**
     * This will return mySell * myMult[i]
     * @pre none
-    * @pram none
+    * @pram a value which represents which multiplier is being requested
     * @return mySell * myMult[i]
     * @post none
     */
@@ -105,7 +105,7 @@ public class Box
     /**
     * This will return the amount the sold boxes are worth.
     * @pre none
-    * @pram amount, randomizedPrice
+    * @pram amount, randomizedPrice (the price that it is being sold at)
     * @return sellAmount
     * @post none
     */
@@ -163,7 +163,7 @@ public class Box
     /**
     * This will set myAmountUnfolded.
     * @pre none
-    * @pram none
+    * @pram the amount of unfolded being set
     * @return none
     * @post myAmountUnfolded
     */
@@ -176,7 +176,7 @@ public class Box
     * This will return how many folded boxes there are.
     * @pre none
     * @pram none
-    * @return myAmountFold
+    * @return myAmountFold total
     * @post none
     */
     public int getTotalFolded()
@@ -188,7 +188,7 @@ public class Box
     * This will return how much everything is worth.
     * @pre none
     * @pram none
-    * @return myAmountFold
+    * @return myAmountFold total * the sell price multiplier
     * @post none
     */
     public double getTotalSell()
@@ -201,25 +201,25 @@ public class Box
     /**
     * This will return myAmount.
     * @pre none
-    * @pram none
+    * @pram a value representing which amount is being requested
     * @return myAmountFold
     * @post none
     */
     public int getFold(int pick)
     {
-        return myAmount[pick-1];
+        return myAmount[pick];
     }//ends GetAmountFold
     
     /**
     * This will set myAmountFold.
     * @pre none
-    * @pram none
+    * @pram which fold is being picked, how many to fold
     * @return none
     * @post myAmountFold
     */
     public void setFold(int pick,int amount)
     {
-        myAmount[pick-1] = amount;
+        myAmount[pick] = amount;
     }//ends setAmountFold
     
     /**

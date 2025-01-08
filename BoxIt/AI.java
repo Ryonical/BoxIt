@@ -35,7 +35,7 @@ public class AI
     public final double FOLD_FOUR_COST = 3;//the cost for the fourth fold
     public final double FOLD_FIVE_COST = 7;//the cost for the fifth fold
     
-    public final double[] FOLD_COST;
+    public final double[] FOLD_COST;//how much each of the folds costs
     
     
     //this is the multiplier of the folds
@@ -59,10 +59,10 @@ public class AI
     private double myFoldMoneyMake;
     private int myFoldMoneyPick;
     private double myMoneyMake;
-    private int myMoneyPick;
-    private boolean canGo;
+    private int myMoneyPick;//whcih 
+    private boolean canGo;//wether a move is to be made or already has
     /**
-    * This constructs.
+    * This is the constructor.
     * @pre none
     * @pram none
     * @return none
@@ -129,7 +129,7 @@ public class AI
     * @pre none
     * @pram none
     * @return none
-    * @post myPick
+    * @post all
     */
     public void makeMove()
     {

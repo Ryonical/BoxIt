@@ -129,7 +129,7 @@ public class BoxIt
     private int myEventCoolDown;//this is the cooldown for the effect
     private String myCurrentThing;//this is the current effect
     /**
-    * This constructs.
+    * This is the constructor.
     * @pre none
     * @pram none
     * @return none
@@ -228,31 +228,31 @@ public class BoxIt
             if(pick == 1)
             {
                 //folds quantity boxes for free
-                foldBoxes(quantity, 1, 0);
+                foldBoxes(quantity, 0, 0);
             }//ends if
             //this is the cheapest fold
             else if(pick == 2)
             {
                 //folds up to quantity boxes for fold two cost or until out of mola
-                foldBoxes(quantity, 2, FOLD_TWO_COST);
+                foldBoxes(quantity, 1, FOLD_TWO_COST);
             }//ends else if
             //this is the moderatly expencive fold
             else if(pick == 3)
             {
                 //folds up to quantity boxes for fold three cost or until out of mola
-                foldBoxes(quantity, 3, FOLD_THREE_COST);
+                foldBoxes(quantity, 2, FOLD_THREE_COST);
             }//ends else if
             //this is the expencive fold
             else if(pick == 4)
             {
                 //folds up to quantity boxes for fold four cost or until out of mola
-                foldBoxes(quantity, 4, FOLD_FOUR_COST);
+                foldBoxes(quantity, 3, FOLD_FOUR_COST);
             }//ends else if
             //this is the very end game fold
             else if(pick == 5)
             {
                 //folds up to quantity boxes for fold five cost or until out of mola
-                foldBoxes(quantity, 5, FOLD_FIVE_COST);
+                foldBoxes(quantity, 4, FOLD_FIVE_COST);
             }//ends else if
             //preform daily operations
             round();

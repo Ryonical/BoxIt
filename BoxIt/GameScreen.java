@@ -13,11 +13,11 @@ public class GameScreen extends JFrame
     private int width;
     
     /**
-    * This will construct.
+    * This is the constructor.
     * pre none
     * pram none
     * return none
-    * post none
+    * post all
     */
     public GameScreen()
     {
@@ -34,7 +34,7 @@ public class GameScreen extends JFrame
     * pre none
     * pram none
     * return none
-    * post none
+    * post setVisible
     */
     public void showScreen()
     {
@@ -64,7 +64,7 @@ public class GameScreen extends JFrame
     * pre none
     * pram button
     * return none
-    * post none
+    * post buttons added
     */
     public void addButtons(JButton[] button)
     {
@@ -82,7 +82,7 @@ public class GameScreen extends JFrame
     * pre none
     * pram updatedText
     * return none
-    * post none
+    * post the visible text
     */
     public void refresh(String[]  updatedText)
     {
