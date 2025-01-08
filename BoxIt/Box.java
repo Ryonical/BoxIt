@@ -7,17 +7,23 @@
  */
 public class Box
 {
+    //the amount of folds possible
     public final int FOLD_COUNT = 5;
+    //an integer value assigned to each box type such as paper being 0
     private int myValue;
+    //the amount of unfolded boxes I hold
     private int myAmountUnfolded;
+    //the amount of each fold of this box that I have such as fold 2 has x amount...
     private int myAmount[];
-    private double myMult2;
-    private double myMult3;
-    private double myMult4;
-    private double myMult5;
+    //fold sell bonus for all folds
+    private double myMult[] = new double[FOLD_COUNT];
+    //name of this box
     private String myName;
+    //cost of box
     private double myCost;
+    //sell price of box
     private double mySell;
+    //amount it can change by
     private double myChange;
     /**
     * This construct.
@@ -38,10 +44,11 @@ public class Box
         {
             myAmount[i] = 0;
         }//ends for
-        myMult2 = mult2;
-        myMult3 = mult3;
-        myMult4 = mult4;
-        myMult5 = mult5;
+        myMult[0] = 1;
+        myMult[1] = mult2;
+        myMult[2] = mult3;
+        myMult[3] = mult4;
+        myMult[4] = mult5;
         myName = name;
         myCost = cost;
         mySell = sell;
@@ -49,51 +56,97 @@ public class Box
     }//ends constructer
     
     /**
-    * This will clear the stock.
+    * This will remove the stock up to the amount given.
     * @pre none
     * @pram none
     * @return none
     * @post none
     */
-    public void clearStock()
+    public void sellStock(int amount)
     {
+        //goes through and removes an amount from the stock starting at the lowest fold
         for(int i = 0; i < FOLD_COUNT; i++)
         {
-            myAmount[i] = 0;
+            //checks to see if you can sell any of this type
+            if(myAmount[i] > 0)
+            {
+                //if you have more than you are selling
+                if(amount <= myAmount[i])
+                {
+                    //removes amount from stock
+                    myAmount[i] -= amount;
+                    //shows that there are no more to sell
+                    amount = 0;
+                }//ends if
+                //if you will have left overs after selling
+                else
+                {
+                    //removes the number sold from amount to keep track
+                    amount -= myAmount[i];
+                    //shows that all of this type were sold
+                    myAmount[i] = 0;
+                }//ends else
+            }//ends if
         }//ends for
     }//ends clearStock
     
     /**
-    * This will return mySell.
+    * This will return mySell * myMult[i]
     * @pre none
     * @pram none
-    * @return mySell
+    * @return mySell * myMult[i]
     * @post none
     */
     public double getSell(int i)
     {
-        if(i == 1)
-        {
-            return mySell;
-        }//ends if
-        else if(i == 2)
-        {
-            return mySell * myMult2;
-        }//ends else if
-        else if(i == 3)
-        {
-            return mySell * myMult3;
-        }//ends else if
-        else if(i == 4)
-        {
-            return mySell * myMult4;
-        }//ends else if
-        else if(i == 5)
-        {
-            return mySell * myMult5;
-        }//ends else if
-        return -1;
+        return mySell * myMult[i];
     }//ends getSell
+    
+    /**
+    * This will return the amount the sold boxes are worth.
+    * @pre none
+    * @pram amount, randomizedPrice
+    * @return sellAmount
+    * @post none
+    */
+    public double getAmountSell(int amount, double randomizedPrice)
+    {
+        double sellAmount = 0;
+        int currentLeft = amount;
+        //to multiply by the randomized price
+        int amountSold = 0;
+        //goes through and counts how much everything is worth
+        for(int i = 0; i < FOLD_COUNT; i++)
+        {
+            //checks to see if you can sell any of this type
+            if(myAmount[i] > 0)
+            {
+                //if you have more than you are selling
+                if(currentLeft <= myAmount[i])
+                {
+                    //removes amount from stock
+                    sellAmount += getSell(i) * currentLeft;
+                    //adds amount sold
+                    amountSold += currentLeft;
+                    //shows that there are no more to sell
+                    currentLeft = 0;
+                }//ends if
+                //if you will have left overs after selling
+                else
+                {
+                    //removes the number sold from amount to keep track
+                    currentLeft -= myAmount[i];
+                    //adds amount sold
+                    amountSold += myAmount[i];
+                    //adds the price of the amount sold
+                    sellAmount += mySell * myMult[i] * myAmount[i];
+                }//ends else
+            }//ends if
+        }//ends for
+        //calculates the total price when adding in randomized price
+        sellAmount += randomizedPrice * amountSold;
+        return sellAmount;
+    }//ends getAmountSell
     
     /**
     * This will return myAmountUnfolded.
@@ -120,7 +173,7 @@ public class Box
     }//ends setAmount
     
     /**
-    * This will return myAmountFold.
+    * This will return how many folded boxes there are.
     * @pre none
     * @pram none
     * @return myAmountFold
@@ -132,7 +185,7 @@ public class Box
     }//ends GetAmountFold
     
     /**
-    * This will return myAmountFold.
+    * This will return how much everything is worth.
     * @pre none
     * @pram none
     * @return myAmountFold
@@ -140,13 +193,13 @@ public class Box
     */
     public double getTotalSell()
     {
-        return (myAmount[0] * mySell) + (myAmount[1] * mySell * myMult2) + 
-        (myAmount[2] * mySell * myMult3) + (myAmount[3] * mySell * myMult4) + 
-        (myAmount[4] * mySell * myMult5);
+        return (myAmount[0] * getSell(0)) + (myAmount[1] * getSell(1)) + 
+        (myAmount[2] * getSell(2)) + (myAmount[3] * getSell(3)) + 
+        (myAmount[4] * getSell(4));
     }//ends GetAmountFold
     
     /**
-    * This will return myAmountFold.
+    * This will return myAmount.
     * @pre none
     * @pram none
     * @return myAmountFold

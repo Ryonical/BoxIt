@@ -30,15 +30,15 @@ public class AI
     public final double THORBY_SELL = 35.00;
     public final double PLARBIN_SELL = 32.00;
     
-    public final double FOLD_TWO_COST = .5;//the cost for the second cost
-    public final double FOLD_THREE_COST = 1;//the cost for the third cost
-    public final double FOLD_FOUR_COST = 3;//the cost for the fourth cost
-    public final double FOLD_FIVE_COST = 7;//the cost for the fifth cost
+    public final double FOLD_TWO_COST = .5;//the cost for the second fold
+    public final double FOLD_THREE_COST = 1;//the cost for the third fold
+    public final double FOLD_FOUR_COST = 3;//the cost for the fourth fold
+    public final double FOLD_FIVE_COST = 7;//the cost for the fifth fold
     
     public final double[] FOLD_COST;
     
     
-    //this is the multiplyer of the folds
+    //this is the multiplier of the folds
     public final double FOLD_TWO_BONUS = 1.25;
     public final double FOLD_THREE_BONUS = 1.5;
     public final double FOLD_FOUR_BONUS = 1.75;
@@ -47,15 +47,15 @@ public class AI
     public final double[] FOLD_MULT;
     
     BoxIt box;
-    private ArrayList<Box> myStock;
-    private ArrayList<Double> myRandom;
-    private String[] myEffectArray;
-    private String myCurrentEffect;
-    private double myMola;
-    private int myMaxBuy;
-    private double myResearchCost;
-    private int myTypeBuy;
-    private double myResearchTypeCost;
+    private ArrayList<Box> myStock;//owned stock
+    private ArrayList<Double> myRandom;//randomized prices
+    private String[] myEffectArray;//possible effects
+    private String myCurrentEffect;//current effect
+    private double myMola;//current mola
+    private int myMaxBuy;//max amount of actions
+    private double myResearchCost;//cost for next research
+    private int myTypeBuy;//how many boxes can be baught
+    private double myResearchTypeCost;//cost for next box unlock
     private double myFoldMoneyMake;
     private int myFoldMoneyPick;
     private double myMoneyMake;
@@ -133,18 +133,25 @@ public class AI
     */
     public void makeMove()
     {
+        //resets the daily prices
         myRandom = box.getRandom();
         canGo = true;
         myStock = box.getStock();
+        //gets current effect
         myCurrentEffect = box.getEffect();
+        //resets values to be used for choosing
         myFoldMoneyMake = 0.0;
         myFoldMoneyPick = -1;
         myMoneyMake = 0.0;
         myMoneyPick = -1;
+        //resets mola
         myMola = box.getMola();
+        //resets how many boxes can be baught
         myMaxBuy = box.getMaxBuy();
         
         //this finds the most efficeant thing to buy
+        
+        //to take advantage of any current effects (highest priority due to limited time offer)
         for(int i = 0; i < EFFECT_NUM / 2 && canGo; i++)
         {
             if(myCurrentEffect == myEffectArray[i] && myResearchTypeCost >= i && myMola >= myStock.get(i).getCost() * myMaxBuy)
@@ -155,7 +162,7 @@ public class AI
             }//ends if
         }//ends for
         
-        //this is to research box
+        //this is to research box (always major priority)
         if(myMola >= myResearchTypeCost * RESEARCH_BOX_CHECK && canGo)
         {
             box.researchType();
@@ -164,7 +171,16 @@ public class AI
             canGo = false;
         }//ends if
         
-        //this is to sell
+        //this is to basic research (always major priority just behind box type)
+        if(myMola >= myResearchCost * RESEARCH_CHECK && canGo)
+        {
+            box.research();
+            myResearchCost = box.getResearchCost();
+            myMaxBuy = box.getMaxBuy();
+            canGo = false;
+        }//ends if
+        
+        //this picks the most valuable thing to sell then sells it (it is better to make money than get stock that will not be used)
         for(int i = 0; i < BOX_NUM && canGo; i ++)
         {
             //this is to make sure you are selling something
@@ -177,6 +193,7 @@ public class AI
                 }//ends if 
             }//ends if
         }//ends for
+        //the selling part after selection
         if(myMoneyPick != -1 && canGo)
         {
             box.setType(myMoneyPick);
@@ -184,53 +201,46 @@ public class AI
             canGo = false;
         }//ends if
         
-        //this is to fold
+        //this is to fold (better to move stock to a more useful state than buy more)
         for(int i = BOX_NUM - 1; i >= 0 && canGo; i--)
         {
+            //if you have this box stock
             if(myStock.get(i).getAmount() >= myMaxBuy)
             {
+                //this checks to see the ratio of folding prices and finds the best
                 for(int j = 0; j < FOLD_NUM; j++)
                 {
-                    //this checks to see the ratio of folding prices and finds the best I think
                     if(myFoldMoneyMake < (myStock.get(i).getSell(i) * FOLD_MULT[j]) / (myStock.get(i).getCost() + FOLD_COST[j]))
                     {
                         myFoldMoneyMake = (myStock.get(i).getSell(i) * FOLD_MULT[j]) / (myStock.get(i).getCost() + FOLD_COST[j]);
                         myFoldMoneyPick = j;
-                    }
-                }//ends if
+                    }//ends if
+                }//ends for
                 //this folds the one that has been picked
                 if(canGo && myFoldMoneyPick != -1 && myTypeBuy >= i)
                 {
                     if(myMola >= myMaxBuy * FOLD_COST[myFoldMoneyPick])
                     {
                         box.setType(i);
-                        box.fold(myFoldMoneyPick + 1);
+                        box.foldSelector(myFoldMoneyPick + 1);
                         canGo = false;
                     }//ends if
                     else
                     {
                         box.setType(i);
-                        box.fold(1);
+                        box.foldSelector(1);
                         canGo = false;
                     }//ends if
                 }//ends if
+                //folds for free if no fold is worth the cost
                 else if(canGo)
                 {
                     box.setType(i);
-                    box.fold(1);
+                    box.foldSelector(1);
                     canGo = false;
                 }//ends else
             }
         }//ends for
-        
-        //this is to basic research
-        if(myMola >= myResearchCost * RESEARCH_CHECK && canGo)
-        {
-            box.research();
-            myResearchCost = box.getResearchCost();
-            myMaxBuy = box.getMaxBuy();
-            canGo = false;
-        }//ends if
         
         //this is to buy
         for(int i = BOX_NUM - 1; i >= 0 && canGo; i--)
@@ -249,7 +259,7 @@ public class AI
             }//ends if
         }//ends for
         
-        //these are the last things to go mostly to be used in the biggineing
+        //these are the last things to go mostly to be used in the begining
         //buys
         if(canGo && myMola >= myStock.get(0).getCost())
         {
@@ -261,7 +271,7 @@ public class AI
         else if(canGo && myStock.get(0).getAmount() > 0)
         {
             box.setType(0);
-            box.fold(1);
+            box.foldSelector(1);
             canGo = false;
         }//ends else if
         //sells

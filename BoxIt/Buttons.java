@@ -507,7 +507,7 @@ public class Buttons extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                box.fold(1);
+                box.foldSelector(1);
                 ai.makeMove();
                 outputPick();
                 pickScreen();
@@ -519,7 +519,7 @@ public class Buttons extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                box.fold(2);
+                box.foldSelector(2);
                 ai.makeMove();
                 outputPick();
                 pickScreen();
@@ -531,7 +531,7 @@ public class Buttons extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                box.fold(3);
+                box.foldSelector(3);
                 ai.makeMove();
                 outputPick();
                 pickScreen();
@@ -543,7 +543,7 @@ public class Buttons extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                box.fold(4);
+                box.foldSelector(4);
                 ai.makeMove();
                 outputPick();
                 pickScreen();
@@ -555,7 +555,7 @@ public class Buttons extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                box.fold(5);
+                box.foldSelector(5);
                 ai.makeMove();
                 outputPick();
                 pickScreen();
@@ -778,19 +778,19 @@ public class Buttons extends JFrame
         output [i++] = box.randomEvent();
         output [i++] = "The date is " + box.getTheDay();
         output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
-        output [i++] = box.getRandom0() + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0) +
+        output [i++] = box.getRandomText(0) + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0) +
         " unfolded " + box.getTotalFold(0) + " folded";
-        output [i++] = box.getRandom1() + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1) +
+        output [i++] = box.getRandomText(1) + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1) +
         " unfolded " + box.getTotalFold(1) + " folded";
-        output [i++] = box.getRandom2() + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2) +
+        output [i++] = box.getRandomText(2) + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2) +
         " unfolded " + box.getTotalFold(2) + " folded";
-        output [i++] = box.getRandom3() + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3) +
+        output [i++] = box.getRandomText(3) + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3) +
         " unfolded " + box.getTotalFold(3) + " folded";
-        output [i++] = box.getRandom4() + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4) +
+        output [i++] = box.getRandomText(4) + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4) +
         " unfolded " + box.getTotalFold(4) + " folded";
-        output [i++] = box.getRandom5() + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5) +
+        output [i++] = box.getRandomText(5) + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5) +
         " unfolded " + box.getTotalFold(5) + " folded";
-        output [i++] = box.getRandom6() + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6) +
+        output [i++] = box.getRandomText(6) + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6) +
         " unfolded " + box.getTotalFold(6) + " folded";
         output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
         " and your new type costs " + box.getResearchTypeCost();
@@ -818,19 +818,19 @@ public class Buttons extends JFrame
         output [i++] = box.randomEvent();
         output [i++] = "The date is " + box.getTheDay();
         output [i++] = "You have $" + Double.toString(box.getMola()) + " Mola";
-        output [i++] = box.getRandom0() + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0) +
+        output [i++] = box.getRandomText(0) + " it costs " + box.getCosts(0) + " and you have " + box.getBoxAmount(0) +
         " unfolded " + box.getTotalFold(0) + " folded";
-        output [i++] = box.getRandom1() + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1) +
+        output [i++] = box.getRandomText(1) + " it costs " + box.getCosts(1) + " and you have " + box.getBoxAmount(1) +
         " unfolded " + box.getTotalFold(1) + " folded";
-        output [i++] = box.getRandom2() + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2) +
+        output [i++] = box.getRandomText(2) + " it costs " + box.getCosts(2) + " and you have " + box.getBoxAmount(2) +
         " unfolded " + box.getTotalFold(2) + " folded";
-        output [i++] = box.getRandom3() + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3) +
+        output [i++] = box.getRandomText(3) + " it costs " + box.getCosts(3) + " and you have " + box.getBoxAmount(3) +
         " unfolded " + box.getTotalFold(3) + " folded";
-        output [i++] = box.getRandom4() + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4) +
+        output [i++] = box.getRandomText(4) + " it costs " + box.getCosts(4) + " and you have " + box.getBoxAmount(4) +
         " unfolded " + box.getTotalFold(4) + " folded";
-        output [i++] = box.getRandom5() + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5) +
+        output [i++] = box.getRandomText(5) + " it costs " + box.getCosts(5) + " and you have " + box.getBoxAmount(5) +
         " unfolded " + box.getTotalFold(5) + " folded";
-        output [i++] = box.getRandom6() + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6) +
+        output [i++] = box.getRandomText(6) + " it costs " + box.getCosts(6) + " and you have " + box.getBoxAmount(6) +
         " unfolded " + box.getTotalFold(6) + " folded";
         output [i++] = "Your research cost is " + Double.toString(box.getResearchCost()) +
         " and your new type costs " + box.getResearchTypeCost();
@@ -854,19 +854,19 @@ public class Buttons extends JFrame
         output [i++] = aIBox.randomEvent();
         output [i++] = "The date is " + aIBox.getTheDay();
         output [i++] = "They have $" + Double.toString(aIBox.getMola()) + " Mola";
-        output [i++] = aIBox.getRandom0() + " it costs " + aIBox.getCosts(0) + " and they have " + aIBox.getBoxAmount(0) +
+        output [i++] = aIBox.getRandomText(0) + " it costs " + aIBox.getCosts(0) + " and they have " + aIBox.getBoxAmount(0) +
         " unfolded " + aIBox.getTotalFold(0) + " folded";
-        output [i++] = aIBox.getRandom1() + " it costs " + aIBox.getCosts(1) + " and they have " + aIBox.getBoxAmount(1) +
+        output [i++] = aIBox.getRandomText(1) + " it costs " + aIBox.getCosts(1) + " and they have " + aIBox.getBoxAmount(1) +
         " unfolded " + aIBox.getTotalFold(1) + " folded";
-        output [i++] = aIBox.getRandom2() + " it costs " + aIBox.getCosts(2) + " and they have " + aIBox.getBoxAmount(2) +
+        output [i++] = aIBox.getRandomText(2) + " it costs " + aIBox.getCosts(2) + " and they have " + aIBox.getBoxAmount(2) +
         " unfolded " + aIBox.getTotalFold(2) + " folded";
-        output [i++] = aIBox.getRandom3() + " it costs " + aIBox.getCosts(3) + " and they have " + aIBox.getBoxAmount(3) +
+        output [i++] = aIBox.getRandomText(3) + " it costs " + aIBox.getCosts(3) + " and they have " + aIBox.getBoxAmount(3) +
         " unfolded " + aIBox.getTotalFold(3) + " folded";
-        output [i++] = aIBox.getRandom4() + " it costs " + aIBox.getCosts(4) + " and they have " + aIBox.getBoxAmount(4) +
+        output [i++] = aIBox.getRandomText(4) + " it costs " + aIBox.getCosts(4) + " and they have " + aIBox.getBoxAmount(4) +
         " unfolded " + aIBox.getTotalFold(4) + " folded";
-        output [i++] = aIBox.getRandom5() + " it costs " + aIBox.getCosts(5) + " and they have " + aIBox.getBoxAmount(5) +
+        output [i++] = aIBox.getRandomText(5) + " it costs " + aIBox.getCosts(5) + " and they have " + aIBox.getBoxAmount(5) +
         " unfolded " + aIBox.getTotalFold(5) + " folded";
-        output [i++] = aIBox.getRandom6() + " it costs " + aIBox.getCosts(6) + " and they have " + aIBox.getBoxAmount(6) +
+        output [i++] = aIBox.getRandomText(6) + " it costs " + aIBox.getCosts(6) + " and they have " + aIBox.getBoxAmount(6) +
         " unfolded " + aIBox.getTotalFold(6) + " folded";
         output [i++] = "There research cost is " + Double.toString(aIBox.getResearchCost()) +
         " and there new type costs " + aIBox.getResearchTypeCost();
