@@ -253,7 +253,7 @@ public class Load
     {
         box.setBoxAmount(type, mySaveBox.get(countBox));
         countBox++;
-        for(int fold = 1; fold <= FOLD_COUNT; fold++)
+        for(int fold = 0; fold <= FOLD_COUNT-1; fold++)
         {
             box.setFold(type, fold, mySaveBox.get(countBox));
             countBox++;

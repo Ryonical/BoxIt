@@ -578,7 +578,6 @@ public class Buttons extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 outputPick();
-                ai.makeMove();
                 pickScreen();
             }//ends actionPerformed
         });//ends jbtAIBack
@@ -590,9 +589,7 @@ public class Buttons extends JFrame
             {
                 Save save = new Save(box);
                 save.getStats(box, 1);
-                save.save();
                 save.getStats(aIBox, 2);
-                save.save();
             }//ends actionPerformed
         });//ends jbtSave
         

@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.target=Save
-comment0.text=\r\n\ This\ will\ drive\ world\ clicker\ 2.\r\n\ \r\n\ @Ryan\ Keeler\r\n\ @World\ Of\ Dlicker\r\n
-comment1.params=box2
+comment0.text=\r\n\ This\ will\ save\ the\ gamestate\ for\ BoxIt.\r\n\ \r\n\ @Ryan\ Keeler\r\n\ @Boxit\r\n
+comment1.params=gameState
 comment1.target=Save(BoxIt)
-comment1.text=\r\n\ This\ will\ construct\ .\r\n\ pre\ none\r\n\ pram\ none\r\n\ return\ none\r\n\ post\ all\r\n
+comment1.text=\r\n\ This\ is\ the\ constructor.\r\n\ pre\ none\r\n\ pram\ the\ current\ gamestate\r\n\ return\ none\r\n\ post\ all\r\n
 comment2.params=box2\ pick
 comment2.target=void\ getStats(BoxIt,\ int)
 comment2.text=\r\n\ This\ will\ get\ the\ info\ that\ needs\ to\ be\ saved.\r\n\ pre\ none\r\n\ pram\ none\r\n\ return\ none\r\n\ post\ none\r\n

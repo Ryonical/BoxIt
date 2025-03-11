@@ -4,10 +4,10 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.*;
 /**
- * This will drive world clicker 2.
+ * This will save the gamestate for BoxIt.
  * 
  * @Ryan Keeler
- * @World Of Dlicker
+ * @Boxit
  */
 public class Save
 {
@@ -28,13 +28,13 @@ public class Save
     //classes
     BoxIt box;
     /**
-    * This will construct .
+    * This is the constructor.
     * pre none
-    * pram none
+    * pram the current gamestate
     * return none
     * post all
     */
-    public Save(BoxIt box2)
+    public Save(BoxIt gameState)
     {
         try
         {
@@ -47,7 +47,7 @@ public class Save
             System.out.println(e);
         }//ends catch
         
-        box = box2;
+        box = gameState;
         mySaveInt = new ArrayList<String>();
         mySaveDouble = new ArrayList<String>();
         mySaveBox = new ArrayList<String>();
@@ -127,6 +127,7 @@ public class Save
         mySaveString.add(box.getDay());
         mySaveString.add(box.getMonth());
         mySaveString.add(box.getEffect().replaceAll(" ", "_"));
+        save();
     }//ends getStats
     
     
@@ -140,7 +141,7 @@ public class Save
     public void minimize(int j)
     {   
         mySaveBox.add(box.getBoxAmount(j));
-        for(int i = 1; i <= FOLD_COUNT; i++)
+        for(int i = 0; i <= FOLD_COUNT-1; i++)
         {
             mySaveBox.add(Integer.toString(box.getFold(i, j)));
         }//ends for
