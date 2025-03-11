@@ -148,7 +148,7 @@ public class BoxIt
         //creates the stock list
         myStock = new ArrayList<Box>();
         //sets date
-        myDate = 156;
+        myDate = 0;
         myMonth = "January";
         myDay = "Monday";
         myHolidayBonus = 1;
